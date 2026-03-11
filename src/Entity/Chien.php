@@ -22,7 +22,7 @@ class Chien
     private ?string $dateNaissance = null;
 
     #[ORM\ManyToOne(inversedBy: 'yes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Race $race = null;
 
     #[ORM\ManyToOne(inversedBy: 'chiens')]

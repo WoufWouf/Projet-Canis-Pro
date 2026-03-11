@@ -3,13 +3,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Chien;
+use App\Entity\Race;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class ChienFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
-    {
+    {   
         $chien = new Chien();
         $chien ->setNom("Pinto")
                 ->setDateNaissance("10/03/2024");
