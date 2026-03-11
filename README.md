@@ -45,4 +45,11 @@ symfony console make:migration
 symfony console doctrine:migrations:migrate
 ```
 
+Faire le load des fixtures :
+```
+bash
+symfony console doctrine:fixtures:load
+```
+
+
 

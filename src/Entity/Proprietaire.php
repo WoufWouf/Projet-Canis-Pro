@@ -28,8 +28,8 @@ class Proprietaire
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $tel = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_Naissance = null;
+    #[ORM\Column(length: 20)]
+    private ?string $date_Naissance = null;
 
     #[ORM\Column(length: 150)]
     private ?string $Adresse = null;
@@ -107,12 +107,12 @@ class Proprietaire
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTime
+    public function getDateNaissance(): ?string
     {
         return $this->date_Naissance;
     }
 
-    public function setDateNaissance(\DateTime $date_Naissance): static
+    public function setDateNaissance(string $date_Naissance): static
     {
         $this->date_Naissance = $date_Naissance;
 

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20260311150806 extends AbstractMigration
+final class Version20260311155526 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,13 +20,13 @@ final class Version20260311150806 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE chien (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(30) NOT NULL, date_naissance VARCHAR(20) NOT NULL, race_id INT NOT NULL, niveaux_apprentissage_id INT NOT NULL, proprietaire_id INT NOT NULL, INDEX IDX_13A4067E6E59D40D (race_id), INDEX IDX_13A4067E32D67822 (niveaux_apprentissage_id), INDEX IDX_13A4067E76C50E4A (proprietaire_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
-        $this->addSql('CREATE TABLE cours (id INT AUTO_INCREMENT NOT NULL, type_entrainement VARCHAR(25) NOT NULL, description VARCHAR(25) NOT NULL, prix INT NOT NULL, es_collectif TINYINT NOT NULL, nb_chien_max INT NOT NULL, duree INT NOT NULL, niveaux_apprentissage_id INT NOT NULL, INDEX IDX_FDCA8C9C32D67822 (niveaux_apprentissage_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
+        $this->addSql('CREATE TABLE chien (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(30) NOT NULL, date_naissance VARCHAR(20) NOT NULL, race_id INT DEFAULT NULL, niveaux_apprentissage_id INT DEFAULT NULL, proprietaire_id INT DEFAULT NULL, INDEX IDX_13A4067E6E59D40D (race_id), INDEX IDX_13A4067E32D67822 (niveaux_apprentissage_id), INDEX IDX_13A4067E76C50E4A (proprietaire_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
+        $this->addSql('CREATE TABLE cours (id INT AUTO_INCREMENT NOT NULL, type_entrainement VARCHAR(25) NOT NULL, description VARCHAR(100) NOT NULL, prix DOUBLE PRECISION NOT NULL, es_collectif TINYINT NOT NULL, nb_chien_max INT NOT NULL, duree INT NOT NULL, niveaux_apprentissage_id INT DEFAULT NULL, INDEX IDX_FDCA8C9C32D67822 (niveaux_apprentissage_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE inscription (id INT AUTO_INCREMENT NOT NULL, nb_chien_inscrit INT DEFAULT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE inscription_seance (inscription_id INT NOT NULL, seance_id INT NOT NULL, INDEX IDX_D74289775DAC5993 (inscription_id), INDEX IDX_D7428977E3797A94 (seance_id), PRIMARY KEY (inscription_id, seance_id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE inscription_chien (inscription_id INT NOT NULL, chien_id INT NOT NULL, INDEX IDX_41ED52335DAC5993 (inscription_id), INDEX IDX_41ED5233BFCF400E (chien_id), PRIMARY KEY (inscription_id, chien_id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE niveau_apprentissage (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(20) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
-        $this->addSql('CREATE TABLE proprietaire (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(25) NOT NULL, prenom VARCHAR(25) NOT NULL, email VARCHAR(150) DEFAULT NULL, tel VARCHAR(20) DEFAULT NULL, date_naissance DATE NOT NULL, adresse VARCHAR(150) NOT NULL, code_postal INT NOT NULL, ville VARCHAR(25) NOT NULL, user_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_69E399D6A76ED395 (user_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
+        $this->addSql('CREATE TABLE proprietaire (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(25) NOT NULL, prenom VARCHAR(25) NOT NULL, email VARCHAR(150) DEFAULT NULL, tel VARCHAR(20) DEFAULT NULL, date_naissance VARCHAR(20) NOT NULL, adresse VARCHAR(150) NOT NULL, code_postal INT NOT NULL, ville VARCHAR(25) NOT NULL, user_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_69E399D6A76ED395 (user_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE race (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(30) NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE seance (id INT AUTO_INCREMENT NOT NULL, date VARCHAR(20) NOT NULL, heure INT NOT NULL, cours_id INT NOT NULL, INDEX IDX_DF7DFD0E7ECF78B0 (cours_id), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');
         $this->addSql('CREATE TABLE utilisateur (id INT AUTO_INCREMENT NOT NULL, login VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_LOGIN (login), PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8');

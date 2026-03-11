@@ -19,7 +19,7 @@ class Cours
     #[ORM\Column(length: 25)]
     private ?string $typeEntrainement = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 100)]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -35,7 +35,7 @@ class Cours
     private ?int $duree = null;
 
     #[ORM\ManyToOne(inversedBy: 'cours')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?NiveauApprentissage $niveauxApprentissage = null;
 
     /**

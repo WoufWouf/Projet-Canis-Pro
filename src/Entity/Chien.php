@@ -26,13 +26,13 @@ class Chien
     private ?Race $race = null;
 
     #[ORM\ManyToOne(inversedBy: 'chiens')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?NiveauApprentissage $niveauxApprentissage = null;
 
    
 
     #[ORM\ManyToOne(inversedBy: 'chiens')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Proprietaire $proprietaire = null;
 
     /**
