@@ -51,5 +51,14 @@ bash
 symfony console doctrine:fixtures:load
 ```
 
+Si fixtures marche pas supprimer le fichier dans migratioins puis faire :
+```
+bash
+symfony console doctrine:database:drop --force
+symfony console doctrine:database:create
+symfony console make:migration
+symfony console doctrine:migrations:migrate
+
+```
 
 
