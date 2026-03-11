@@ -1,16 +1,12 @@
 #!/bin/bash
 set -e
 
-echo "==== Vérification des versions ===="
-php -v
-composer --version
-symfony -v
-node -v
-yarn -v
+echo "==== Installation dépendances ===="
+composer install --no-interaction
 
-# Optionnel : Installation automatique des dépendances du projet
-# if [ -f "composer.json" ]; then
-#     composer install
-# fi
+echo "==== Passage à Symfony 8 ===="
 
-echo "==== Environnement prêt ! ===="
+composer config extra.symfony.require "8.0.*"
+composer update "symfony/*" --with-all-dependencies --no-interaction
+
+echo "==== Symfony prêt ===="
