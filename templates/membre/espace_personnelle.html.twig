@@ -1,10 +1,17 @@
-{# {% extends "base.html.twig" %}
+{#
+
+{% extends "base.html.twig" %}
 
 {% block title %}Espace Personnel - {{ proprietaire.prenom }} {{ proprietaire.nom }}{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
-    <!-- En-tête de profil -->
+    {# ---------------------------------------------------------------- #}
+    {# Section dédiée aux informations du propriétaire.                #}
+    {# Seul ce bloc est rendu, les éléments liés aux chiens sont        #}
+    {# commentés afin d'être conservés pour référence future.          #}
+    {# ---------------------------------------------------------------- #}
+
     <div class="row mb-5">
         <div class="col-md-8">
             <div class="card shadow">
@@ -19,14 +26,14 @@
                                 <li><strong>Nom :</strong> {{ proprietaire.nom }}</li>
                                 <li><strong>Prénom :</strong> {{ proprietaire.prenom }}</li>
                                 <li><strong>Date de naissance :</strong> {{ proprietaire.dateNaissance|date('d/m/Y') }}</li>
-                                <li><strong>Email :</strong> 
+                                <li><strong>Email :</strong>
                                     {% if proprietaire.email %}
                                         <a href="mailto:{{ proprietaire.email }}">{{ proprietaire.email }}</a>
                                     {% else %}
                                         <span class="text-muted">Non renseigné</span>
                                     {% endif %}
                                 </li>
-                                <li><strong>Téléphone :</strong> 
+                                <li><strong>Téléphone :</strong>
                                     {% if proprietaire.tel %}
                                         {{ proprietaire.tel }}
                                     {% else %}
@@ -50,6 +57,11 @@
             </div>
         </div>
 
+        {# ---------------------------------------------------------------- #}
+        {# Bloc chiens commenté : non affiché dans cet espace personnel     #}
+        {# Vous pouvez supprimer les marqueurs de commentaire pour le réactiver. #}
+        {# ---------------------------------------------------------------- #}
+        {#
         <!-- Statistiques -->
         <div class="col-md-4">
             <div class="card shadow bg-light">
@@ -62,8 +74,14 @@
                 </div>
             </div>
         </div>
+        #}
     </div>
 
+    {# ---------------------------------------------------------------- #}
+    {# Liste détaillée des chiens (commentée pour se concentrer sur le    #}
+    {# propriétaire). 
+    #}
+    {#
     <!-- Liste des chiens -->
     <div class="row">
         <div class="col-12">
@@ -142,6 +160,7 @@
             {% endif %}
         </div>
     </div>
+    #}
 </div>
 
 <style>
