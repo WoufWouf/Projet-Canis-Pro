@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Chien;
+use App\Entity\Inscription;
+use App\Entity\NiveauApprentissage;
+use App\Entity\Proprietaire;
+use App\Entity\Race;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ChienType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('nom')
+            ->add('dateNaissance')
+            ->add('race', EntityType::class, [
+                'class' => Race::class,
+                'choice_label' => 'id',
+            ])
+            ->add('niveauxApprentissage', EntityType::class, [
+                'class' => NiveauApprentissage::class,
+                'choice_label' => 'id',
+            ])
+            ->add('proprietaire', EntityType::class, [
+                'class' => Proprietaire::class,
+                'choice_label' => 'id',
+            ])
+            ->add('inscriptions', EntityType::class, [
+                'class' => Inscription::class,
+                'choice_label' => 'id',
+                'multiple' => true,
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Chien::class,
+        ]);
+    }
+}

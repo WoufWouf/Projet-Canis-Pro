@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    <h1>Cours</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cour.id }}</td>
+            </tr>
+            <tr>
+                <th>TypeEntrainement</th>
+                <td>{{ cour.typeEntrainement }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ cour.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ cour.prix }}</td>
+            </tr>
+            <tr>
+                <th>EsCollectif</th>
+                <td>{{ cour.esCollectif ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>NbChienMax</th>
+                <td>{{ cour.nbChienMax }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ cour.duree }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cours_index') }}">back to list</a>
+
+    <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+
+    {{ include('cours/_delete_form.html.twig') }}
+{% endblock %}
