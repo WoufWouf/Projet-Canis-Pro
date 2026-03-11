@@ -1,0 +1,176 @@
+{# {% extends "base.html.twig" %}
+
+{% block title %}Espace Personnel - {{ proprietaire.prenom }} {{ proprietaire.nom }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <!-- En-tête de profil -->
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="mb-0">Bienvenue, {{ proprietaire.prenom }} {{ proprietaire.nom }} !</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="card-title">Informations personnelles</h5>
+                            <ul class="list-unstyled">
+                                <li><strong>Nom :</strong> {{ proprietaire.nom }}</li>
+                                <li><strong>Prénom :</strong> {{ proprietaire.prenom }}</li>
+                                <li><strong>Date de naissance :</strong> {{ proprietaire.dateNaissance|date('d/m/Y') }}</li>
+                                <li><strong>Email :</strong> 
+                                    {% if proprietaire.email %}
+                                        <a href="mailto:{{ proprietaire.email }}">{{ proprietaire.email }}</a>
+                                    {% else %}
+                                        <span class="text-muted">Non renseigné</span>
+                                    {% endif %}
+                                </li>
+                                <li><strong>Téléphone :</strong> 
+                                    {% if proprietaire.tel %}
+                                        {{ proprietaire.tel }}
+                                    {% else %}
+                                        <span class="text-muted">Non renseigné</span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="card-title">Adresse</h5>
+                            <ul class="list-unstyled">
+                                <li>{{ proprietaire.adresse }}</li>
+                                <li>{{ proprietaire.codePostal }} {{ proprietaire.ville }}</li>
+                            </ul>
+                            <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}" class="btn btn-sm btn-warning mt-3">
+                                <i class="bi bi-pencil"></i> Modifier mes informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="col-md-4">
+            <div class="card shadow bg-light">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Mes chiens</h3>
+                    <p class="display-4 text-primary">{{ chiens|length }}</p>
+                    <a href="{{ path('app_chien_new') }}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-plus-circle"></i> Ajouter un chien
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liste des chiens -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">Mes chiens</h2>
+            
+            {% if chiens is empty %}
+                <div class="alert alert-info">
+                    <p>Vous n'avez pas encore enregistré de chien. 
+                    <a href="{{ path('app_chien_new') }}">Ajouter un chien</a></p>
+                </div>
+            {% else %}
+                <div class="row">
+                    {% for chien in chiens %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0">{{ chien.nom }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <dl class="row">
+                                        <dt class="col-sm-6">Date de naissance :</dt>
+                                        <dd class="col-sm-6">
+                                            {% if chien.dateNaissance %}
+                                                {{ chien.dateNaissance|date('d/m/Y') }}
+                                            {% else %}
+                                                <span class="text-muted">Non renseignée</span>
+                                            {% endif %}
+                                        </dd>
+
+                                        <dt class="col-sm-6">Race :</dt>
+                                        <dd class="col-sm-6">
+                                            {% if chien.race %}
+                                                {{ chien.race.nom }}
+                                            {% else %}
+                                                <span class="text-muted">Non renseignée</span>
+                                            {% endif %}
+                                        </dd>
+
+                                        <dt class="col-sm-6">Niveau :</dt>
+                                        <dd class="col-sm-6">
+                                            {% if chien.niveauxApprentissage %}
+                                                <span class="badge bg-secondary">{{ chien.niveauxApprentissage.nom }}</span>
+                                            {% else %}
+                                                <span class="text-muted">Non défini</span>
+                                            {% endif %}
+                                        </dd>
+
+                                        <dt class="col-sm-6">Inscriptions :</dt>
+                                        <dd class="col-sm-6">
+                                            <span class="badge bg-success">{{ chien.inscriptions|length }}</span>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <a href="{{ path('app_chien_show', {'id': chien.id}) }}" class="btn btn-sm btn-info">
+                                        <i class="bi bi-eye"></i> Voir
+                                    </a>
+                                    <a href="{{ path('app_chien_edit', {'id': chien.id}) }}" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-pencil"></i> Modifier
+                                    </a>
+                                    <a href="{{ path('app_chien_delete', {'id': chien.id}) }}" class="btn btn-sm btn-danger"
+                                       onclick="return confirm('Êtes-vous sûr ?')">
+                                        <i class="bi bi-trash"></i> Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ path('app_chien_new') }}" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Ajouter un autre chien
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 8px;
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-header {
+        border-radius: 8px 8px 0 0;
+        padding: 1rem;
+    }
+
+    dl {
+        margin-bottom: 0;
+    }
+
+    dt {
+        font-weight: 600;
+        color: #555;
+    }
+
+    dd {
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %} #}
