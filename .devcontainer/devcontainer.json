@@ -1,0 +1,17 @@
+{
+  "name": "Projet-Canis-Pro",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "felixfbecker.php-debug",
+        "bmewburn.vscode-intelephense-client",
+        "symfony.symfony-vscode"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
