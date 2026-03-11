@@ -1,29 +1,39 @@
-# Base image
-FROM mcr.microsoft.com/devcontainers/php:8.4
+# Utilisation de l'image officielle PHP 8.4 CLI sur Debian Bookworm
+FROM php:8.4-cli-bookworm
 
-# Éviter les interactions lors de l'install
-ENV DEBIAN_FRONTEND=noninteractive
+USER root
 
-# 1. Ajout du dépôt PHP Ondrej et Yarn
-RUN apt-get update && apt-get install -y software-properties-common gpg curl \
-    && add-apt-repository ppa:ondrej/php -y \
-    && mkdir -p /etc/apt/keyrings \
-    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /etc/apt/keyrings/yarn.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian stable main" > /etc/apt/sources.list.d/yarn.list
-
-# 2. Installation de PHP 8.4 et des outils
-RUN apt-get update && apt-get install -y \
-    php8.4 php8.4-cli php8.4-common php8.4-mbstring php8.4-xml php8.4-curl php8.4-mysql php8.4-zip php8.4-intl php8.4-bcmath \
-    git unzip zip mariadb-client nodejs yarn \
+# Installation des dépendances système
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get install -y --no-install-recommends \
+       curl \
+       git \
+       unzip \
+       libicu-dev \
+       libzip-dev \
+       ca-certificates \
+       sudo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3. Forcer PHP 8.4 par défaut
-RUN update-alternatives --set php /usr/bin/php8.4 \
-    && ln -sf /usr/bin/php8.4 /usr/local/bin/php
+# Installation des extensions PHP pour Symfony
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions intl zip pdo_mysql opcache bcmath gd mbstring
 
-# 4. Installer Composer & Symfony CLI
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && curl -sS https://get.symfony.com/cli/installer | bash \
+# Installation de Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Installation de Yarn (via Corepack, intégré à Node)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && corepack enable && corepack prepare yarn@stable --activate
+
+# Installation de Symfony CLI
+RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
 
-WORKDIR /workspace
+# Création de l'utilisateur vscode (pour correspondre à ton devcontainer.json)
+RUN useradd -m vscode && \
+    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/apt/sudoers
+
+USER vscode
