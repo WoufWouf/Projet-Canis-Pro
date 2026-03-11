@@ -24,3 +24,25 @@ push :
 bash
 git push --set-upstream origin main
 ```
+# Symfony 
+
+Création d'un Controlleur :
+```
+bash
+symfony console make:Controller NomController
+```
+
+Création d'un Entity :
+```
+bash
+symfony console make:Entity nomEntity
+```
+
+Création d'une migration :
+```
+bash
+symfony console make:migration  
+symfony console doctrine:migrations:migrate
+```
+
+
