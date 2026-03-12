@@ -46,9 +46,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_proprietaire_index') }}">back to list</a>
+    <a href="{{ path('adminListeProprietaires') }}">back to list</a>
 
-    <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}">edit</a>
+    <a href="{{ path('adminModifierUnProprietaire', {'id': proprietaire.id}) }}">edit</a>
 
     {{ include('proprietaire/_delete_form.html.twig') }}
 {% endblock %}

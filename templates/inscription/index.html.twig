@@ -19,8 +19,8 @@
                 <td>{{ inscription.id }}</td>
                 <td>{{ inscription.nbChienInscrit }}</td>
                 <td>
-                    <a href="{{ path('app_inscription_show', {'id': inscription.id}) }}">show</a>
-                    <a href="{{ path('app_inscription_edit', {'id': inscription.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficheUneInscription', {'id': inscription.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUneInscription', {'id': inscription.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_inscription_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutInscription') }}">Create new</a>
 {% endblock %}

@@ -21,8 +21,8 @@
                 <td>{{ seance.date }}</td>
                 <td>{{ seance.heure }}</td>
                 <td>
-                    <a href="{{ path('app_seance_show', {'id': seance.id}) }}">show</a>
-                    <a href="{{ path('app_seance_edit', {'id': seance.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficheUneSeance', {'id': seance.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUneSeance', {'id': seance.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_seance_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutSeance') }}">Create new</a>
 {% endblock %}

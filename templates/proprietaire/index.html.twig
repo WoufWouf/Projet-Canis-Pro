@@ -33,8 +33,8 @@
                 <td>{{ proprietaire.CodePostal }}</td>
                 <td>{{ proprietaire.Ville }}</td>
                 <td>
-                    <a href="{{ path('app_proprietaire_show', {'id': proprietaire.id}) }}">show</a>
-                    <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficheUnProprietaire', {'id': proprietaire.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUnProprietaire', {'id': proprietaire.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -45,5 +45,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_proprietaire_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutProprietaire') }}">Create new</a>
 {% endblock %}

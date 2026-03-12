@@ -23,8 +23,8 @@
                 <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
                 <td>{{ utilisateur.password }}</td>
                 <td>
-                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
-                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficheUnUtilisateur', {'id': utilisateur.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUnUtilisateur', {'id': utilisateur.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_utilisateur_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutUtilisateur') }}">Create new</a>
 {% endblock %}

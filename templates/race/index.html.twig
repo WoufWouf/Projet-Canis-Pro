@@ -19,8 +19,8 @@
                 <td>{{ race.id }}</td>
                 <td>{{ race.nom }}</td>
                 <td>
-                    <a href="{{ path('app_race_show', {'id': race.id}) }}">show</a>
-                    <a href="{{ path('app_race_edit', {'id': race.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficheUneRace', {'id': race.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUneRace', {'id': race.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_race_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutRace') }}">Create new</a>
 {% endblock %}

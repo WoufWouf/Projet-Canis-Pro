@@ -21,8 +21,8 @@
                 <td>{{ chien.nom }}</td>
                 <td>{{ chien.dateNaissance }}</td>
                 <td>
-                    <a href="{{ path('app_chien_show', {'id': chien.id}) }}">show</a>
-                    <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">edit</a>
+                    <a href="{{ path('adminAfficherUnChien', {'id': chien.id}) }}">show</a>
+                    <a href="{{ path('adminModifierUnChien', {'id': chien.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_chien_new') }}">Create new</a>
+    <a href="{{ path('adminAjoutChien') }}">Create new</a>
 {% endblock %}

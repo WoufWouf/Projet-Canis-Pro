@@ -22,9 +22,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_chien_index') }}">back to list</a>
+    <a href="{{ path('adminListeChiens') }}">back to list</a>
 
-    <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">edit</a>
+    <a href="{{ path('adminModifierUnChien', {'id': chien.id}) }}">edit</a>
 
     {{ include('chien/_delete_form.html.twig') }}
 {% endblock %}
