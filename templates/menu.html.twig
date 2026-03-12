@@ -9,11 +9,18 @@
     </div>
 
     <div class="logo-area">
+<<<<<<< HEAD
         <img src="{{ asset('img/logo.png') }}" alt="CanisPro Education">
+=======
+    <a href="{{ path('app_visiteur') }}">
+        <img src="{{ asset('img/logo.png') }}" alt="CanisPro Education">
+    </a>
+>>>>>>> c411b00 (V22 = V1 + Template ListeCours, detail Cours + Ajout méthode et route dans Controlleur + Template Contact + Ajout route dans Controlleur)
     </div>
 
     <nav class="main-nav">
         <ul>
+<<<<<<< HEAD
             { % if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path ('adminListeChiens')}}">Chiens</a></li>
                 <li><a href="{{ path ('adminListeProprietaires')}}">Proprietaires</a></li>
@@ -31,6 +38,12 @@
                     <li><a href="#">Contactez-nous</a></li>
                 { % endif % }
             { % endif % }
+=======
+            <li><a href="{{path('app_listeCours')}}">Cours</a></li>
+            <li><a href="{{path('app_listeCours')}}">Séances</a></li>
+            <li><a href="{{path('app_listeCours')}}">Informations</a></li>
+            <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
+>>>>>>> c411b00 (V22 = V1 + Template ListeCours, detail Cours + Ajout méthode et route dans Controlleur + Template Contact + Ajout route dans Controlleur)
         </ul>
     </nav>
 </header>
@@ -59,7 +72,7 @@
     text-decoration: none;
     color: #4a4a4a;
     font-style: italic;
-    font-size: 14px;
+    font-size: 20px;
     transition: opacity 0.3s;
 }
 
