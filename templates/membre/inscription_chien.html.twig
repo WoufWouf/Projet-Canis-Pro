@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{# page de confirmation d'inscription d'un chien à une séance #}
+
+{% block title %}Inscription chien{% endblock %}
+
+{% block body %}
+    <h1>Inscription réussie</h1>
+
+    <p>Le chien a bien été inscrit à la séance suivante :</p>
+    <ul>
+    {#  Si la variable est ne contient aucune valeurs alors |first renvoie null. #}
+        <li>Séance : {{ inscription.seances|first.cours }} le {{ inscription.seances|first.date|date('d/m/Y') }} à {{ inscription.seances|first.heure|date('H:i') }}</li>
+        <li>Chien : {{ inscription.chiens|first.nom }}</li>
+    </ul>
+
+    <a href="{{ path('membre_mes_seances') }}">Retour aux séances</a>
+{% endblock %}

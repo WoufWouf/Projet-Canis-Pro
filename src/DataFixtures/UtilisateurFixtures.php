@@ -11,7 +11,7 @@ class UtilisateurFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $utilisateur = new Utilisateur();
-        $utilisateur->setLogin("Anaelle")
+        $utilisateur->setLogin("Annaelle")
                     ->setPassword('$2y$13$kPJWBGe6cFSsyEhfzdL/PeR6OlCMMUmykKRIoSXdssM.jIkxWtkpy')
                     ->setRoles(["ROLE_ADMIN","ROLE_USER"]);
         $manager->persist($utilisateur);

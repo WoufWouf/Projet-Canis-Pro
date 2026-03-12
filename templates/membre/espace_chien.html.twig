@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{#
+    Page affichant les chiens détaillés d'un propriétaire.
+    Le contrôleur doit fournir les variables :
+    - proprietaire : l'objet Proprietaire courant
+    - chiens : Collection ou tableau d'objets Chien
+#}
+
+{% block title %}Espace Chien - {{ proprietaire.prenom }} {{ proprietaire.nom }}{% endblock %}
+
+{% block body %}
+    <h1>Les chiens de {{ proprietaire.prenom }} {{ proprietaire.nom }}</h1>
+
+    {% if chiens is empty %}
+        <p>Aucun chien enregistré pour ce propriétaire.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Race</th>
+                    <th>Niveau</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chien in chiens %}
+                    <tr>
+                        <td>{{ chien.nom }}</td>
+                        <td>{{ chien.dateNaissance }}</td>
+                        <td>{{ chien.race ? chien.race.nom : '—' }}</td>
+                        <td>{{ chien.niveauxApprentissage ? chien.niveauxApprentissage.nom : '—' }}</td>
+                        <td>
+                            <a href="{{ path('app_chien_show', {'id': chien.id}) }}">Voir</a>
+                            <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">Éditer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <a href="{{ path('espace_personnel') }}">← Retour à mon espace personnel</a>
+{% endblock %}

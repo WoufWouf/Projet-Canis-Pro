@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{# vue affichant la liste des séances et permettant d'inscrire un de ses chiens #}
+
+{% block title %}Mes séances{% endblock %}
+
+{% block body %}
+    <h1>Les séances disponibles</h1>
+
+    {% if seances is empty %}
+        <p>Aucune séance n'est programmée pour le moment.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cours</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Inscription</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for seance in seances %}
+                    <tr>
+                        <td>{{ seance.cours }}</td>
+                        <td>{{ seance.date|date('d/m/Y') }}</td>
+                        <td>{{ seance.heure|date('H:i') }}</td>
+                        <td>
+                            {# pour chaque chien du propriétaire on propose un lien d'inscription #}
+                            {% for chien in proprietaire.chiens %}
+                                <a class="btn btn-sm btn-primary" href="{{ path('membre_inscrire', {'seance': seance.id, 'chien': chien.id}) }}">
+                                    Inscrire {{ chien.nom }}
+                                </a>
+                                <br />
+                            {% else %}
+                                <span>Aucun chien à inscrire</span>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <a href="{{ path('espace_personnel') }}">← Retour à mon espace personnel</a>
+{% endblock %}

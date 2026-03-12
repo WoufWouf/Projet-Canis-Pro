@@ -1,0 +1,41 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Espace Personnel - {{ proprietaire.prenom }} {{ proprietaire.nom }}{% endblock %}
+
+{% block body %}
+    {# ---------------------------------------------------------------- #}
+    {# Section dédiée aux informations du propriétaire.                #}
+    {# Seul ce bloc est rendu visble au propriétaire associé à un compte membre #}
+    {# ---------------------------------------------------------------- #}
+                    <h1>Bienvenue, {{ proprietaire.prenom }} {{ proprietaire.nom }} !</h1>
+                            <h5>Informations personnelles</h5>
+                            <ul>
+                                <li><strong>Nom :</strong> {{ proprietaire.nom }}</li>
+                                <li><strong>Prénom :</strong> {{ proprietaire.prenom }}</li>
+                                <li><strong>Date de naissance :</strong> {{ proprietaire.dateNaissance|date('d/m/Y') }}</li>
+                                <li><strong>Email :</strong>
+                                    {% if proprietaire.email %}
+                                        <a href="mailto:{{ proprietaire.email }}">{{ proprietaire.email }}</a>
+                                    {% else %}
+                                        <span>Non renseigné</span>
+                                    {% endif %}
+                                </li>
+                                <li><strong>Téléphone :</strong>
+                                    {% if proprietaire.tel %}
+                                        {{ proprietaire.tel }}
+                                    {% else %}
+                                        <span>Non renseigné</span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <h5>Adresse</h5>
+                            <ul>
+                                <li>{{ proprietaire.adresse }}</li>
+                                <li>{{ proprietaire.codePostal }} {{ proprietaire.ville }}</li>
+                            </ul>
+                                <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}">
+                                <i></i> Modifier mes informations
+                                </a>
+
+{% endblock %}
