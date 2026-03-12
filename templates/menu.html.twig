@@ -1,19 +1,36 @@
 <header class="main-header">
     <div class="auth-links">
-        <a href="#">Inscription</a>
-        <a href="#">Connexion</a>
+        { % if app.user %}
+            <a href="{{ path ('deconnexion')}}">Deconnexion</a>
+        { % else % }
+            <a href="#">Inscription</a>
+            <a href="{{ path ('connexion')}}">Connexion</a>
+        { % endif % }
     </div>
 
     <div class="logo-area">
-        <img src="img/logo.png" alt="CanisPro Education">
+        <img src="{{ asset('img/logo.png') }}" alt="CanisPro Education">
     </div>
 
     <nav class="main-nav">
         <ul>
-            <li><a href="#">Cours</a></li>
-            <li><a href="#">Séances</a></li>
-            <li><a href="#">Informations</a></li>
-            <li><a href="#">Contactez-nous</a></li>
+            { % if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path ('adminListeChiens')}}">Chiens</a></li>
+                <li><a href="{{ path ('adminListeProprietaires')}}">Proprietaires</a></li>
+                <li><a href="{{ path ('adminListeCours')}}">Cours</a></li>
+                <li><a href="{{ path ('adminListeSeances')}}">Séances</a></li>
+                <li><a href="{{ path ('adminListeInscription')}}">Inscriptions</a></li>
+                <li><a href="{{ path ('adminListeInscription')}}">Membres</a></li>
+            { % else % }
+                { % if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path ('espace_personnel')}}">Mon espace</a></li>
+                { % else % }
+                    <li><a href="#">Cours</a></li>
+                    <li><a href="#">Séances</a></li>
+                    <li><a href="#">Informations</a></li>
+                    <li><a href="#">Contactez-nous</a></li>
+                { % endif % }
+            { % endif % }
         </ul>
     </nav>
 </header>
