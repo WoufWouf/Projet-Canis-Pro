@@ -1,23 +1,91 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Projet Films</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item">
-        <a class="nav-link" href="{{path('accueil')}}">Accueil</a>
-    </li>
-{#     <li class="nav-item">
-        <a class="nav-link" href="{{path('espace_personnel')}}">Espace Personnel</a>
-    </li> #}
-
-</ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<header class="main-header">
+    <div class="auth-links">
+        <a href="#">Inscription</a>
+        <a href="#">Connexion</a>
     </div>
-  </div>
-</nav>
+
+    <div class="logo-area">
+        <img src="img/logo.png" alt="CanisPro Education">
+    </div>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#">Cours</a></li>
+            <li><a href="#">Séances</a></li>
+            <li><a href="#">Informations</a></li>
+            <li><a href="#">Contactez-nous</a></li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+/* STYLE DU MENU (CSS) */
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Liens en haut à droite */
+.auth-links {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-style: italic;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+/* Zone du Logo */
+.logo-area {
+    margin-bottom: 25px;
+}
+
+.logo-area img {
+    height: 250px; /* Ajustez selon la taille de votre image */
+    display: block;
+}
+
+/* Navigation principale */
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #5d5d5d;
+    font-size: 15px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.main-nav ul li a:hover {
+    color: #8fb1b3; /* Une nuance de bleu gris pour le survol */
+}
+
+/* Responsive simple */
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .auth-links {
+        justify-content: center;
+    }
+}
+</style>

@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VisiteurController!{% endblock %}
+
+{% block body %}
+<style>
+/* --- Reset et Fond --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- Section Carrousel --- */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    overflow: hidden;
+}
+
+.slider-container {
+    display: flex;
+    width: 100%;
+}
+
+.main-slide {
+    flex: 3.5;
+}
+
+.side-images {
+    flex: 1;
+    display: flex;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.small-slide {
+    filter: brightness(0.7); /* Effet sombre sur les images de droite */
+    border-left: 2px solid white;
+}
+
+/* Points de navigation */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+
+.dot.active {
+    background-color: white;
+}
+
+/* --- Section Bienvenue --- */
+.welcome-section {
+    position: relative;
+    padding: 80px 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.welcome-container {
+    position: relative;
+    width: 90%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+}
+
+/* Boîte bleue/verte */
+.welcome-box {
+    background-color: #385656;
+    color: white;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+    z-index: 2; /* Devant les pattes */
+    position: relative;
+}
+
+/* Titre Manuscrit */
+.script-font {
+    font-family: 'Mr Dafoe', cursive;
+    font-size: 5rem;
+    color: #a4c9c9; /* Couleur bleu clair du tracé */
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* Texte courant */
+.welcome-text p {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.welcome-text strong {
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: block;
+    margin: 20px 0;
+}
+
+/* Image des pattes */
+.paw-bg {
+    position: absolute;
+    right: -350px; /* Aligné sur le bord droit du conteneur */
+    top: 20px;
+    width: 500px;
+    z-index: 1; /* Derrière la boîte */
+    pointer-events: none;
+}
+
+.paw-bg img {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .hero-slider { height: 350px; }
+    .side-images { display: none; }
+    .welcome-box { max-width: 100%; }
+    .paw-bg { width: 300px; opacity: 0.3; right: -20px; }
+    .script-font { font-size: 3.5rem; }
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanisPro Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="canispro-main-content">
+    
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slide main-slide">
+                <img src="img/pleinDeChiens.jpg" alt="Chiens parc">
+            </div>
+            <div class="side-images">
+                <div class="slide small-slide">
+                    <img src="img/unChienQuiTireLaLangue.png" alt="Chien langue">
+                </div>
+                <div class="slide small-slide">
+                    <img src="img/unChienQuiCourt.png" alt="Chien court">
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
+
+    <section class="welcome-section">
+        <div class="welcome-container">
+            
+            <div class="welcome-box">
+                <h1 class="script-font">Bienvenue !</h1>
+                <div class="welcome-text">
+                    <p>Vous souhaitez offrir une éducation à vos compagnons ?</p>
+                    <p><strong>Nous sommes là pour eux !</strong></p>
+                    <p>CanisPro Education s'engage à respecter le soin d'élever nos cher petit amis poilu.</p>
+                    <p>Nous proposons des cours pour tout âge et de différent niveau. Pour plus d'information, vous pouvez visiter notre site à votre guise.</p>
+                </div>
+            </div>
+
+            <div class="paw-bg">
+                <img src="img/pattes-chien-contour.png" alt="Empreintes de pattes">
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
+{% endblock %}
