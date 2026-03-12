@@ -17,11 +17,8 @@ use Doctrine\ORM\EntityManagerInterface;
 #[Route('/membre')]
 final class MembreController extends AbstractController
 {
-<<<<<<< Updated upstream
-    #[Route('', name: 'accueil')]
-=======
+
     #[Route('/membre', name: 'accueil')]
->>>>>>> Stashed changes
     public function index(): Response
     {
         return $this->render('index.html.twig', [
