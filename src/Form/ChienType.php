@@ -21,15 +21,16 @@ class ChienType extends AbstractType
             ->add('dateNaissance')
             ->add('race', EntityType::class, [
                 'class' => Race::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('niveauxApprentissage', EntityType::class, [
                 'class' => NiveauApprentissage::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             ->add('proprietaire', EntityType::class, [
                 'class' => Proprietaire::class,
-                'choice_label' => 'id',
+                'choice_label' =>function(Proprietaire $unProprietaire) {
+        return $unProprietaire->getNom() . ' ' . $unProprietaire->getPrenom();}
             ])
             ->add('inscriptions', EntityType::class, [
                 'class' => Inscription::class,

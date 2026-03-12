@@ -12,9 +12,7 @@ final class VisiteurController extends AbstractController
     #[Route('/visiteur', name: 'app_visiteur')]
     public function index(): Response
     {
-        return $this->render('visiteur/index.html.twig', [
-            'controller_name' => 'VisiteurController',
-        ]);
+        return $this->render('visiteur/index.html.twig');
     }
 
         #[Route('/visiteur/seance', name: 'app_visiteur_seance')]
