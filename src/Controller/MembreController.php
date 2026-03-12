@@ -12,6 +12,7 @@ use App\Entity\Inscription;
 use App\Entity\Chien;
 use App\Entity\Proprietaire;
 use App\Entity\Seance;
+use App\Entity\Cours;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/membre')]
@@ -46,6 +47,28 @@ final class MembreController extends AbstractController
         // et un aperçu de ses chiens.
         return $this->render('membre/espace_personnel.html.twig', [
             'proprietaire' => $proprietaire,
+        ]);
+    }
+
+    #[Route('/mes-informations/modifier/{id}', name: 'membre_modifier_informations', methods: ['GET','POST'])]
+    public function modifierInformations(Proprietaire $proprietaire, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Formulaire de modification des données du propriétaire courant
+        $form = $this->createForm(
+            \App\Form\ProprietaireType::class,
+            $proprietaire
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            // après mise à jour, on renvoie vers l'espace personnel
+            return $this->redirectToRoute('espace_personnel');
+        }
+
+        return $this->render('membre/edit_proprietaire.html.twig', [
+            'proprietaire' => $proprietaire,
+            'form' => $form,
         ]);
     }
 
@@ -87,11 +110,11 @@ final class MembreController extends AbstractController
 
         return $this->render('membre/mes_seances.html.twig', [
             'proprietaire' => $proprietaire,
-            'seances' => $seances,
+            'seances' => $seances[0]->getCours(), // pour l'exemple, on prend le cours de la première séance
         ]);
     }
 
-    #[Route('/inscription/{seance}/{chien}', name: 'membre_inscrire', methods: ['GET'])]
+    #[Route('/inscription/{seance}/{chien}', name: 'membre_inscrit', methods: ['GET'])]
     public function inscriptionChien(SeanceRepository $seanceRepo, ChienRepository $chienRepo, EntityManagerInterface $entityManager, $seance, $chien): Response
     {
         // cette route est volontairement simple : elle crée une inscription
@@ -110,8 +133,13 @@ final class MembreController extends AbstractController
         $entityManager->persist($inscription);
         $entityManager->flush();
 
+        // récupérer le propriétaire du chien inscrit pour afficher la liste de
+        // tous ses chiens (niveau inclus)
+        $proprietaire = $chienObj->getProprietaire();
+
         return $this->render('membre/inscription_chien.html.twig', [
             'inscription' => $inscription,
+            'proprietaire' => $proprietaire,
         ]);
     }
 

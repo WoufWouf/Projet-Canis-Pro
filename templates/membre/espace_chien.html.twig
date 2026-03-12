@@ -29,9 +29,9 @@
                 {% for chien in chiens %}
                     <tr>
                         <td>{{ chien.nom }}</td>
-                        <td>{{ chien.dateNaissance }}</td>
+                        <td>{{ chien.date_naissance }}</td>
                         <td>{{ chien.race ? chien.race.nom : '—' }}</td>
-                        <td>{{ chien.niveauxApprentissage ? chien.niveauxApprentissage.nom : '—' }}</td>
+                        <td>{{ chien.niveaux_apprentissage ? chien.niveaux_apprentissage.nom : '—' }}</td>
                         <td>
                             <a href="{{ path('app_chien_show', {'id': chien.id}) }}">Voir</a>
                             <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">Éditer</a>

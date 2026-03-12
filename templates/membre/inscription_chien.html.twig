@@ -5,6 +5,18 @@
 {% block title %}Inscription chien{% endblock %}
 
 {% block body %}
+
+    {% if proprietaire and proprietaire.chiens|length > 0 %}
+        <h2>Tous mes chiens (pour choisir selon le niveau)</h2>
+        <ul>
+            {% for chien in proprietaire.chiens %}
+                <li>
+                    {{ chien.nom }} (niveau : {{ chien.niveaux_apprentissage ? chien.niveaux_apprentissage.nom : '—' }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
     <h1>Inscription réussie</h1>
 
     <p>Le chien a bien été inscrit à la séance suivante :</p>
@@ -13,6 +25,7 @@
         <li>Séance : {{ inscription.seances|first.cours }} le {{ inscription.seances|first.date|date('d/m/Y') }} à {{ inscription.seances|first.heure|date('H:i') }}</li>
         <li>Chien : {{ inscription.chiens|first.nom }}</li>
     </ul>
+
 
     <a href="{{ path('membre_mes_seances') }}">Retour aux séances</a>
 {% endblock %}
