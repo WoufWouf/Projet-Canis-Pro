@@ -42,10 +42,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 
-#[Route('/chien')]
+#[Route('/admin')]
 final class AdminController extends AbstractController
 {
-    #[Route(name: 'app_chien_index', methods: ['GET'])]
+    #[Route('/chiens',name: 'adminListeChiens', methods: ['GET'])]
     public function index(ChienRepository $chienRepository): Response
     {
         return $this->render('chien/index.html.twig', [
@@ -53,7 +53,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_chien_new', methods: ['GET', 'POST'])]
+    #[Route('/chiens/ajout', name: 'adminAjoutChien', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $chien = new Chien();
@@ -64,7 +64,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeChiens', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
@@ -73,7 +73,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_chien_show', methods: ['GET'])]
+    #[Route('/chiens/{id}', name: 'adminAfficherUnChien', methods: ['GET'])]
     public function show(Chien $chien): Response
     {
         return $this->render('chien/show.html.twig', [
@@ -81,7 +81,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_chien_edit', methods: ['GET', 'POST'])]
+    #[Route('/chiens/modification/{id}', name: 'adminModifierUnChien', methods: ['GET', 'POST'])]
     public function edit(Request $request, Chien $chien, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ChienType::class, $chien);
@@ -90,7 +90,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeChiens', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/edit.html.twig', [
@@ -99,7 +99,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_chien_delete', methods: ['POST'])]
+    #[Route('/chiens/suppression/{id}', name: 'adminSupprimerUnChien', methods: ['POST'])]
     public function delete(Request $request, Chien $chien, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$chien->getId(), $request->getPayload()->getString('_token'))) {
@@ -107,10 +107,10 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeChiens', [], Response::HTTP_SEE_OTHER);
     }
 
- #[Route(name: 'app_utilisateur_index', methods: ['GET'])]
+ #[Route('/utilisateurs',name: 'adminListeUtilisateurs', methods: ['GET'])]
     public function indexUtilitaire(UtilisateurRepository $utilisateurRepository): Response
     {
         return $this->render('utilisateur/index.html.twig', [
@@ -118,7 +118,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_utilisateur_new', methods: ['GET', 'POST'])]
+    #[Route('/utilisateurs/ajout', name: 'adminAjoutUtilisateur', methods: ['GET', 'POST'])]
     public function newUtilitaire(Request $request, EntityManagerInterface $entityManager): Response
     {
         $utilisateur = new Utilisateur();
@@ -129,7 +129,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeUtilisateurs', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('utilisateur/new.html.twig', [
@@ -138,7 +138,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_utilisateur_show', methods: ['GET'])]
+    #[Route('/utilisateurs/{id}', name: 'adminAfficheUnUtilisateur', methods: ['GET'])]
     public function showUtilitaire(Utilisateur $utilisateur): Response
     {
         return $this->render('utilisateur/show.html.twig', [
@@ -146,7 +146,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_utilisateur_edit', methods: ['GET', 'POST'])]
+    #[Route('/utilisateurs/modification/{id}', name: 'adminModifierUnUtilisateur', methods: ['GET', 'POST'])]
     public function editUtilitaire(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
@@ -155,7 +155,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeUtilisateurs', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('utilisateur/edit.html.twig', [
@@ -164,7 +164,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_utilisateur_delete', methods: ['POST'])]
+    #[Route('/utilisateurs/suppression/{id}', name: 'adminSupprimerUnUtilisateur', methods: ['POST'])]
     public function deleteUtilitaire(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->getPayload()->getString('_token'))) {
@@ -172,10 +172,10 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeUtilisateurs', [], Response::HTTP_SEE_OTHER);
     }
 
- #[Route(name: 'app_seance_index', methods: ['GET'])]
+ #[Route('/seances', name: 'adminListeSeances', methods: ['GET'])]
     public function indexSeance(SeanceRepository $seanceRepository): Response
     {
         return $this->render('seance/index.html.twig', [
@@ -183,7 +183,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_seance_new', methods: ['GET', 'POST'])]
+    #[Route('/seances/ajout', name: 'adminAjoutSeance', methods: ['GET', 'POST'])]
     public function newSeance(Request $request, EntityManagerInterface $entityManager): Response
     {
         $seance = new Seance();
@@ -194,7 +194,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($seance);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_seance_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeSeances', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('seance/new.html.twig', [
@@ -203,7 +203,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_seance_show', methods: ['GET'])]
+    #[Route('/seances/{id}', name: 'adminAfficheUneSeance', methods: ['GET'])]
     public function showSeance(Seance $seance): Response
     {
         return $this->render('seance/show.html.twig', [
@@ -211,7 +211,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_seance_edit', methods: ['GET', 'POST'])]
+    #[Route('/seances/modification/{id}', name: 'adminModifierUneSeance', methods: ['GET', 'POST'])]
     public function editSeance(Request $request, Seance $seance, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SeanceType::class, $seance);
@@ -220,7 +220,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_seance_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeSeances', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('seance/edit.html.twig', [
@@ -229,7 +229,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_seance_delete', methods: ['POST'])]
+    #[Route('/seances/suppression/{id}', name: 'adminSupprimerUneSeance', methods: ['POST'])]
     public function deleteSeance(Request $request, Seance $seance, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$seance->getId(), $request->getPayload()->getString('_token'))) {
@@ -237,10 +237,10 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_seance_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeSeances', [], Response::HTTP_SEE_OTHER);
     }
 
-  #[Route(name: 'app_race_index', methods: ['GET'])]
+  #[Route('/races',name: 'adminListeRaces', methods: ['GET'])]
     public function indexRace(RaceRepository $raceRepository): Response
     {
         return $this->render('race/index.html.twig', [
@@ -248,7 +248,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_race_new', methods: ['GET', 'POST'])]
+    #[Route('/races/ajout', name: 'adminAjoutRace', methods: ['GET', 'POST'])]
     public function newRace(Request $request, EntityManagerInterface $entityManager): Response
     {
         $race = new Race();
@@ -259,7 +259,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($race);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_race_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeRaces', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('race/new.html.twig', [
@@ -268,7 +268,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_race_show', methods: ['GET'])]
+    #[Route('/races/{id}', name: 'adminAfficheUneRace', methods: ['GET'])]
     public function showRace(Race $race): Response
     {
         return $this->render('race/show.html.twig', [
@@ -276,7 +276,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_race_edit', methods: ['GET', 'POST'])]
+    #[Route('/races/modification/{id}', name: 'adminModifierUneRace', methods: ['GET', 'POST'])]
     public function editRace(Request $request, Race $race, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RaceType::class, $race);
@@ -285,7 +285,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_race_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeRaces', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('race/edit.html.twig', [
@@ -294,7 +294,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_race_delete', methods: ['POST'])]
+    #[Route('/races/suppression/{id}', name: 'adminSupprimerUneRace', methods: ['POST'])]
     public function deleteRace(Request $request, Race $race, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$race->getId(), $request->getPayload()->getString('_token'))) {
@@ -302,10 +302,10 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_race_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeRaces', [], Response::HTTP_SEE_OTHER);
     }
 
- #[Route(name: 'app_proprietaire_index', methods: ['GET'])]
+ #[Route('/proprietaires',name: 'adminListeProprietaires', methods: ['GET'])]
     public function indexProprietaire(ProprietaireRepository $proprietaireRepository): Response
     {
         return $this->render('proprietaire/index.html.twig', [
@@ -313,7 +313,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_proprietaire_new', methods: ['GET', 'POST'])]
+    #[Route('/proprietaires/ajout', name: 'adminAjoutProprietaire', methods: ['GET', 'POST'])]
     public function newProprietaire(Request $request, EntityManagerInterface $entityManager): Response
     {
         $proprietaire = new Proprietaire();
@@ -324,7 +324,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($proprietaire);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_proprietaire_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeProprietaires', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('proprietaire/new.html.twig', [
@@ -333,7 +333,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_proprietaire_show', methods: ['GET'])]
+    #[Route('/proprietaires/{id}', name: 'adminAfficheUnProprietaire', methods: ['GET'])]
     public function showProprietaire(Proprietaire $proprietaire): Response
     {
         return $this->render('proprietaire/show.html.twig', [
@@ -341,7 +341,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_proprietaire_edit', methods: ['GET', 'POST'])]
+    #[Route('/proprietaires/modification/{id}', name: 'adminModifierUnProprietaire', methods: ['GET', 'POST'])]
     public function editProprietaire(Request $request, Proprietaire $proprietaire, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProprietaireType::class, $proprietaire);
@@ -350,7 +350,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_proprietaire_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeProprietaires', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('proprietaire/edit.html.twig', [
@@ -359,7 +359,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_proprietaire_delete', methods: ['POST'])]
+    #[Route('/proprietaires/suppression/{id}', name: 'adminSupprimerUnProprietaire', methods: ['POST'])]
     public function deleteProprietaire(Request $request, Proprietaire $proprietaire, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$proprietaire->getId(), $request->getPayload()->getString('_token'))) {
@@ -367,9 +367,9 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_proprietaire_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeProprietaires', [], Response::HTTP_SEE_OTHER);
     }
-      #[Route(name: 'app_niveau_apprentissage_index', methods: ['GET'])]
+      #[Route('/niveauApprentissage',name: 'adminListeNiveauApprentissage', methods: ['GET'])]
     public function indexNiveauApprentissage(NiveauApprentissageRepository $niveauApprentissageRepository): Response
     {
         return $this->render('niveau_apprentissage/index.html.twig', [
@@ -377,7 +377,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_niveau_apprentissage_new', methods: ['GET', 'POST'])]
+    #[Route('/niveauApprentissage/ajout', name: 'adminAjoutNiveauApprentissage', methods: ['GET', 'POST'])]
     public function newNiveauApprentissage(Request $request, EntityManagerInterface $entityManager): Response
     {
         $niveauApprentissage = new NiveauApprentissage();
@@ -388,7 +388,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($niveauApprentissage);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_niveau_apprentissage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeNiveauApprentissage', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('niveau_apprentissage/new.html.twig', [
@@ -397,7 +397,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_niveau_apprentissage_show', methods: ['GET'])]
+    #[Route('/niveauApprentissage/{id}', name: 'adminAfficheUnNiveauApprentissage', methods: ['GET'])]
     public function showNiveauApprentissage(NiveauApprentissage $niveauApprentissage): Response
     {
         return $this->render('niveau_apprentissage/show.html.twig', [
@@ -405,7 +405,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_niveau_apprentissage_edit', methods: ['GET', 'POST'])]
+    #[Route('/niveauApprentissage/modification/{id}', name: 'adminModifierUnNiveauApprentissage', methods: ['GET', 'POST'])]
     public function editNiveauApprentissage(Request $request, NiveauApprentissage $niveauApprentissage, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(NiveauApprentissageType::class, $niveauApprentissage);
@@ -414,7 +414,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_niveau_apprentissage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeNiveauApprentissage', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('niveau_apprentissage/edit.html.twig', [
@@ -423,7 +423,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_niveau_apprentissage_delete', methods: ['POST'])]
+    #[Route('/niveauApprentissage/suppression/{id}', name: 'adminSupprimerUnNiveauApprentissage', methods: ['POST'])]
     public function deleteNiveauApprentissage(Request $request, NiveauApprentissage $niveauApprentissage, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$niveauApprentissage->getId(), $request->getPayload()->getString('_token'))) {
@@ -431,10 +431,10 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_niveau_apprentissage_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeNiveauApprentissage', [], Response::HTTP_SEE_OTHER);
     }
 
-     #[Route(name: 'app_inscription_index', methods: ['GET'])]
+     #[Route('/inscriptions',name: 'adminListeInscription', methods: ['GET'])]
     public function indexInscription(InscriptionRepository $inscriptionRepository): Response
     {
         return $this->render('inscription/index.html.twig', [
@@ -442,7 +442,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_inscription_new', methods: ['GET', 'POST'])]
+    #[Route('/inscriptions/ajout', name: 'adminAjoutInscription', methods: ['GET', 'POST'])]
     public function newInscription(Request $request, EntityManagerInterface $entityManager): Response
     {
         $inscription = new Inscription();
@@ -453,7 +453,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($inscription);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_inscription_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeInscription', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('inscription/new.html.twig', [
@@ -462,7 +462,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_inscription_show', methods: ['GET'])]
+    #[Route('/inscriptions/{id}', name: 'adminAfficheUneInscription', methods: ['GET'])]
     public function showInscription(Inscription $inscription): Response
     {
         return $this->render('inscription/show.html.twig', [
@@ -470,7 +470,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_inscription_edit', methods: ['GET', 'POST'])]
+    #[Route('/inscriptions/modification/{id}', name: 'adminModifierUneInscription', methods: ['GET', 'POST'])]
     public function editInscription(Request $request, Inscription $inscription, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(InscriptionType::class, $inscription);
@@ -479,7 +479,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_inscription_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeInscription', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('inscription/edit.html.twig', [
@@ -488,7 +488,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_inscription_delete', methods: ['POST'])]
+    #[Route('/inscriptions/suppression/{id}', name: 'adminSupprimerUneInscription', methods: ['POST'])]
     public function deleteInscription(Request $request, Inscription $inscription, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->getPayload()->getString('_token'))) {
@@ -496,9 +496,9 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_inscription_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeInscription', [], Response::HTTP_SEE_OTHER);
     }
- #[Route(name: 'app_cours_index', methods: ['GET'])]
+ #[Route('/cours',name: 'adminListeCours', methods: ['GET'])]
     public function indexCours(CoursRepository $coursRepository): Response
     {
         return $this->render('cours/index.html.twig', [
@@ -506,7 +506,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
+    #[Route('/cours/ajout', name: 'adminAjoutCours', methods: ['GET', 'POST'])]
     public function newCours(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cour = new Cours();
@@ -517,7 +517,7 @@ final class AdminController extends AbstractController
             $entityManager->persist($cour);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeCours', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('cours/new.html.twig', [
@@ -526,7 +526,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cours_show', methods: ['GET'])]
+    #[Route('/cours/{id}', name: 'adminAfficheUnCours', methods: ['GET'])]
     public function showCours(Cours $cour): Response
     {
         return $this->render('cours/show.html.twig', [
@@ -534,7 +534,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_cours_edit', methods: ['GET', 'POST'])]
+    #[Route('/cours/modification/{id}', name: 'adminModifierUnCours', methods: ['GET', 'POST'])]
     public function editCours(Request $request, Cours $cour, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CoursType::class, $cour);
@@ -543,7 +543,7 @@ final class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('adminListeCours', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('cours/edit.html.twig', [
@@ -552,7 +552,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cours_delete', methods: ['POST'])]
+    #[Route('/cours/suppression/{id}', name: 'adminSupprimerUnCours', methods: ['POST'])]
     public function deleteCours(Request $request, Cours $cour, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->getPayload()->getString('_token'))) {
@@ -560,7 +560,7 @@ final class AdminController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('adminListeCours', [], Response::HTTP_SEE_OTHER);
     }
 
 

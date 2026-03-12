@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ProprietaireRepository;
 
+#[Route('/membre')]
 final class MembreController extends AbstractController
 {
-    #[Route('/', name: 'accueil')]
+    #[Route('', name: 'accueil')]
     public function index(): Response
     {
         return $this->render('index.html.twig', [
