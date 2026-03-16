@@ -1,46 +1,179 @@
 {% extends 'base.html.twig' %}
 
-{#
-    Page affichant les chiens détaillés d'un propriétaire.
-    Le contrôleur doit fournir les variables :
-    - proprietaire : l'objet Proprietaire courant
-    - chiens : Collection ou tableau d'objets Chien
-#}
-
-{% block title %}Espace Chien - {{ proprietaire.prenom }} {{ proprietaire.nom }}{% endblock %}
+{% block title %}Espace Chien - {{ proprietaire.prenom }}{% endblock %}
 
 {% block body %}
-    <h1>Les chiens de {{ proprietaire.prenom }} {{ proprietaire.nom }}</h1>
+<style>
+    .espace-chien-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .page-title {
+        font-family: 'Apple Chancery', 'Segoe Print', cursive;
+        font-size: 2.2rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    /* Grille de cartes */
+    .dogs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .dog-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #eef2f3;
+        text-align: center;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dog-card:hover {
+        transform: translateY(-5px);
+        border-color: #7baeb5;
+    }
+
+    /* Icône ou Image par défaut */
+    .dog-avatar {
+        width: 80px;
+        height: 80px;
+        background-color: #f0f7f8;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #7baeb5;
+        font-size: 2rem;
+    }
+
+    .dog-name {
+        font-family: 'Apple Chancery', 'Segoe Print', cursive;
+        font-size: 1.5rem;
+        color: #7baeb5;
+        margin-bottom: 10px;
+    }
+
+    .dog-info {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+        font-size: 0.9rem;
+        color: #666;
+        text-align: left;
+    }
+
+    .dog-info li {
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+    .info-label { font-weight: bold; color: #999; }
+
+    /* Badges de niveau */
+    .level-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: #e0f2f1;
+        color: #00796b;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .card-actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .btn-view {
+        background: #7baeb5;
+        color: white;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
+    .btn-edit {
+        background: #f1f1f1;
+        color: #666;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+        color: #7baeb5;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+
+<div class="espace-chien-container">
+    <h1 class="page-title">Les chiens de {{ proprietaire.prenom }}</h1>
 
     {% if chiens is empty %}
-        <p>Aucun chien enregistré pour ce propriétaire.</p>
+        <div style="text-align: center; padding: 50px;">
+            <p>Aucun compagnon n'est encore enregistré.</p>
+            <a href="#" class="btn-view">Ajouter un chien</a>
+        </div>
     {% else %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Date de naissance</th>
-                    <th>Race</th>
-                    <th>Niveau</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for chien in chiens %}
-                    <tr>
-                        <td>{{ chien.nom }}</td>
-                        <td>{{ chien.date_naissance }}</td>
-                        <td>{{ chien.race ? chien.race.nom : '—' }}</td>
-                        <td>{{ chien.niveaux_apprentissage ? chien.niveaux_apprentissage.nom : '—' }}</td>
-                        <td>
-                            <a href="{{ path('app_chien_show', {'id': chien.id}) }}">Voir</a>
-                            <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">Éditer</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="dogs-grid">
+            {% for chien in chiens %}
+                <div class="dog-card">
+                    <div class="dog-avatar">
+                        {# On peut mettre une icône de patte ou une photo si elle existe #}
+                        <i class="fas fa-dog">🐾</i> 
+                    </div>
+                    
+                    <div class="dog-name">{{ chien.nom }}</div>
+                    
+                    <ul class="dog-info">
+                        <li>
+                            <span class="info-label">Race</span>
+                            <span>{{ chien.race ? chien.race.nom : 'Croisé' }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Né le</span>
+                            <span>{{ chien.dateNaissance|date('d/m/Y') }}</span>
+                        </li>
+                        <li>
+                            <span class="info-label">Niveau</span>
+                            <span class="level-badge">{{ chien.niveauxApprentissage ? chien.niveauxApprentissage.nom : 'Débutant' }}</span>
+                        </li>
+                    </ul>
+
+                    <div class="card-actions">
+                        <a href="{{ path('app_chien_show', {'id': chien.id}) }}" class="btn-view">Voir profil</a>
+                        <a href="{{ path('app_chien_edit', {'id': chien.id}) }}" class="btn-edit">Modifier</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 
-    <a href="{{ path('espace_personnel') }}">← Retour à mon espace personnel</a>
+    <a href="{{ path('espace_personnel') }}" class="back-link">
+        ← Retour à mon espace personnel
+    </a>
+</div>
 {% endblock %}

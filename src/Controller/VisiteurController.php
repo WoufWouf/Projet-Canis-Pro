@@ -9,17 +9,17 @@ use App\Repository\SeanceRepository;
 
 final class VisiteurController extends AbstractController
 {
-    #[Route('/visiteur', name: 'app_visiteur')]
+    #[Route('', name: 'app_visiteur')]
     public function index(): Response
     {
         return $this->render('visiteur/index.html.twig');
     }
 
-        #[Route('/visiteur/seance', name: 'app_visiteur_seance')]
+        #[Route('/seance', name: 'app_visiteur_seance')]
     public function seance(SeanceRepository $seanceRepository): Response
     {
         $seance = $seanceRepository->findAll();
-
+        
         return $this->render('visiteur/seance.html.twig', [
             'seances' => $seance,
         ]);

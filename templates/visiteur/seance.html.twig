@@ -21,9 +21,9 @@
 <tbody>
     {% for seance in seances %}
         <tr>
-            <td>{{ seance.cours.id }}</td>
-            <td>{{ seance.date|date('d/m/Y') }}</td>
-            <td>{{ seance.heure|date('H:i') }}</td>
+            <td>{{ seances.cours.id }}</td>
+            <td>{{ seances.date|date('d/m/Y') }}</td>
+            <td>{{ seances.heure|date('H:i') }}</td>
             <td>
                 {# les visiteurs ne peuvent pas inscrire de chien, rediriger vers l'espace membre #}
                 <a href="{{ path('espace_personnel') }}">Se connecter pour inscrire votre chien</a>
