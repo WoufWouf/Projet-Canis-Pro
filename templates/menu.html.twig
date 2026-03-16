@@ -27,10 +27,17 @@
                 {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path ('espace_personnel')}}">Mon espace</a></li>
                 {% else %}
+<<<<<<< HEAD
                     <li><a href="{{path('app_listeCours')}}">Cours</a></li>
                     <li><a href="{{path('app_listeCours')}}">Séances</a></li>
                     <li><a href="{{path('app_listeCours')}}">Informations</a></li>
                     <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
+=======
+                    <li><a href="#">Cours</a></li>
+                    <li><a href="#">Séances</a></li>
+                    <li><a href="#">Informations</a></li>
+                    <li><a href="#">Contactez-nous</a></li>
+>>>>>>> c5e14dd (V24 : V23+ correction bug)
                 {% endif %}
             {% endif %}
         </ul>
