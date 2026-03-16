@@ -1,49 +1,38 @@
 <header class="main-header">
     <div class="auth-links">
-        { % if app.user %}
+        {% if app.user %}
             <a href="{{ path ('deconnexion')}}">Deconnexion</a>
-        { % else % }
+        {% else %}
             <a href="#">Inscription</a>
             <a href="{{ path ('connexion')}}">Connexion</a>
-        { % endif % }
+        {% endif %}
     </div>
 
     <div class="logo-area">
-<<<<<<< HEAD
-        <img src="{{ asset('img/logo.png') }}" alt="CanisPro Education">
-=======
     <a href="{{ path('app_visiteur') }}">
         <img src="{{ asset('img/logo.png') }}" alt="CanisPro Education">
     </a>
->>>>>>> c411b00 (V22 = V1 + Template ListeCours, detail Cours + Ajout méthode et route dans Controlleur + Template Contact + Ajout route dans Controlleur)
     </div>
 
     <nav class="main-nav">
         <ul>
-<<<<<<< HEAD
-            { % if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path ('adminListeChiens')}}">Chiens</a></li>
                 <li><a href="{{ path ('adminListeProprietaires')}}">Proprietaires</a></li>
                 <li><a href="{{ path ('adminListeCours')}}">Cours</a></li>
                 <li><a href="{{ path ('adminListeSeances')}}">Séances</a></li>
                 <li><a href="{{ path ('adminListeInscription')}}">Inscriptions</a></li>
                 <li><a href="{{ path ('adminListeInscription')}}">Membres</a></li>
-            { % else % }
-                { % if is_granted('ROLE_USER') %}
+            {% else %}
+                {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path ('espace_personnel')}}">Mon espace</a></li>
-                { % else % }
-                    <li><a href="#">Cours</a></li>
-                    <li><a href="#">Séances</a></li>
-                    <li><a href="#">Informations</a></li>
-                    <li><a href="#">Contactez-nous</a></li>
-                { % endif % }
-            { % endif % }
-=======
-            <li><a href="{{path('app_listeCours')}}">Cours</a></li>
-            <li><a href="{{path('app_listeCours')}}">Séances</a></li>
-            <li><a href="{{path('app_listeCours')}}">Informations</a></li>
-            <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
->>>>>>> c411b00 (V22 = V1 + Template ListeCours, detail Cours + Ajout méthode et route dans Controlleur + Template Contact + Ajout route dans Controlleur)
+                {% else %}
+                    <li><a href="{{path('app_listeCours')}}">Cours</a></li>
+                    <li><a href="{{path('app_listeCours')}}">Séances</a></li>
+                    <li><a href="{{path('app_listeCours')}}">Informations</a></li>
+                    <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
+                {% endif %}
+            {% endif %}
         </ul>
     </nav>
 </header>
