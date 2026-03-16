@@ -27,10 +27,10 @@
                 {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path('espace_personnel') }}">Mon espace</a></li>
                 {% else %}
-                    <li><a href="{{ path('app_listeCours') }}">Cours</a></li>
-                    <li><a href="{{ path('app_listeCours') }}">Séances</a></li>
-                    <li><a href="{{ path('app_listeCours') }}">Informations</a></li>
-                    <li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>  
+                    <li><a href="{{path('app_listeCours')}}">Cours</a></li>
+                    <li><a href="{{path('app_seance')}}">Séances</a></li>
+                    <li><a href="{{path('app_information')}}">Informations</a></li>
+                    <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
                 {% endif %}
         {% endif %} 
         </ul>
