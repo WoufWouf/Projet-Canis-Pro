@@ -9,6 +9,7 @@ use App\Repository\SeanceRepository;
 
 final class VisiteurController extends AbstractController
 {
+    #[Route('/', name: 'app_visiteur')]
     #[Route('', name: 'app_visiteur')]
     public function index(): Response
     {

@@ -18,7 +18,7 @@ class InscriptionType extends AbstractType
             ->add('nb_Chien_Inscrit')
             ->add('seances', EntityType::class, [
                 'class' => Seance::class,
-                'choice_label' => 'id',
+                'choice_label' => 'date',
                 'multiple' => true,
             ])
             ->add('chiens', EntityType::class, [

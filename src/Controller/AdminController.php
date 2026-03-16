@@ -264,7 +264,7 @@ final class AdminController extends AbstractController
 
         return $this->render('race/new.html.twig', [
             'race' => $race,
-            'form' => $form,
+            'form' =>  $form->createView(),
         ]);
     }
 
