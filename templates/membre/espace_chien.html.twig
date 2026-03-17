@@ -143,7 +143,7 @@
                 <div class="dog-card">
                     <div class="dog-avatar">
                         {# On peut mettre une icône de patte ou une photo si elle existe #}
-                        <i class="fas fa-dog">🐾</i> 
+                        <i class="fas fa-dog"></i> 
                     </div>
                     
                     <div class="dog-name">{{ chien.nom }}</div>
@@ -159,14 +159,10 @@
                         </li>
                         <li>
                             <span class="info-label">Niveau</span>
-                            <span class="level-badge">{{ chien.niveauxApprentissage ? chien.niveauxApprentissage.nom : 'Débutant' }}</span>
+                            <span class="level-badge">{{ chien.niveauxApprentissage? chien.niveauxApprentissage.libelle}}</span>
                         </li>
                     </ul>
 
-                    <div class="card-actions">
-                        <a href="{{ path('app_chien_show', {'id': chien.id}) }}" class="btn-view">Voir profil</a>
-                        <a href="{{ path('app_chien_edit', {'id': chien.id}) }}" class="btn-edit">Modifier</a>
-                    </div>
                 </div>
             {% endfor %}
         </div>

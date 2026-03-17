@@ -27,48 +27,11 @@ final class MembreController extends AbstractController
         ]);
     }
 
-    #[Route('/espace-personnel', name: 'espace_personnel')]
-    public function espaceProprietaire(ProprietaireRepository $proprietaireRepository): Response
+    #[Route('/espace-personnel/{id}', name: 'espace_personnel')]
+    public function espaceProprietaire(Proprietaire $proprietaire): Response
     {
-        // Récupère l'ensemble des propriétaires. En pratique, on devrait
-        // sélectionner celui de l'utilisateur connecté ou passer un ID.
-        $proprietaires = $proprietaireRepository->findAll();
-        
-        if (empty($proprietaires)) {
-            // La base de données est vide, on lève une exception 404
-            throw $this->createNotFoundException('Aucun propriétaire trouvé');
-        }
-
-        // Pour le moment nous utilisons simplement le premier résultat comme
-        // propriétaire de test.
-        $proprietaire = $proprietaires[0];
-
-        // On transmet le propriétaire à la vue qui affichera ses informations
-        // et un aperçu de ses chiens.
         return $this->render('membre/espace_personnel.html.twig', [
             'proprietaire' => $proprietaire,
-        ]);
-    }
-
-    #[Route('/mes-informations/modifier/{id}', name: 'membre_modifier_informations', methods: ['GET','POST'])]
-    public function modifierInformations(Proprietaire $proprietaire, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        // Formulaire de modification des données du propriétaire courant
-        $form = $this->createForm(
-            \App\Form\ProprietaireType::class,
-            $proprietaire
-        );
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            // après mise à jour, on renvoie vers l'espace personnel
-            return $this->redirectToRoute('espace_personnel');
-        }
-
-        return $this->render('membre/edit_proprietaire.html.twig', [
-            'proprietaire' => $proprietaire,
-            'form' => $form,
         ]);
     }
 

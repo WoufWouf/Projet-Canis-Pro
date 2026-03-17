@@ -20,6 +20,15 @@ security:
             lazy: true
             provider: app_user_provider
 
+            form_login:
+                login_path: connexion
+                check_path: connexion
+                enable_csrf: true
+
+            logout:
+                path: deconnexion
+                target: connexion
+
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
 
