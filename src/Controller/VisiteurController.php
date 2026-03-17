@@ -15,6 +15,14 @@ final class VisiteurController extends AbstractController
         return $this->render('visiteur/index.html.twig');
     }
 
+    #[Route('/cours', name: 'app_listeCours')]
+    public function cours(): Response
+    {
+        return $this->render('visiteur/listeCours.html.twig', [
+            'controller_name' => 'VisiteurController',
+        ]);
+    }
+
     #[Route('/seance', name: 'app_seance')]
     public function seance(SeanceRepository $seanceRepository): Response
     {
@@ -25,10 +33,10 @@ final class VisiteurController extends AbstractController
         ]);
     }
 
-    #[Route('/cours', name: 'app_listeCours')]
-    public function cours(): Response
+    #[Route('/information', name: 'app_information')]
+    public function information(): Response
     {
-        return $this->render('visiteur/listeCours.html.twig', [
+        return $this->render('visiteur/information.html.twig', [
             'controller_name' => 'VisiteurController',
         ]);
     }

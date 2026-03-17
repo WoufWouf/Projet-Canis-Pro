@@ -3,276 +3,175 @@
 {% block title %}CanisPro - Séances{% endblock %}
 
 {% block body %}
+{# Sécurité pour éviter le crash si la variable n'est pas envoyée #}
+{% set seances = seances|default([]) %}
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Mr+Dafoe&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        background-color: white !important;
-        margin: 0;
-        padding: 0;
-        scroll-behavior: smooth;
-    }
+    body { background-color: white !important; margin: 0; font-family: 'Montserrat', sans-serif; color: #333; scroll-behavior: smooth; }
+    .seances-wrapper { padding: 40px 0; }
+    .seances-container { max-width: 1100px; margin: 0 auto; text-align: center; }
+    
+    /* Menu latéral */
+    .side-nav { position: fixed; left: 50px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+    .nav-bar { width: 45px; height: 7px; background-color: #a8c3c6; border-radius: 3px; transition: 0.3s; }
+    .nav-text { font-family: 'Mr Dafoe', cursive !important; font-size: 2.2rem; color: #5e8d93; margin-left: 15px; opacity: 0; transition: 0.3s; position: absolute; left: 50px; white-space: nowrap; }
+    .nav-item { display: flex; align-items: center; text-decoration: none; position: relative; }
+    .nav-item:hover .nav-bar { background-color: #5e8d93; }
+    .nav-item:hover .nav-text { opacity: 1; }
 
-    .seances-wrapper {
-        background-color: white;
-        min-height: 100vh;
-        width: 100%;
-        font-family: 'Montserrat', sans-serif;
-        color: #333;
-        padding: 40px 0;
-    }
+    /* Titres */
+    .signature-title { font-family: 'Mr Dafoe', cursive !important; font-size: 6.5rem; margin-bottom: 0; color: #222; }
+    .course-subtitle { font-size: 1rem; letter-spacing: 4px; color: #666; text-transform: uppercase; margin-top: -15px; }
+    .availability-text { color: #d4a373; font-size: 1.2rem; display: block; margin-bottom: 50px; }
 
-    .seances-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    /* --- MENU LATÉRAL AJUSTÉ --- */
-    .side-nav {
-        position: fixed;
-        left: 50px; /* Décalé plus à droite (était à 20px) */
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        gap: 10px; /* Espacement resserré entre les barres (était à 20px) */
-        z-index: 1000;
-    }
-
-    .nav-item {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        position: relative;
-    }
-
-    .nav-bar {
-        width: 45px;
-        height: 7px;
-        background-color: #a8c3c6;
-        border-radius: 3px;
-        transition: background-color 0.3s;
-    }
-
-    .nav-text {
-        font-family: 'Mr Dafoe', cursive !important;
-        font-size: 2.2rem;
-        color: #5e8d93;
-        margin-left: 15px;
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        pointer-events: none;
-    }
-
-    .nav-item:hover .nav-bar {
-        background-color: #5e8d93;
-    }
-
-    .nav-item:hover .nav-text {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    /* --- TITRES ET CONTENU --- */
-    .signature-title {
-        font-family: 'Mr Dafoe', cursive !important;
-        font-size: 6.5rem;
-        margin-bottom: 0;
-        font-weight: 400;
-        color: #222;
-    }
-
-    .course-subtitle {
-        font-size: 1rem;
-        letter-spacing: 4px;
-        color: #666;
-        text-transform: uppercase;
-        margin-top: -15px;
-    }
-
-    .availability-text {
-        color: #d4a373;
-        font-size: 1.2rem;
-        display: block;
-        margin-bottom: 50px;
-        font-weight: 500;
-    }
-
-    .sessions-grid {
-        display: flex;
-        justify-content: center;
-        gap: 80px;
-        margin-bottom: 80px;
-    }
-
-    .session-column {
-        flex: 1;
-        max-width: 450px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .type-header { font-size: 0.9rem; letter-spacing: 1.5px; color: #999; margin-bottom: 25px; text-transform: uppercase; }
-    .calendar-day { width: 100%; max-width: 380px; text-align: left; margin-bottom: 25px; }
-    .day-label { font-weight: 700; font-size: 1.2rem; display: block; margin-bottom: 12px; }
-    .time-slots { display: flex; gap: 12px; justify-content: flex-start; margin-bottom: 15px; }
-
-    .time-slot {
-        border: 2px solid #5e8d93;
-        background-color: #f0fafa;
-        color: #5e8d93;
-        padding: 12px 16px;
-        border-radius: 6px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        min-width: 100px;
-        text-align: center;
-        transition: 0.2s;
-        font-weight: 500;
-    }
-
+    /* Grille et Colonnes */
+    .sessions-grid { display: flex; justify-content: center; gap: 40px; margin-bottom: 80px; }
+    .session-column { flex: 1; background: #f9f9f9; padding: 20px; border-radius: 15px; border: 1px solid #eee; }
+    .type-header { font-size: 0.9rem; letter-spacing: 1.5px; color: #5e8d93; margin-bottom: 20px; text-transform: uppercase; font-weight: 700; }
+    
+    .day-label { font-weight: 700; font-size: 1.1rem; display: block; margin: 15px 0 8px 0; }
+    .time-slot { border: 2px solid #5e8d93; background-color: #f0fafa; color: #5e8d93; padding: 10px; border-radius: 6px; cursor: pointer; transition: 0.2s; display: inline-block; min-width: 80px; }
     .time-slot.selected { background-color: #385656; color: white; border-color: #385656; }
-
-    .time-slot.disabled-orange {
-        background-color: #f2bcab;
-        color: #a64d32;
-        border: none;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-
-    .btn-reserve {
-        background-color: #a8c3c6;
-        color: white;
-        border: none;
-        padding: 16px 40px;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 1rem;
-        cursor: pointer;
-        margin-top: 25px;
-        transition: 0.3s;
-    }
-
+    
+    .btn-reserve { background-color: #a8c3c6; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; margin-top: 20px; font-weight: 700; transition: 0.3s; }
     .btn-reserve.active-dark { background-color: #385656; }
-    .separator { width: 500px; border-top: 1px solid #ddd; margin: 80px auto; }
+    .separator { width: 500px; border-top: 1px solid #ddd; margin: 60px auto; }
+    .no-data { color: #aaa; font-size: 0.9rem; margin: 20px 0; }
 </style>
 
 <div class="side-nav">
-    <a href="#socia" class="nav-item">
-        <div class="nav-bar"></div>
-        <span class="nav-text">Sociabilisation</span>
-    </a>
-    <a href="#obe" class="nav-item">
-        <div class="nav-bar"></div>
-        <span class="nav-text">Obéissance</span>
-    </a>
-    <a href="#agi" class="nav-item">
-        <div class="nav-bar"></div>
-        <span class="nav-text">Agilité</span>
-    </a>
+    <a href="#socia" class="nav-item"><div class="nav-bar"></div><span class="nav-text">Sociabilisation</span></a>
+    <a href="#obe" class="nav-item"><div class="nav-bar"></div><span class="nav-text">Obéissance</span></a>
+    <a href="#agi" class="nav-item"><div class="nav-bar"></div><span class="nav-text">Agilité</span></a>
 </div>
 
 <div class="seances-wrapper">
     <div class="seances-container">
+
+        {# --- SECTION 1 : SOCIABILISATION (ID 1) --- #}
         <section id="socia">
             <h2 class="signature-title">Sociabilisation</h2>
             <p class="course-subtitle">Individuel ou Collectif</p>
             <span class="availability-text">Disponibilités</span>
+
             <div class="sessions-grid">
-                <div class="session-column" id="col-soc-indiv">
-                    <h3 class="type-header">Cours Individuel</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">9 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-soc-indiv')">9h à 11h</span>
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-soc-indiv')">14h à 16h</span>
-                            <span class="time-slot disabled-orange">18h à 19h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+                <div class="session-column" id="col-socia-indiv">
+                    <h3 class="type-header">Individuel</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Sociabilisation' and s.cours.esCollectif == 0 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-socia-indiv')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% else %} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                    {% endif %}
+
                 </div>
-                <div class="session-column" id="col-soc-coll">
-                    <h3 class="type-header">Cours Collectif</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">11 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-soc-coll')">9h à 11h</span>
-                            <span class="time-slot disabled-orange">14h à 16h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+
+                <div class="session-column" id="col-socia-coll">
+                    <h3 class="type-header">Collectif</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Sociabilisation' and s.cours.esCollectif == 1 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-socia-coll')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {% if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% else %} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% endif %}
                 </div>
             </div>
         </section>
 
         <hr class="separator">
 
+        {# --- SECTION 2 : OBÉISSANCE (ID 2) --- #}
         <section id="obe">
             <h2 class="signature-title">Obéissance</h2>
-            <p class="course-subtitle">Individuel ou Collectif</p>
-            <span class="availability-text">Disponibilités</span>
             <div class="sessions-grid">
                 <div class="session-column" id="col-obe-indiv">
-                    <h3 class="type-header">Cours Individuel</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">15 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-obe-indiv')">10h à 12h</span>
-                            <span class="time-slot disabled-orange">15h à 17h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+                    <h3 class="type-header">Individuel</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Agility' and s.cours.esCollectif == 0 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-obe-indiv')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% endif %}
                 </div>
+
                 <div class="session-column" id="col-obe-coll">
-                    <h3 class="type-header">Cours Collectif</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">15 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-obe-coll')">10h à 12h</span>
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-obe-coll')">15h à 17h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+                    <h3 class="type-header">Collectif</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Agility'  and s.cours.esCollectif == 1 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-obe-coll')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% endif %}
                 </div>
             </div>
         </section>
 
         <hr class="separator">
 
+        {# --- SECTION 3 : AGILITÉ (ID 3) --- #}
         <section id="agi">
             <h2 class="signature-title">Agilité</h2>
-            <p class="course-subtitle">Individuel ou Collectif</p>
-            <span class="availability-text">Disponibilités</span>
             <div class="sessions-grid">
                 <div class="session-column" id="col-agi-indiv">
-                    <h3 class="type-header">Cours Individuel</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">17 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-agi-indiv')">14h à 16h</span>
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-agi-indiv')">17h à 19h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+                    <h3 class="type-header">Individuel</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Obeissance' and s.cours.esCollectif == 0 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-agi-indiv')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% endif %}
                 </div>
+
                 <div class="session-column" id="col-agi-coll">
-                    <h3 class="type-header">Cours Collectif</h3>
-                    <div class="calendar-day">
-                        <span class="day-label">17 avril 2026 :</span>
-                        <div class="time-slots">
-                            <span class="time-slot disabled-orange">14h à 16h</span>
-                            <span class="time-slot" onclick="toggleSlot(this, 'col-agi-coll')">17h à 19h</span>
-                        </div>
-                    </div>
-                    <button class="btn-reserve">Réserver une séance</button>
+                    <h3 class="type-header">Collectif</h3>
+                    {% set found = false %}
+                    {% for s in seances %}
+                        {% if s.cours.typeEntrainement == 'Obeissance' and s.cours.esCollectif == 1 %}
+                            <span class="day-label">{{ s.date }}</span>
+                            <div class="time-slot" onclick="toggleSlot(this, 'col-agi-coll')">{{ s.heure }}h00</div>
+                            {% set found = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% endif %}
                 </div>
             </div>
         </section>
+
     </div>
 </div>
 
@@ -290,11 +189,7 @@
         }
 
         const hasSelection = column.querySelector('.time-slot.selected') !== null;
-        if (hasSelection) {
-            reserveBtn.classList.add('active-dark');
-        } else {
-            reserveBtn.classList.remove('active-dark');
-        }
+        hasSelection ? reserveBtn.classList.add('active-dark') : reserveBtn.classList.remove('active-dark');
     }
 </script>
 {% endblock %}
