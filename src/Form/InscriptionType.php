@@ -23,7 +23,7 @@ class InscriptionType extends AbstractType
             ])
             ->add('chiens', EntityType::class, [
                 'class' => Chien::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
         ;

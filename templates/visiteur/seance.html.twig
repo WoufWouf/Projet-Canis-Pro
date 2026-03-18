@@ -66,11 +66,15 @@
                             <div class="time-slot" onclick="toggleSlot(this, 'col-socia-indiv')">{{ s.heure }}h00</div>
                             {% set found = true %}
                         {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+
+
+                    {%if app.user %}<a href="{{ path ('app_reservation', { seance: s.id })}}"><button class="btn-reserve">Réserver</button></a>
                         {% else %} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
                     {% endif %}
+                    
+                    {% endfor %}
+                    
 
                 </div>
 
@@ -79,15 +83,25 @@
                     {% set found = false %}
                     {% for s in seances %}
                         {% if s.cours.typeEntrainement == 'Sociabilisation' and s.cours.esCollectif == 1 %}
-                            <span class="day-label">{{ s.date }}</span>
-                            <div class="time-slot" onclick="toggleSlot(this, 'col-socia-coll')">{{ s.heure }}h00</div>
-                            {% set found = true %}
-                        {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {% if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
-                        {% else %} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
-                        {% endif %}
+                             <span class="day-label">{{ s.date }}</span>
+
+        <div class="time-slot">
+            {{ s.heure }}h00
+
+            {% if app.user %}
+                <a href="{{ path('app_reservation', { seance: s.id }) }}">
+                    <button class="btn-reserve">Réserver</button>
+                </a>
+            {% else %}
+                <a href="{{ path('connexion') }}">
+                    <button class="btn-reserve">Réserver</button>
+                </a>
+            {% endif %}
+        </div>
+
+    {% endif %}
+{% endfor %}
+                   
                 </div>
             </div>
         </section>
@@ -107,11 +121,12 @@
                             <div class="time-slot" onclick="toggleSlot(this, 'col-obe-indiv')">{{ s.heure }}h00</div>
                             {% set found = true %}
                         {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                        {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('app_reservation', { seance: s.id })}}"><button class="btn-reserve">Réserver</button></a>
                         {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
                         {% endif %}
+                    {% endfor %}
+                    
                 </div>
 
                 <div class="session-column" id="col-obe-coll">
@@ -123,11 +138,12 @@
                             <div class="time-slot" onclick="toggleSlot(this, 'col-obe-coll')">{{ s.heure }}h00</div>
                             {% set found = true %}
                         {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                         {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('app_reservation', { seance: s.id })}}"><button class="btn-reserve">Réserver</button></a>
                         {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
                         {% endif %}
+                    {% endfor %}
+                   
                 </div>
             </div>
         </section>
@@ -147,11 +163,12 @@
                             <div class="time-slot" onclick="toggleSlot(this, 'col-agi-indiv')">{{ s.heure }}h00</div>
                             {% set found = true %}
                         {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                          {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('app_reservation', { seance: s.id })}}"><button class="btn-reserve">Réserver</button></a>
                         {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
                         {% endif %}
+                    {% endfor %}
+                  
                 </div>
 
                 <div class="session-column" id="col-agi-coll">
@@ -163,11 +180,12 @@
                             <div class="time-slot" onclick="toggleSlot(this, 'col-agi-coll')">{{ s.heure }}h00</div>
                             {% set found = true %}
                         {% endif %}
-                    {% endfor %}
-                    {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
-                    {%if app.user %}<a href="{{ path ('membre_inscrit')}}"><button class="btn-reserve">Réserver</button></a>
+                         {% if not found %}<p class="no-data">Aucun créneau</p>{% endif %}
+                    {%if app.user %}<a href="{{ path ('app_reservation', { seance: s.id })}}"><button class="btn-reserve">Réserver</button></a>
                         {%else%} <a href="{{ path ('connexion')}}"><button class="btn-reserve">Réserver</button></a>
                         {% endif %}
+                    {% endfor %}
+                   
                 </div>
             </div>
         </section>
