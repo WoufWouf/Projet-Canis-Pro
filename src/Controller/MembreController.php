@@ -17,6 +17,7 @@ use App\Entity\Proprietaire;
 use App\Form\ProprietaireType;
 use App\Entity\Seance;
 use App\Entity\Cours;
+use App\Form\InscriptionType;
 
 #[Route('/membre')]
 final class MembreController extends AbstractController
@@ -30,17 +31,23 @@ final class MembreController extends AbstractController
         ]);
     }
 
-    #[Route('/espace-personnel/{id}', name: 'espace_personnel')]
-    public function espaceProprietaire(Proprietaire $proprietaire): Response
+    #[Route('/espace-personnel', name: 'espace_personnel')]
+    public function espaceProprietaire(): Response
     {
+         $user = $this->getUser();
+        $proprietaire= $user->getProprietaire();
         return $this->render('membre/espace_personnel.html.twig', [
             'proprietaire' => $proprietaire,
         ]);
     }
 
-    #[Route('/espace-chien/{id}', name: 'espace_chien')]
-    public function espaceChien(Proprietaire $proprietaire): Response
+    #[Route('/espace-chien', name: 'espace_chien')]
+    public function espaceChien(): Response
     {
+        $user = $this->getUser();
+        $proprietaire= $user->getProprietaire();
+
+
         // Grâce à la relation OneToMany définie dans l'entité,
         // on peut directement obtenir la collection de chiens liés.
         $chiens = $proprietaire->getChiens();
@@ -78,14 +85,11 @@ final class MembreController extends AbstractController
     }
 
     #[Route('/mes-prochaines-seances', name: 'membre_mes_prochaines_seances')]
-    public function mesSeances(ProprietaireRepository $proprietaireRepository, SeanceRepository $seanceRepository): Response
+    public function mesSeances(SeanceRepository $seanceRepository): Response
     {
         // récupère le propriétaire de test (idem espaceProprietaire)
-        $proprietaires = $proprietaireRepository->findAll();
-        if (empty($proprietaires)) {
-            throw $this->createNotFoundException('Aucun propriétaire trouvé');
-        }
-        $proprietaire = $proprietaires[0];
+        $user = $this->getUser();
+        $proprietaire = $user->getProprietaire();
 
         // toutes les séances disponibles
         $seances = $seanceRepository->findAll();
@@ -96,21 +100,35 @@ final class MembreController extends AbstractController
         ]);
     }
 
-    #[Route('/inscription/{seance}/{chien}', name: 'membre_inscrit', methods: ['GET'])]
-    public function inscriptionChien(SeanceRepository $seanceRepo, ChienRepository $chienRepo, EntityManagerInterface $entityManager, $seance, $chien): Response
-    {
-        // cette route est volontairement simple : elle crée une inscription
-        // reliant un chien et une séance puis affiche un accusé de réception.
-        $seanceObj = $seanceRepo->find($seance);
-        $chienObj = $chienRepo->find($chien);
+  
+#[Route('/inscriptions/ajout/{seance}', name: 'app_reservation', methods: ['GET', 'POST'])]
+public function newInscription(
+    Request $request, 
+    ChienRepository $chienRepository, 
+    EntityManagerInterface $entityManager, 
+    Seance $seance
+): Response {
+    $user = $this->getUser();
+    $proprietaire = $user->getProprietaire();
+    $chiens = $chienRepository->findBy(['proprietaire' => $proprietaire]);
 
-        if (!$seanceObj || !$chienObj) {
-            throw $this->createNotFoundException('Séance ou chien introuvable ou chien déja inscrit à cette séance');
-        }
+    $inscription = new Inscription();
+    $inscription->addSeance($seance); 
+    foreach ($chiens as $chien) {
+        $inscription->addChien($chien);
+    }
 
-        $inscription = new Inscription();
-        $inscription->addSeance($seanceObj);
-        $inscription->addChien($chienObj);
+    $form = $this->createForm(InscriptionType::class, $inscription);
+    $form->handleRequest($request);
+
+    // IMPORTANT : On vérifie si le formulaire est soumis
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        // On récupère l'ID du chien posté manuellement
+        $idChien = $request->request->get('chien_id');
+        $chien = $chienRepository->find($idChien);
+        $inscription->addChien($chien); 
+        $inscription->setNbChienInscrit(1);
 
         $entityManager->persist($inscription);
         $entityManager->flush();

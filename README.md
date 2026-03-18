@@ -61,4 +61,8 @@ symfony console doctrine:migrations:migrate
 
 ```
 
-
+Pour les mot de passe :
+```
+bash
+symfony console security:hash-password leMotDePasse
+```
