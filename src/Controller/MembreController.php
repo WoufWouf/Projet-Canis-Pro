@@ -248,4 +248,5 @@ public function voirSeancesChien(ChienRepository $chienRepo, int $id): Response
         'seances' => $seances,
     ]);
 }
+
 }
