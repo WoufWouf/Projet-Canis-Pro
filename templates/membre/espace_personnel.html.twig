@@ -129,7 +129,7 @@
             <p style="margin: 0; font-size: 1.1rem;">{{ proprietaire.adresse }}</p>
             <p style="margin: 5px 0 0 0; font-weight: bold;">{{ proprietaire.codePostal }} {{ proprietaire.ville }}</p>
         </div>
-                <a href="{{ path('espace_chien') }}" class="btn-edit">Gérer mes chiens</a>
+                <a href="{{ path('espace_chien', {'id': proprietaire.id}) }}" class="btn-edit">Gérer mes chiens</a>
     </div>
 
     {# Rappel visuel des pattes de chien comme sur ton image #}

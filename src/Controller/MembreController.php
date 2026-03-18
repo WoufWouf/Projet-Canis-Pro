@@ -35,18 +35,9 @@ final class MembreController extends AbstractController
         ]);
     }
 
-    #[Route('/espace-chien', name: 'espace_chien')]
-    public function espaceChien(ProprietaireRepository $proprietaireRepository): Response
+    #[Route('/espace-chien/{id}', name: 'espace_chien')]
+    public function espaceChien(Proprietaire $proprietaire): Response
     {
-        // Pour cet exemple, on récupère simplement un propriétaire existant.
-        // En situation réelle, on utiliserait l'utilisateur connecté ou l'ID
-        // passé en paramètre.
-        $proprietaires = $proprietaireRepository->findAll();
-        if (empty($proprietaires)) {
-            throw $this->createNotFoundException('Aucun propriétaire trouvé');
-        }
-        $proprietaire = $proprietaires[0];
-
         // Grâce à la relation OneToMany définie dans l'entité,
         // on peut directement obtenir la collection de chiens liés.
         $chiens = $proprietaire->getChiens();
