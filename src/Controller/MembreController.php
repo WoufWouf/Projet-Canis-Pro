@@ -14,6 +14,7 @@ use App\Entity\Inscription;
 use App\Entity\Chien;
 use App\Form\ChienType;
 use App\Entity\Proprietaire;
+use App\Form\ProprietaireType;
 use App\Entity\Seance;
 use App\Entity\Cours;
 
@@ -123,5 +124,41 @@ final class MembreController extends AbstractController
             'proprietaire' => $proprietaire,
         ]);
     }
+
+#[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+public function modifier(
+    ?int $id, 
+    ProprietaireRepository $repository, 
+    EntityManagerInterface $entity, 
+    Request $request // <-- IL FAUT AJOUTER CECI ICI
+): Response {
+
+    $proprietaire = $repository->findOneBy(['id' => $id]);
+    $isModification = $proprietaire !== null;
+
+    if (!$proprietaire) {
+        $proprietaire = new Proprietaire();
+    }
+
+    $form = $this->createForm(ProprietaireType::class, $proprietaire);
+    $form->handleRequest($request); // Maintenant, $request est reconnu !
+
+    // On ne persiste/flush QUE si le formulaire est soumis et valide
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entity->persist($proprietaire);
+        $entity->flush();
+
+        $this->addFlash('success', $isModification ? 'Propriétaire modifié' : 'Propriétaire ajouté');
+        
+        // Redirection pour éviter de renvoyer le formulaire en rafraîchissant
+        return $this->redirectToRoute('espace_personnel', ['id' => $proprietaire->getId()]);
+    }
+
+    return $this->render('membre/modification_proprietaire.html.twig', [
+        'form' => $form->createView(), // <-- BIEN PASSER LE FORMULAIRE ICI
+        'proprietaire' => $proprietaire,
+        'isModification' => $isModification,
+    ]);
+}
 
 }
