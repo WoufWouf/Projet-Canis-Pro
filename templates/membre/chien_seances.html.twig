@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Séances de {{ chien.nom }}{% endblock %}
+
+{% block body %}
+<h1>Les séances de {{ chien.nom }}</h1>
+
+{% if seances is empty %}
+    <p>Aucune séance n'est encore planifiée pour ce chien.</p>
+{% else %}
+    <ul>
+        {% for seance in seances %}
+            <li>
+                {{ seance.date }} - {{ seance.cours.nom }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="{{ path('espace_chien', {'id': chien.proprietaire.id}) }}">← Retour à l'espace chien</a>
+{% endblock %}
