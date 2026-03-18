@@ -36,6 +36,7 @@ class ChienType extends AbstractType
                 'class' => Inscription::class,
                 'choice_label' => 'id',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
     }

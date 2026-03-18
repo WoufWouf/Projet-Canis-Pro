@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Chieb{% endblock %}
+{% block title %}Ajout d'un chien{% endblock %}
 
 {% block body %}
 <style>
@@ -196,7 +196,7 @@
 
 
 <div class="edit-card">
-    <h1>Modifier un chien</h1>
+    <h1>Ajouter un chien</h1>
 
     {{ form_start(form, {'attr': {'class': 'form-grid'}}) }}
         
@@ -219,23 +219,33 @@
             <label>Niveau d'apprentissage :</label>
             {{ form_widget(form.niveauxApprentissage) }}
         </div>
-
-        <div class="form-group">
-            <label>Propriétaire :</label>
-            {{ form_widget(form.proprietaire) }}
-        </div>
-
-        <div class="form-group">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="form-group">
+                <label>Propriétaire :</label>
+                {{ form_widget(form.proprietaire) }}
+            </div>
+        {% else %}
+            <div class="form-group">
+                <label>Propriétaire :</label>
+                {{ form_widget(form.proprietaire, {'attr': {'disabled': 'disabled'}}) }}
+            </div>
+        {% endif %}
+        <div class="form-group" style="display: none;">
             <label>Inscriptions :</label>
             {{ form_widget(form.inscriptions) }}
         </div>
-
         <div class="form-footer">
             {{ include('chien/_form.html.twig', {'button_label': ' Ajouter', 'form_class': 'btn-edit'}) }}
 
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="footer-right">
+                    <a href="{{ path('adminListeChiens') }}" class="back-link">Retour à la liste</a>
+                </div>
+            {% else %}
             <div class="footer-right">
-                <a href="{{ path('adminListeChiens') }}" class="back-link">Retour à la liste</a>
+                <a href="{{ path('espace_chien', {'id': proprietaire.id}) }}" class="back-link">Retour à la liste</a>
             </div>
+            {% endif %}
         </div>
 
     {{ form_end(form) }}

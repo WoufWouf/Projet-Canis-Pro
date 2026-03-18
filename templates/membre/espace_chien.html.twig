@@ -135,7 +135,7 @@
     {% if chiens is empty %}
         <div style="text-align: center; padding: 50px;">
             <p>Aucun compagnon n'est encore enregistré.</p>
-            <a href="#" class="btn-view">Ajouter un chien</a>
+            <a href="{{ path('membreAjoutChien', {'id':proprietaire.id}) }}" class="btn-view">Ajouter un chien</a>
         </div>
     {% else %}
         <div class="dogs-grid">
@@ -155,7 +155,7 @@
                         </li>
                         <li>
                             <span class="info-label">Né le</span>
-                            <span>{{ chien.dateNaissance|date('d/m/Y') }}</span>
+                            <span>{{ chien.dateNaissance }}</span>
                         </li>
                         <li>
                             <span class="info-label">Niveau</span>

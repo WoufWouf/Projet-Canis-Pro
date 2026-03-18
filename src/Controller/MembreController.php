@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\ProprietaireRepository;
@@ -10,10 +12,10 @@ use App\Repository\ChienRepository;
 use App\Repository\SeanceRepository;
 use App\Entity\Inscription;
 use App\Entity\Chien;
+use App\Form\ChienType;
 use App\Entity\Proprietaire;
 use App\Entity\Seance;
 use App\Entity\Cours;
-use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/membre')]
 final class MembreController extends AbstractController
@@ -46,6 +48,31 @@ final class MembreController extends AbstractController
         return $this->render('membre/espace_chien.html.twig', [
             'proprietaire' => $proprietaire,
             'chiens' => $chiens,
+        ]);
+    }
+
+    #[Route('/espace-chien/ajoutChien/{id}', name: 'membreAjoutChien')]
+    public function new(Request $request, EntityManagerInterface $entityManager, Proprietaire $proprietaire): Response
+    {
+        $chien = new Chien();
+        $form = $this->createForm(ChienType::class, $chien);
+        $chien->setProprietaire($proprietaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chien->setProprietaire($proprietaire);
+            $entityManager->persist($chien);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('espace_chien', [
+                        'id' => $proprietaire->getId()
+                    ], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('chien/new.html.twig', [
+            'chien' => $chien,
+            'form' => $form,
+            'proprietaire'=> $proprietaire
         ]);
     }
 
