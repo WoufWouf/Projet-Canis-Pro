@@ -126,7 +126,7 @@ final class MembreController extends AbstractController
     }
 
 #[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-public function modifier(
+public function modifierUnProprietaire(
     ?int $id, 
     ProprietaireRepository $repository, 
     EntityManagerInterface $entity, 
@@ -157,6 +157,50 @@ public function modifier(
     return $this->render('membre/modification_proprietaire.html.twig', [
         'form' => $form->createView(), // <-- BIEN PASSER LE FORMULAIRE ICI
         'proprietaire' => $proprietaire,
+        'isModification' => $isModification,
+    ]);
+}
+
+#[Route('/membre/espace-chien/modification/{id}', name: 'membre_chien_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+public function modifierUnChien(
+    int $id,
+    ChienRepository $repository,
+    EntityManagerInterface $entity,
+    Request $request
+): Response {
+
+    // 🔍 On récupère le chien
+    $chien = $repository->find($id);
+
+    // ❌ Si pas trouvé → erreur
+    if (!$chien) {
+        throw $this->createNotFoundException('Chien non trouvé');
+    }
+
+    // ✅ On sait qu'on est en modification
+    $isModification = true;
+
+    // 📝 Formulaire
+    $form = $this->createForm(ChienType::class, $chien);
+    $form->handleRequest($request);
+
+    // ✅ Si validé → on modifie
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        $entity->flush(); // pas besoin de persist
+
+        $this->addFlash('success', 'Chien modifié avec succès 🐶');
+
+        // 🔁 Redirection vers l’espace chien du propriétaire
+        return $this->redirectToRoute('espace_chien', [
+            'id' => $chien->getProprietaire()->getId()
+        ], Response::HTTP_SEE_OTHER);
+    }
+
+    // 🎨 Affichage du formulaire
+    return $this->render('membre/modification_chien.html.twig', [
+        'form' => $form->createView(),
+        'chien' => $chien,
         'isModification' => $isModification,
     ]);
 }
