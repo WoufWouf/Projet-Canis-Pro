@@ -34,7 +34,7 @@ final class MembreController extends AbstractController
     #[Route('/espace-personnel', name: 'espace_personnel')]
     public function espaceProprietaire(): Response
     {
-         $user = $this->getUser();
+        $user = $this->getUser();
         $proprietaire= $user->getProprietaire();
         return $this->render('membre/espace_personnel.html.twig', [
             'proprietaire' => $proprietaire,
@@ -59,6 +59,37 @@ final class MembreController extends AbstractController
         ]);
     }
 
+    #[Route('/inscriptions/ajout/{seance}', name: 'app_reservation', methods: ['GET', 'POST'])]
+    public function newInscription( Request $request, ChienRepository $chienRepository, EntityManagerInterface $entityManager, Seance $seance): Response {
+    $user = $this->getUser();
+    $proprietaire = $user->getProprietaire();
+    $chiens = $chienRepository->findBy(['proprietaire' => $proprietaire]);
+
+    $inscription = new Inscription();
+    $inscription->addSeance($seance); 
+
+    $form = $this->createForm(InscriptionType::class, $inscription);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        $idChien = $request->request->get('chien');
+        $chien = $chienRepository->find($idChien);
+        $inscription->addChien($chien); 
+        $inscription->setNbChienInscrit(1);
+
+        $entityManager->persist($inscription);
+        $entityManager->flush();
+        return $this->redirectToRoute('espace_personnel',  [],   Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->render('inscription/new.html.twig', [
+        'inscription' => $inscription,
+        'form' => $form,
+        'chiens' => $chiens,
+    ]);
+    }
+
     #[Route('/espace-chien/ajoutChien/{id}', name: 'membreAjoutChien')]
     public function new(Request $request, EntityManagerInterface $entityManager, Proprietaire $proprietaire): Response
     {
@@ -72,9 +103,7 @@ final class MembreController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('espace_chien', [
-                        'id' => $proprietaire->getId()
-                    ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('espace_chien',  Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
@@ -83,6 +112,8 @@ final class MembreController extends AbstractController
             'proprietaire'=> $proprietaire
         ]);
     }
+
+    
 
     #[Route('/mes-prochaines-seances', name: 'membre_mes_prochaines_seances')]
     public function mesSeances(SeanceRepository $seanceRepository): Response
@@ -101,6 +132,7 @@ final class MembreController extends AbstractController
     }
 
   
+<<<<<<< HEAD
 #[Route('/inscriptions/ajout/{seance}', name: 'app_reservation', methods: ['GET', 'POST'])]
 public function newInscription(
     Request $request, 
@@ -143,6 +175,9 @@ public function newInscription(
         ]);
     }
 }
+=======
+
+>>>>>>> c59bbd5 (V37 : V6 + inscriptio na une seance)
 #[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
 public function modifierUnProprietaire(
     ?int $id, 

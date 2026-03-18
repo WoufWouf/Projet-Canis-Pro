@@ -20,11 +20,13 @@ class InscriptionType extends AbstractType
                 'class' => Seance::class,
                 'choice_label' => 'date',
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('chiens', EntityType::class, [
                 'class' => Chien::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
     }

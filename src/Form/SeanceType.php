@@ -19,12 +19,14 @@ class SeanceType extends AbstractType
             ->add('heure')
             ->add('cours', EntityType::class, [
                 'class' => Cours::class,
-                'choice_label' => 'id',
+                'choice_label' => function(Cours $unCours) {
+            return $unCours->getTypeEntrainement() . ' (' . ($unCours->isEsCollectif()? "Collectif":"Individuel").")";}
             ])
             ->add('inscriptions', EntityType::class, [
                 'class' => Inscription::class,
                 'choice_label' => 'id',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
     }
