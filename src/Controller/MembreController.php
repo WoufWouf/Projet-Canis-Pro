@@ -131,53 +131,6 @@ final class MembreController extends AbstractController
         ]);
     }
 
-  
-<<<<<<< HEAD
-#[Route('/inscriptions/ajout/{seance}', name: 'app_reservation', methods: ['GET', 'POST'])]
-public function newInscription(
-    Request $request, 
-    ChienRepository $chienRepository, 
-    EntityManagerInterface $entityManager, 
-    Seance $seance
-): Response {
-    $user = $this->getUser();
-    $proprietaire = $user->getProprietaire();
-    $chiens = $chienRepository->findBy(['proprietaire' => $proprietaire]);
-
-    $inscription = new Inscription();
-    $inscription->addSeance($seance); 
-    foreach ($chiens as $chien) {
-        $inscription->addChien($chien);
-    }
-
-    $form = $this->createForm(InscriptionType::class, $inscription);
-    $form->handleRequest($request);
-
-    // IMPORTANT : On vérifie si le formulaire est soumis
-    if ($form->isSubmitted() && $form->isValid()) {
-        
-        // On récupère l'ID du chien posté manuellement
-        $idChien = $request->request->get('chien_id');
-        $chien = $chienRepository->find($idChien);
-        $inscription->addChien($chien); 
-        $inscription->setNbChienInscrit(1);
-
-        $entityManager->persist($inscription);
-        $entityManager->flush();
-
-        // récupérer le propriétaire du chien inscrit pour afficher la liste de
-        // tous ses chiens (niveau inclus)
-        $proprietaire = $chienObj->getProprietaire();
-
-        return $this->render('membre/inscription_chien.html.twig', [
-            'inscription' => $inscription,
-            'proprietaire' => $proprietaire,
-        ]);
-    }
-}
-=======
-
->>>>>>> c59bbd5 (V37 : V6 + inscriptio na une seance)
 #[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
 public function modifierUnProprietaire(
     ?int $id, 
