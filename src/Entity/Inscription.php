@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\InscriptionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InscriptionRepository::class)]
@@ -18,23 +16,15 @@ class Inscription
     #[ORM\Column(nullable: true)]
     private ?int $nb_Chien_Inscrit = null;
 
-    /**
-     * @var Collection<int, Seance>
-     */
-    #[ORM\ManyToMany(targetEntity: Seance::class, inversedBy: 'inscriptions')]
-    private Collection $seances;
+    // ✅ UNE inscription = UN chien
+    #[ORM\ManyToOne(targetEntity: Chien::class, inversedBy: 'inscriptions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Chien $chien = null;
 
-    /**
-     * @var Collection<int, Chien>
-     */
-    #[ORM\ManyToMany(targetEntity: Chien::class, inversedBy: 'inscriptions')]
-    private Collection $chiens;
-
-    public function __construct()
-    {
-        $this->seances = new ArrayCollection();
-        $this->chiens = new ArrayCollection();
-    }
+    // ✅ UNE inscription = UNE séance
+    #[ORM\ManyToOne(targetEntity: Seance::class, inversedBy: 'inscriptions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Seance $seance = null;
 
     public function getId(): ?int
     {
@@ -49,55 +39,30 @@ class Inscription
     public function setNbChienInscrit(?int $nb_Chien_Inscrit): static
     {
         $this->nb_Chien_Inscrit = $nb_Chien_Inscrit;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, Seance>
-     */
-    public function getSeances(): Collection
+    // ✅ GETTER / SETTER CHIEN
+    public function getChien(): ?Chien
     {
-        return $this->seances;
+        return $this->chien;
     }
 
-    public function addSeance(Seance $seance): static
+    public function setChien(?Chien $chien): static
     {
-        if (!$this->seances->contains($seance)) {
-            $this->seances->add($seance);
-        }
-
+        $this->chien = $chien;
         return $this;
     }
 
-    public function removeSeance(Seance $seance): static
+    // ✅ GETTER / SETTER SEANCE
+    public function getSeance(): ?Seance
     {
-        $this->seances->removeElement($seance);
-
-        return $this;
+        return $this->seance;
     }
 
-    /**
-     * @return Collection<int, Chien>
-     */
-    public function getChiens(): Collection
+    public function setSeance(?Seance $seance): static
     {
-        return $this->chiens;
-    }
-
-    public function addChien(Chien $chien): static
-    {
-        if (!$this->chiens->contains($chien)) {
-            $this->chiens->add($chien);
-        }
-
-        return $this;
-    }
-
-    public function removeChien(Chien $chien): static
-    {
-        $this->chiens->removeElement($chien);
-
+        $this->seance = $seance;
         return $this;
     }
 }

@@ -10,10 +10,11 @@
         {% block stylesheets %}
         {% endblock %}
 
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+
         <style>
-        *{
-    background-color:  white;
-}
             /* Style du bouton retour en haut */
             #backToTop {
                 display: none; /* Caché par défaut */

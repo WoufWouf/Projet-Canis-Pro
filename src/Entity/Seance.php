@@ -25,16 +25,14 @@ class Seance
     #[ORM\JoinColumn(nullable: false)]
     private ?Cours $cours = null;
 
-  
     /**
      * @var Collection<int, Inscription>
      */
-    #[ORM\ManyToMany(targetEntity: Inscription::class, mappedBy: 'seances')]
+    #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'seance', orphanRemoval: true)]
     private Collection $inscriptions;
 
     public function __construct()
     {
-        $this->chiens = new ArrayCollection();
         $this->inscriptions = new ArrayCollection();
     }
 
@@ -51,7 +49,6 @@ class Seance
     public function setDate(string $date): static
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -63,7 +60,6 @@ class Seance
     public function setHeure(int $heure): static
     {
         $this->heure = $heure;
-
         return $this;
     }
 
@@ -75,11 +71,8 @@ class Seance
     public function setCours(?Cours $cours): static
     {
         $this->cours = $cours;
-
         return $this;
     }
-
- 
 
     /**
      * @return Collection<int, Inscription>
@@ -93,18 +86,18 @@ class Seance
     {
         if (!$this->inscriptions->contains($inscription)) {
             $this->inscriptions->add($inscription);
-            $inscription->addSeance($this);
+            $inscription->setSeance($this);
         }
-
         return $this;
     }
 
     public function removeInscription(Inscription $inscription): static
     {
         if ($this->inscriptions->removeElement($inscription)) {
-            $inscription->removeSeance($this);
+            if ($inscription->getSeance() === $this) {
+                $inscription->setSeance(null);
+            }
         }
-
         return $this;
     }
 }

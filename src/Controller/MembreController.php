@@ -157,98 +157,73 @@ public function modifierUnProprietaires(Request $request, Proprietaire $propriet
             'form' => $form,
         ]);
     }
+    #[Route('/membre/espace-chien/modification/{id}', name: 'membre_chien_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function modifierUnChien(
+        int $id,
+        ChienRepository $repository,
+        EntityManagerInterface $entity,
+        Request $request
+    ): Response {
 
-#[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-public function modifierUnProprietaires(Request $request, Proprietaire $proprietaire, Chien $chien, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-    $proprietaire = $user->getProprietaire();
-   
+        // On récupère le chien
+        $chien = $repository->find($id);
 
-        $form = $this->createForm(ProprietaireType::class, $proprietaire);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-        $entityManager->persist($proprietaire);
-        $entityManager->flush();
-
- $chiens = $proprietaire->getChiens();
-             return $this->redirectToRoute('espace_personnel', [], Response::HTTP_SEE_OTHER);
+        // Si pas trouvé → erreur
+        if (!$chien) {
+            throw $this->createNotFoundException('Chien non trouvé');
         }
 
-        return $this->render('membre/modification_proprietaire.html.twig', [
-            'proprietaire' => $proprietaire,
-            'form' => $form,
-        ]);
-    }
-#[Route('/membre/espace-chien/modification/{id}', name: 'membre_chien_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-public function modifierUnChien(
-    int $id,
-    ChienRepository $repository,
-    EntityManagerInterface $entity,
-    Request $request
-): Response {
+        // On sait qu'on est en modification
+        $isModification = true;
 
-    // On récupère le chien
-    $chien = $repository->find($id);
+        // Formulaire
+        $form = $this->createForm(ChienType::class, $chien);
+        $form->handleRequest($request);
 
-    // Si pas trouvé → erreur
-    if (!$chien) {
-        throw $this->createNotFoundException('Chien non trouvé');
-    }
+        // Si validé → on modifie
+        if ($form->isSubmitted() && $form->isValid()) {
 
-    // On sait qu'on est en modification
-    $isModification = true;
-
-    // Formulaire
-    $form = $this->createForm(ChienType::class, $chien);
-    $form->handleRequest($request);
-
-    // Si validé → on modifie
-    if ($form->isSubmitted() && $form->isValid()) {
-
-        $entity->flush(); // pas besoin de persist
+            $entity->flush(); // pas besoin de persist
 
         $this->addFlash('success', 'Chien modifié avec succès');
 
-        // Redirection vers l’espace chien du propriétaire
-        return $this->redirectToRoute('espace_chien', [
-            'id' => $chien->getProprietaire()->getId()
-        ], Response::HTTP_SEE_OTHER);
-    }
-
-    // Affichage du formulaire
-    return $this->render('membre/modification_chien.html.twig', [
-        'form' => $form->createView(),
-        'chien' => $chien,
-        'isModification' => $isModification,
-    ]);
-}
-
-#[Route('/espace-chien/seances/{id}', name: 'chien_inscrit_seance')]
-public function voirSeancesChien(ChienRepository $chienRepo, int $id): Response
-{
-    $chien = $chienRepo->find($id);
-
-    if (!$chien) {
-        throw $this->createNotFoundException('Chien introuvable');
-    }
-
-    $seances = [];
-
-    // On parcourt les inscriptions du chien
-    foreach ($chien->getInscriptions() as $inscription) {
-        // getSeances() retourne une ArrayCollection
-        foreach ($inscription->getSeances() as $seance) {
-            $seances[$seance->getId()] = $seance; // clé = id pour éviter doublons
+            // Redirection vers l’espace chien du propriétaire
+            return $this->redirectToRoute('espace_chien', [
+                'id' => $chien->getProprietaire()->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
+
+        // Affichage du formulaire
+        return $this->render('membre/modification_chien.html.twig', [
+            'form' => $form->createView(),
+            'chien' => $chien,
+            'isModification' => $isModification,
+        ]);
     }
 
-    // On a maintenant un array de séances unique
-    return $this->render('membre/chien_seances.html.twig', [
+    #[Route('/espace-chien/seances/{id}', name: 'chien_inscrit_seance')]
+    public function voirSeancesChien(ChienRepository $chienRepo, int $id): Response
+    {
+        $chien = $chienRepo->find($id);
+
+        if (!$chien) {
+            throw $this->createNotFoundException('Chien introuvable');
+        }
+        return $this->render('membre/chien_seances.html.twig', [
         'chien' => $chien,
-        'seances' => $seances,
-    ]);
-}
+        'inscriptions' => $chien->getInscriptions(),
+        ]);
+    }
+
+    #[Route('/espace-chien/inscription/supression/{id}', name: 'membreSuppressionInscription')]
+    public function delete(Request $request, Inscription $inscription, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($inscription);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('adminListeInscription', [], Response::HTTP_SEE_OTHER);
+    }
 
 }

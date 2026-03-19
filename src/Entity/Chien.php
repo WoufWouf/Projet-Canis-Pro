@@ -21,15 +21,13 @@ class Chien
     #[ORM\Column(length: 20)]
     private ?string $dateNaissance = null;
 
-    #[ORM\ManyToOne(inversedBy: 'yes')]
+    #[ORM\ManyToOne(inversedBy: 'chiens')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Race $race = null;
 
     #[ORM\ManyToOne(inversedBy: 'chiens')]
     #[ORM\JoinColumn(nullable: true)]
     private ?NiveauApprentissage $niveauxApprentissage = null;
-
-   
 
     #[ORM\ManyToOne(inversedBy: 'chiens')]
     #[ORM\JoinColumn(nullable: true)]
@@ -38,12 +36,11 @@ class Chien
     /**
      * @var Collection<int, Inscription>
      */
-    #[ORM\ManyToMany(targetEntity: Inscription::class, mappedBy: 'chiens')]
+    #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'chien', orphanRemoval: true)]
     private Collection $inscriptions;
 
     public function __construct()
     {
-        $this->seances = new ArrayCollection();
         $this->inscriptions = new ArrayCollection();
     }
 
@@ -60,7 +57,6 @@ class Chien
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -72,7 +68,6 @@ class Chien
     public function setDateNaissance(string $dateNaissance): static
     {
         $this->dateNaissance = $dateNaissance;
-
         return $this;
     }
 
@@ -84,7 +79,6 @@ class Chien
     public function setRace(?Race $race): static
     {
         $this->race = $race;
-
         return $this;
     }
 
@@ -96,11 +90,9 @@ class Chien
     public function setNiveauxApprentissage(?NiveauApprentissage $niveauxApprentissage): static
     {
         $this->niveauxApprentissage = $niveauxApprentissage;
-
         return $this;
     }
 
-   
     public function getProprietaire(): ?Proprietaire
     {
         return $this->proprietaire;
@@ -109,7 +101,6 @@ class Chien
     public function setProprietaire(?Proprietaire $proprietaire): static
     {
         $this->proprietaire = $proprietaire;
-
         return $this;
     }
 
@@ -125,18 +116,18 @@ class Chien
     {
         if (!$this->inscriptions->contains($inscription)) {
             $this->inscriptions->add($inscription);
-            $inscription->addChien($this);
+            $inscription->setChien($this);
         }
-
         return $this;
     }
 
     public function removeInscription(Inscription $inscription): static
     {
         if ($this->inscriptions->removeElement($inscription)) {
-            $inscription->removeChien($this);
+            if ($inscription->getChien() === $this) {
+                $inscription->setChien(null);
+            }
         }
-
         return $this;
     }
 }

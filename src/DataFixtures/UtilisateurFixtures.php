@@ -13,7 +13,7 @@ class UtilisateurFixtures extends Fixture
         $utilisateur = new Utilisateur();
         $utilisateur->setLogin("Annaelle")
                     ->setPassword('$2y$13$kPJWBGe6cFSsyEhfzdL/PeR6OlCMMUmykKRIoSXdssM.jIkxWtkpy')
-                    ->setRoles(["ROLE_ADMIN","ROLE_USER"]);
+                    ->setRoles(["ROLE_ADMIN"]);
         $manager->persist($utilisateur);
 
         $utilisateur2 = new Utilisateur();

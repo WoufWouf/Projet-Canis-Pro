@@ -22,13 +22,11 @@
                 <li><a href="{{ path('adminListeCours')}}">Cours</a></li>
                 <li><a href="{{ path('adminListeSeances')}}">Séances</a></li>
                 <li><a href="{{ path('adminListeInscription')}}">Inscriptions</a></li>
-                <li><a href="{{ path('adminListeInscription')}}">Membres</a></li>
             {% else %}
                 {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path('espace_personnel') }}">Mon espace</a></li>
                     <li><a href="{{path('app_listeCours')}}">Cours</a></li>
                     <li><a href="{{path('app_seance')}}">Séances</a></li>
-                    <li><a href="{{ path('espace_personnel', {'id': app.user.proprietaire.id}) }}">Mes réservations</a></li>
                     <li><a href="{{path('app_information')}}">Informations</a></li>
                     <li><a href="{{path('app_contact')}}">Contactez-nous</a></li>
                     
