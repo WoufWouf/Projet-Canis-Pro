@@ -3,7 +3,7 @@
         {% if app.user %}
             <a href="{{ path ('deconnexion')}}">Deconnexion</a>
         {% else %}
-            <a href="#">Inscription</a>
+            <a href="{{ path ('inscription')}}">Inscription</a>
             <a href="{{ path ('connexion')}}">Connexion</a>
         {% endif %}
     </div>
