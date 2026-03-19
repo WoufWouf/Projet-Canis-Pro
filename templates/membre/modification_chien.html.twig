@@ -4,6 +4,9 @@
 
 {% block body %}
 <style>
+    body{
+        background-color: white;
+    }
     :root {
         --main-blue: #54889c;
         --input-bg: #e2eff2; /* bleu clair */
@@ -102,23 +105,49 @@
 
 <div class="page-wrapper">
     <div class="form-card">
-        <h1 class="form-title">
-            {{ isModification ? 'Modifier le chien' : 'Ajouter un nouveau chien' }}
-        </h1>
+        <h1 class="form-title"> WOUF! WOUF! Je suis :</h1>
 
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
             
-            {% for child in form %}
-                {% if child.vars.name != '_token' %}
-                    <div class="form-row">
-                        {{ form_label(child) }}
-                        {{ form_errors(child) }}
-                        {{ form_widget(child) }}
-                    </div>
-                {% endif %}
-            {% endfor %}
 
-            {{ form_rest(form) }}
+        <div class="form-group" >
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nom) }}
+        </div>
+
+        <div class="form-group" >
+            {{ form_label(form.dateNaissance) }}
+            {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dateNaissance) }}
+        </div>
+
+        <div class="form-group" >
+            {{ form_label(form.race) }}
+            {{ form_widget(form.race, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.race) }}
+        </div>
+
+        <div class="form-group" >
+            {{ form_label(form.niveauxApprentissage) }}
+            {{ form_widget(form.niveauxApprentissage, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.niveauxApprentissage) }}
+        </div>
+
+        <div class="form-group" style="display: none;" >
+            {{ form_label(form.proprietaire) }}
+            {{ form_widget(form.proprietaire, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.proprietaire) }}
+        </div>
+
+        <div class="form-group" style="display: none;" >
+            {{ form_label(form.inscriptions) }}
+            {{ form_widget(form.inscriptions, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.inscriptions) }}
+        </div>
+
+
+
 
             <button type="submit" class="btn-submit">
                 {{ isModification ? 'Mettre à jour' : 'Enregistrer' }}

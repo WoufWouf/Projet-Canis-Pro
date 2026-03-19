@@ -23,7 +23,7 @@ class CoursType extends AbstractType
           
             ->add('niveauxApprentissage', EntityType::class, [
                 'class' => NiveauApprentissage::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             
         ;

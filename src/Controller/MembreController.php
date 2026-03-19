@@ -47,12 +47,9 @@ final class MembreController extends AbstractController
         $user = $this->getUser();
         $proprietaire= $user->getProprietaire();
 
-
-        // Grâce à la relation OneToMany définie dans l'entité,
-        // on peut directement obtenir la collection de chiens liés.
         $chiens = $proprietaire->getChiens();
 
-        // on transmet à la vue à la fois le propriétaire et ses chiens
+
         return $this->render('membre/espace_chien.html.twig', [
             'proprietaire' => $proprietaire,
             'chiens' => $chiens,
@@ -92,8 +89,10 @@ final class MembreController extends AbstractController
     }
 
     #[Route('/espace-chien/ajoutChien/{id}', name: 'membreAjoutChien')]
-    public function new(Request $request, EntityManagerInterface $entityManager, Proprietaire $proprietaire): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        $proprietaire = $user->getProprietaire();
         $chien = new Chien();
         $form = $this->createForm(ChienType::class, $chien);
         $chien->setProprietaire($proprietaire);
@@ -104,7 +103,7 @@ final class MembreController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('espace_chien', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('espace_chien',  Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
@@ -132,7 +131,30 @@ final class MembreController extends AbstractController
         ]);
     }
 
-  
+
+#[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+public function modifierUnProprietaires(Request $request, Proprietaire $proprietaire, Chien $chien, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+    $proprietaire = $user->getProprietaire();
+   
+
+        $form = $this->createForm(ProprietaireType::class, $proprietaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->persist($proprietaire);
+        $entityManager->flush();
+
+ $chiens = $proprietaire->getChiens();
+             return $this->redirectToRoute('espace_personnel', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('membre/modification_proprietaire.html.twig', [
+            'proprietaire' => $proprietaire,
+            'form' => $form,
+        ]);
+    }
 
 #[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
 public function modifierUnProprietaires(Request $request, Proprietaire $proprietaire, Chien $chien, EntityManagerInterface $entityManager): Response

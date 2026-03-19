@@ -4,6 +4,9 @@
 
 {% block body %}
 <style>
+    body{
+        background-color: white;
+    }
     :root {
         --main-blue: #54889c;
         --accent-brown: #6d5b4b;
@@ -151,7 +154,7 @@
                         </li>
                         <li>
                             <span class="info-label">Né le</span>
-                            <span>{{ chien.dateNaissance ? chien.dateNaissance|date('d/m/Y') : 'Non renseigné' }}</span>
+                            <span>{{ chien.dateNaissance ? chien.dateNaissance : 'Non renseigné' }}</span>
                         </li>
                         <li>
                             <span class="info-label">Niveau</span>

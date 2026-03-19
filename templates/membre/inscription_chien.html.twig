@@ -4,6 +4,9 @@
 
 {% block body %}
 <style>
+    body{
+        background-color: white;
+    }
     .conf-container {
         max-width: 800px;
         margin: 40px auto;
@@ -114,11 +117,11 @@
             <strong>Cours :</strong> {{ inscription.seances|first.cours }}
         </p>
         <p class="recap-detail">
-            <strong>Date :</strong> 🗓️ {{ inscription.seances|first.date|date('d/m/Y') }} 
-            à 🕒 {{ inscription.seances|first.heure|date('H:i') }}
+            <strong>Date :</strong> {{ inscription.seances|first.date|date('d/m/Y') }} 
+            à {{ inscription.seances|first.heure|date('H:i') }}
         </p>
         <p class="recap-detail">
-            <strong>Chien inscrit :</strong> 🐶 {{ inscription.chiens|first.nom }}
+            <strong>Chien inscrit :</strong> {{ inscription.chiens|first.nom }}
         </p>
     </div>
 

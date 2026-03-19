@@ -197,58 +197,11 @@
    
     .footer-right button:hover { background-color: #fff5f5; }
 </style>
+    <h1>Edit Cours</h1>
 
+    {{ include('cours/_form.html.twig', {'button_label': 'Update'}) }}
 
+    <a href="{{ path('adminListeCours') }}">Retour a la liste </a>
 
-<div class="edit-card">
-    <h1>Modifier le cours</h1>
-
-    {{ form_start(form, {'attr': {'class': 'form-grid'}}) }}
-        
-        <div class="form-group">
-            <label>Type Entrainement :</label>
-            {{ form_widget(form.typeEntrainement) }}
-        </div>
-
-        <div class="form-group">
-            <label>Chien Max :</label>
-            {{ form_widget(form.nbChienMax) }}
-        </div>
-
-        <div class="form-group">
-            <label>Prix :</label>
-            {{ form_widget(form.prix) }}
-        </div>
-
-        <div class="form-group">
-            <label>Durée :</label>
-            {{ form_widget(form.duree) }}
-        </div>
-
-        <div class="form-group">
-            <label>Niveaux Apprentissage :</label>
-            {{ form_widget(form.niveauxApprentissage) }}
-        </div>
-
-        <div class="form-group desc-group">
-            <label>Description :</label>
-            {{ form_widget(form.description) }}
-        </div>
-
-        <div class="checkbox-group">
-            <label>Collectif :</label>
-            {{ form_widget(form.esCollectif) }}
-        </div>
-
-        <div class="form-footer">
-            {{ include('cours/_delete_form.html.twig') }}
-            {{ include('cours/_form.html.twig', {'button_label': ' Enregistrer' , 'form_class': 'btn-edit'}) }}
-
-            <div class="footer-right">
-                <a href="{{ path('adminListeCours') }}" class="back-link">Retour à la liste</a>
-            </div>
-        </div>
-
-    {{ form_end(form) }}
-</div>
+    {{ include('cours/_delete_form.html.twig') }}
 {% endblock %}
