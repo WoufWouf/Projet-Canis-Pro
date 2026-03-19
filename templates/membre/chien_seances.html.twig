@@ -4,76 +4,108 @@
 
 {% block body %}
 <style>
-    /* Une petite touche de style personnalisé */
-    .table-container { border-radius: 12px; overflow: hidden; }
-    .dog-name { font-weight: 700; border-bottom: 3px solid #0d6efd; padding-bottom: 2px; }
-    .table thead { background-color: #f8f9fa; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
-    .badge-custom { padding: 0.5em 0.8em; border-radius: 6px; }
+    :root {
+        --main-blue: #54889c;
+        --accent-brown: #6d5b4b;
+        --input-bg: #e2eff2;
+        --border-light: #ccd5d8;
+    }
+
+    .seances-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .page-title {
+        font-family: 'Apple Chancery', 'Segoe Print', cursive;
+        font-size: 2.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .seance-card {
+        background: #fff;
+        border-radius: 25px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1.5px solid var(--border-light);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .seance-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--main-blue);
+    }
+
+    .seance-info {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .seance-info li {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 5px;
+    }
+
+    .info-label { font-weight: bold; color: #888; }
+
+    .btn-canispro {
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: 0.3s;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .btn-blue { background-color: var(--main-blue); color: white !important; }
+    .btn-canispro:hover { opacity: 0.9; transform: scale(1.03); }
 </style>
 
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h1 class="h2 mb-1">Carnet de séances</h1>
-            <p class="text-muted">Suivi des entraînements pour <span class="dog-name text-primary">{{ chien.nom }}</span></p>
-        </div>
-        <a href="{{ path('espace_chien', {'id': chien.proprietaire.id}) }}" class="btn btn-outline-secondary rounded-pill">
-            <i class="fas fa-arrow-left me-2"></i>Retour à l'espace
-        </a>
-    </div>
+<div class="seances-container">
+    <h1 class="page-title">Séances de {{ chien.nom }}</h1>
 
     {% if inscriptions is empty %}
-        <div class="text-center py-5 bg-light rounded-4 border border-dashed">
-            <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
-            <h4 class="text-muted">Aucune séance planifiée</h4>
-            <p>Il semblerait que {{ chien.nom }} n'ait pas encore de rendez-vous à l'agenda.</p>
+        <div style="text-align: center; padding: 50px; background: #f9fbfc; border-radius: 30px; border: 1px dashed var(--border-light);">
+            <p style="color: #888;">Aucune inscription pour ce chien.</p>
         </div>
     {% else %}
-        <div class="card shadow-sm border-0 table-container">
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th class="ps-4">Date & Heure</th>
-                                <th><i class="fas fa-clock me-2"></i>Durée</th>
-                                <th><i class="fas fa-graduation-cap me-2"></i>Niveau</th>
-                                <th>Type d'exercice</th>
-                                <th class="text-end pe-4">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for inscription in inscriptions %}
-                                <tr>
-                                    <td class="ps-4">
-                                        <div class="fw-bold text-dark">{{ inscription.seance.date }}</div>
-                                    </td>
-                                    <td>
-                                        <span class="fw-semibold text-secondary">{{ inscription.seance.cours.duree }} min</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-soft-primary text-primary border border-primary-subtle">
-                                            {{  inscription.seance.cours.niveauxApprentissage.libelle }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-info text-dark badge-custom">
-                                            {{ inscription.seance.cours.typeEntrainement }}
-                                        </span>
-                                    </td>
-                                    <td class="text-end pe-4">
-                                         <form method="post" action="{{ path('membreSuppressionInscription', {'id': inscription.id}) }}">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription.id) }}">
-                <button class="btn btn-danger btn-sm">Supprimer</button>
-            </form>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+        {% for inscription in inscriptions %}
+            <div class="seance-card">
+                <ul class="seance-info">
+                    <li>
+                        <span class="info-label">Date</span>
+                        <span>{{ inscription.seance?.date ?: 'Non renseignée' }}</span>
+                    </li>
+                    <li>
+                        <span class="info-label">Heure</span>
+                        <span>{{ inscription.seance?.heure ?: 'Non renseignée' }}</span>
+                    </li>
+                    <li>
+                        <span class="info-label">Cours</span>
+                        <span>{{ inscription.seance?.cours?.typeEntrainement ?: 'Non renseigné' }}</span>
+                    </li>
+                    <li>
+                        <span class="info-label">Niveau</span>
+                        <span>{{ inscription.seance?.cours?.niveauxApprentissage?.libelle ?: 'Débutant' }}</span>
+                    </li>
+                </ul>
+
+                 {{ include('inscription/_delete_form.html.twig') }}
             </div>
-        </div>
+        {% endfor %}
     {% endif %}
 </div>
 {% endblock %}

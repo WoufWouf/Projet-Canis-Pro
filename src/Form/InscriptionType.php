@@ -16,16 +16,16 @@ class InscriptionType extends AbstractType
     {
         $builder
             ->add('nb_Chien_Inscrit')
-            ->add('seances', EntityType::class, [
+            ->add('seance', EntityType::class, [
                 'class' => Seance::class,
                 'choice_label' => 'date',
-                'multiple' => true,
+                'multiple' => false,
                 'required' => false,
             ])
-            ->add('chiens', EntityType::class, [
+            ->add('chien', EntityType::class, [
                 'class' => Chien::class,
                 'choice_label' => 'nom',
-                'multiple' => true,
+                'multiple' => false,
                 'required' => false,
             ])
         ;

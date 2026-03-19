@@ -15,17 +15,17 @@
         </div>
 
         <div class="form-group" >
-            {{ form_label(form.seances) }}
-            {{ form_widget(form.seances, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.seances) }}
+            {{ form_label(form.seance) }}
+            {{ form_widget(form.seance, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.seance) }}
         </div>
         <div class="form-group" >
-            {{ form_widget(form.chiens) }}
+            {{ form_widget(form.chien) }}
         </div>
         
         {% else %}
         <div class="form-group" style="display: none;">
-            {{ form_widget(form.chiens) }}
+            {{ form_widget(form.chien) }}
         </div>
 
         <div class="form-group" style="display: none;">
@@ -35,9 +35,9 @@
         </div>
 
         <div class="form-group" style="display: none;">
-            {{ form_label(form.seances) }}
-            {{ form_widget(form.seances, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.seances) }}
+            {{ form_label(form.seance) }}
+            {{ form_widget(form.seance, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.seance) }}
         </div>
             <label for="chien">Choisir un chien :</label>
                 <select name="chien" id="chien" class="form-control">

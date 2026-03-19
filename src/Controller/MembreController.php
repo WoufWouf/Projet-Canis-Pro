@@ -67,7 +67,7 @@ final class MembreController extends AbstractController
     $chiens = $chienRepository->findBy(['proprietaire' => $proprietaire]);
 
     $inscription = new Inscription();
-    $inscription->addSeance($seance); 
+    $inscription->setSeance($seance); 
 
     $form = $this->createForm(InscriptionType::class, $inscription);
     $form->handleRequest($request);
@@ -76,7 +76,7 @@ final class MembreController extends AbstractController
         
         $idChien = $request->request->get('chien');
         $chien = $chienRepository->find($idChien);
-        $inscription->addChien($chien); 
+        $inscription->setChien($chien); 
         $inscription->setNbChienInscrit(1);
 
         $entityManager->persist($inscription);
@@ -104,7 +104,7 @@ final class MembreController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('espace_chien',  Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('espace_chien', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
@@ -218,12 +218,13 @@ public function modifierUnProprietaires(Request $request, Proprietaire $propriet
     #[Route('/espace-chien/inscription/supression/{id}', name: 'membreSuppressionInscription')]
     public function delete(Request $request, Inscription $inscription, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->getPayload()->getString('_token'))) {
+        $chienId = $inscription->getChien()->getId();
+        if ($this->isCsrfTokenValid('delete'.$inscription->getId(), $request->request->get('_token'))) {
             $entityManager->remove($inscription);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('adminListeInscription', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('chien_inscrit_seance', [ 'id' => $chienId], Response::HTTP_SEE_OTHER);
     }
 
 }
