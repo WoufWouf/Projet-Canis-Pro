@@ -24,7 +24,7 @@ class ProprietaireType extends AbstractType
             ->add('Ville')
             ->add('user', EntityType::class, [
                 'class' => Utilisateur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'login',
             ])
         ;
     }

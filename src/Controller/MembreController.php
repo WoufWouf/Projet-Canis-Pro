@@ -131,42 +131,72 @@ final class MembreController extends AbstractController
         ]);
     }
 
-#[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-public function modifierUnProprietaire(
-    ?int $id, 
-    ProprietaireRepository $repository, 
-    EntityManagerInterface $entity, 
-    Request $request // <-- IL FAUT AJOUTER CECI ICI
+  
+#[Route('/inscriptions/ajout/{seance}', name: 'app_reservation', methods: ['GET', 'POST'])]
+public function newInscription(
+    Request $request, 
+    ChienRepository $chienRepository, 
+    EntityManagerInterface $entityManager, 
+    Seance $seance
 ): Response {
+    $user = $this->getUser();
+    $proprietaire = $user->getProprietaire();
+    $chiens = $chienRepository->findBy(['proprietaire' => $proprietaire]);
 
-    $proprietaire = $repository->findOneBy(['id' => $id]);
-    $isModification = $proprietaire !== null;
-
-    if (!$proprietaire) {
-        $proprietaire = new Proprietaire();
+    $inscription = new Inscription();
+    $inscription->addSeance($seance); 
+    foreach ($chiens as $chien) {
+        $inscription->addChien($chien);
     }
 
-    $form = $this->createForm(ProprietaireType::class, $proprietaire);
-    $form->handleRequest($request); // Maintenant, $request est reconnu !
+    $form = $this->createForm(InscriptionType::class, $inscription);
+    $form->handleRequest($request);
 
-    // On ne persiste/flush QUE si le formulaire est soumis et valide
+    // IMPORTANT : On vérifie si le formulaire est soumis
     if ($form->isSubmitted() && $form->isValid()) {
-        $entity->persist($proprietaire);
-        $entity->flush();
-
-        $this->addFlash('success', $isModification ? 'Propriétaire modifié' : 'Propriétaire ajouté');
         
-        // Redirection pour éviter de renvoyer le formulaire en rafraîchissant
-        return $this->redirectToRoute('espace_personnel', ['id' => $proprietaire->getId()]);
+        // On récupère l'ID du chien posté manuellement
+        $idChien = $request->request->get('chien_id');
+        $chien = $chienRepository->find($idChien);
+        $inscription->addChien($chien); 
+        $inscription->setNbChienInscrit(1);
+
+        $entityManager->persist($inscription);
+        $entityManager->flush();
+
+        // récupérer le propriétaire du chien inscrit pour afficher la liste de
+        // tous ses chiens (niveau inclus)
+        $proprietaire = $chienObj->getProprietaire();
+
+        return $this->render('membre/inscription_chien.html.twig', [
+            'inscription' => $inscription,
+            'proprietaire' => $proprietaire,
+        ]);
     }
-
-    return $this->render('membre/modification_proprietaire.html.twig', [
-        'form' => $form->createView(), // <-- BIEN PASSER LE FORMULAIRE ICI
-        'proprietaire' => $proprietaire,
-        'isModification' => $isModification,
-    ]);
 }
+#[Route('/membre/espace-personnel/modification/{id}', name: 'membre_proprietaire_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+public function modifierUnProprietaires(Request $request, Proprietaire $proprietaire, Chien $chien, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+    $proprietaire = $user->getProprietaire();
+   
 
+        $form = $this->createForm(ProprietaireType::class, $proprietaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->persist($proprietaire);
+        $entityManager->flush();
+
+ $chiens = $proprietaire->getChiens();
+             return $this->redirectToRoute('espace_personnel', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('membre/modification_proprietaire.html.twig', [
+            'proprietaire' => $proprietaire,
+            'form' => $form,
+        ]);
+    }
 #[Route('/membre/espace-chien/modification/{id}', name: 'membre_chien_modification', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
 public function modifierUnChien(
     int $id,
@@ -175,35 +205,35 @@ public function modifierUnChien(
     Request $request
 ): Response {
 
-    //  On récupère le chien
+    // On récupère le chien
     $chien = $repository->find($id);
 
-    //  Si pas trouvé → erreur
+    // Si pas trouvé → erreur
     if (!$chien) {
         throw $this->createNotFoundException('Chien non trouvé');
     }
 
-    //  On sait qu'on est en modification
+    // On sait qu'on est en modification
     $isModification = true;
 
-    //  Formulaire
+    // Formulaire
     $form = $this->createForm(ChienType::class, $chien);
     $form->handleRequest($request);
 
-    //  Si validé → on modifie
+    // Si validé → on modifie
     if ($form->isSubmitted() && $form->isValid()) {
 
         $entity->flush(); // pas besoin de persist
 
-        $this->addFlash('success', 'Chien modifié avec succès 🐶');
+        $this->addFlash('success', 'Chien modifié avec succès');
 
-        //  Redirection vers l’espace chien du propriétaire
+        // Redirection vers l’espace chien du propriétaire
         return $this->redirectToRoute('espace_chien', [
             'id' => $chien->getProprietaire()->getId()
         ], Response::HTTP_SEE_OTHER);
     }
 
-    //  Affichage du formulaire
+    // Affichage du formulaire
     return $this->render('membre/modification_chien.html.twig', [
         'form' => $form->createView(),
         'chien' => $chien,

@@ -4,6 +4,9 @@
 
 {% block body %}
 <style>
+    *{
+    background-color:  white;
+}
     .espace-perso-container {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #555;
@@ -122,7 +125,6 @@
                 <span class="value">{{ proprietaire.tel|default('Non renseigné') }}</span>
             </li>
 
-                <a href="{{ path('membre_proprietaire_modification', {'id': proprietaire.id}) }}" class="btn-canispro-edit" role="button">Modifier</a>
             
         </ul>
 
@@ -131,7 +133,9 @@
             <p style="margin: 0; font-size: 1.1rem;">{{ proprietaire.adresse }}</p>
             <p style="margin: 5px 0 0 0; font-weight: bold;">{{ proprietaire.codePostal }} {{ proprietaire.ville }}</p>
         </div>
+                <a href="{{ path('membre_proprietaire_modification', {'id': proprietaire.id}) }}" class="btn-edit" role="button">Modifier</a>
                 <a href="{{ path('espace_chien', {'id': proprietaire.id}) }}" class="btn-edit">Gérer mes chiens</a>
+
     </div>
 
     {# Rappel visuel des pattes de chien comme sur ton image #}

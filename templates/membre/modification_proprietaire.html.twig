@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ isModification ? 'Modifier' : 'Ajouter' }} un propriétaire{% endblock %}
+{% block title %}un propriétaire{% endblock %}
 
 {% block body %}
 <style>
@@ -10,7 +10,9 @@
         --border-light: #ccd5d8;
         --text-gray: #4a4a4a;
     }
-
+*{
+    background-color:  white;
+}
     .page-wrapper {
         display: flex;
         justify-content: center;
@@ -107,29 +109,67 @@
 <div class="page-wrapper">
     <div class="form-card">
         <h1 class="form-title">
-            {{ isModification ? 'Modifier vos informations' : 'Nouvel enregistrement' }}
+          Moi je suis : 
         </h1>
 
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
-            
-            {# On boucle sur les champs pour appliquer le style aux labels et widgets #}
-            {% for child in form %}
-                {% if child.vars.name != '_token' %}
-                    <div class="form-row">
-                        {{ form_label(child) }}
-                        {{ form_errors(child) }}
-                        {{ form_widget(child) }}
-                    </div>
-                {% endif %}
-            {% endfor %}
+                
+            <div class="form-group">
+            {{ form_label(form.Nom) }}
+            {{ form_widget(form.Nom, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Nom) }}
+            </div>
 
-            {# Le champ CSRF caché est important pour la sécurité #}
-            {{ form_rest(form) }}
+            <div class="form-group">
+            {{ form_label(form.Prenom) }}
+            {{ form_widget(form.Prenom, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Prenom) }}
+            </div>
 
-            <button type="submit" class="btn-submit">
-                {{ isModification ? 'Mettre à jour' : 'Enregistrer' }}
-            </button>
-            
+            <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.email) }}
+            </div>
+
+            <div class="form-group">
+            {{ form_label(form.tel) }}
+            {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.tel) }}
+            </div>
+
+            <div class="form-group">
+            {{ form_label(form.date_Naissance) }}
+            {{ form_widget(form.date_Naissance, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.date_Naissance) }}
+            </div>
+
+            <div class="form-group" >
+            {{ form_label(form.Adresse) }}
+            {{ form_widget(form.Adresse, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Adresse) }}
+            </div>
+
+            <div class="form-group">
+            {{ form_label(form.Code_Postal) }}
+            {{ form_widget(form.Code_Postal, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Code_Postal) }}
+            </div>
+
+            <div class="form-group">
+            {{ form_label(form.Ville) }}
+            {{ form_widget(form.Ville, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Ville) }}
+            </div>
+
+            <div class="form-group" style="display: none;">
+            {{ form_label(form.user) }}
+            {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.user) }}
+            </div>
+
+          {{ form_widget(form) }}
+    <button type="submit" class="btn-edit">{{ button_label|default('Enregistrer') }}</button>
         {{ form_end(form) }}
     </div>
 </div>

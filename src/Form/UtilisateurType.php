@@ -19,7 +19,7 @@ class UtilisateurType extends AbstractType
             ->add('password')
             ->add('proprietaire', EntityType::class, [
                 'class' => Proprietaire::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
         ;
     }
