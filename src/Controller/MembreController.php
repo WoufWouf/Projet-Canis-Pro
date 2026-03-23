@@ -227,7 +227,7 @@ final class MembreController extends AbstractController
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('espace_chien', Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('espace_chien', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('chien/new.html.twig', [
