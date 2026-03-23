@@ -97,6 +97,10 @@
                 <a href="packages/App-Controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="packages/App-Entity.html" class="">Entity</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -129,7 +133,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Entity.html">Entity</a></li>
                             </ul>
         </div>
     
@@ -147,12 +152,30 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Utilisateur - Entité représentant un compte utilisateur de l&#039;application CanisPro.</p>
 
+
+    <section class="phpdocumentor-description"><p>Cette entité est le pilier du système d'authentification Symfony. Elle implémente
+deux interfaces du composant Security :</p>
+<ul>
+<li>UserInterface           : fournit les méthodes requises par le pare-feu Symfony
+(getUserIdentifier, getRoles, eraseCredentials).</li>
+<li>PasswordAuthenticatedUserInterface : indique que cet utilisateur s'authentifie
+par mot de passe (getPassword).</li>
+</ul>
+<p>Chaque Utilisateur est lié à exactement un Proprietaire via une relation
+OneToOne bidirectionnelle. L'Utilisateur est le côté &quot;inverse&quot; de cette relation
+(mappedBy), ce qui signifie que c'est le Proprietaire qui détient la clé étrangère.</p>
+<p>Le cascade ['persist', 'remove'] garantit que toute opération de persistance
+ou suppression sur l'Utilisateur est automatiquement propagée au Proprietaire lié.</p>
+<p>Contrainte d'unicité : le champ &quot;login&quot; est unique en base de données
+grâce à l'attribut #[ORM\UniqueConstraint].</p>
+<p>Table Doctrine : générée automatiquement depuis le nom de la classe.</p>
+</section>
 
 
 
@@ -215,30 +238,35 @@
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Identifiant unique auto-incrémenté de l&#039;utilisateur en base de données.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Utilisateur.html#property_login">$login</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>Login (identifiant de connexion) de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Utilisateur.html#property_password">$password</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: string|null            </span>
 </dt>
+<dd>Mot de passe haché de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Utilisateur.html#property_proprietaire">$proprietaire</a>
     <span>
                         &nbsp;: <a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null            </span>
 </dt>
+<dd>Propriétaire associé à cet utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Utilisateur.html#property_roles">$roles</a>
     <span>
                         &nbsp;: array&lt;int, string&gt;            </span>
 </dt>
+<dd>Liste des rôles attribués à l&#039;utilisateur.</dd>
 
     </dl>
 
@@ -251,70 +279,79 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method___serialize">__serialize()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string, mixed&gt;    </span>
 </dt>
-<dd>Ensure the session doesn&#039;t contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.</dd>
+<dd>Sérialise l&#039;entité pour stockage en session en remplaçant le hash du mot de passe.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne l&#039;identifiant technique unique de l&#039;utilisateur en base.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getLogin">getLogin()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne le login de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getPassword">getPassword()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne le mot de passe haché de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getProprietaire">getProprietaire()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null    </span>
 </dt>
+<dd>Retourne le Proprietaire associé à cet utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getRoles">getRoles()</a>
     <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;int, string&gt;    </span>
 </dt>
+<dd>Retourne la liste complète des rôles de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_getUserIdentifier">getUserIdentifier()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>A visual identifier that represents this user.</dd>
+<dd>Retourne l&#039;identifiant visuel représentant cet utilisateur pour Symfony Security.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_setLogin">setLogin()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le login de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_setPassword">setPassword()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le mot de passe haché de l&#039;utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_setProprietaire">setProprietaire()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit ou retire le Proprietaire associé à cet utilisateur.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Utilisateur.html#method_setRoles">setRoles()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit les rôles de l&#039;utilisateur.</dd>
 
     </dl>
 
@@ -346,11 +383,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identifiant unique auto-incrémenté de l&#039;utilisateur en base de données.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -358,7 +396,10 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Généré automatiquement par Doctrine lors du premier persist().
+Vaut null tant que l'entité n'a pas été persistée.</p>
+</section>
+
     
     
 
@@ -404,11 +445,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Login (identifiant de connexion) de l&#039;utilisateur.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -416,7 +458,11 @@
     <span class="phpdocumentor-signature__name">$login</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Utilisé comme identifiant unique de connexion (getUserIdentifier).
+Limité à 180 caractères et soumis à une contrainte d'unicité en base
+via #[ORM\UniqueConstraint]. Ne peut pas être null en base de données.</p>
+</section>
+
     
     
 
@@ -455,23 +501,43 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Mot de passe haché de l&#039;utilisateur.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">string</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$password</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
-        <section class="phpdocumentor-description"><p>The hashed password</p>
+        <section class="phpdocumentor-description"><p>Ne stocke jamais le mot de passe en clair — uniquement le hash généré
+par UserPasswordHasherInterface (algorithme configuré dans security.yaml,
+généralement bcrypt ou sodium).
+La méthode __serialize() remplace ce hash par un CRC32C avant sérialisation
+en session pour éviter d'exposer le vrai hash dans les données de session.</p>
 </section>
 
     
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Entity-Utilisateur.html#property_password#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><abbr title="\Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface">PasswordAuthenticatedUserInterface</abbr></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
 
         
             <section class="phpdocumentor-attributes">
@@ -505,11 +571,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Propriétaire associé à cet utilisateur.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -517,7 +584,13 @@
     <span class="phpdocumentor-signature__name">$proprietaire</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation OneToOne bidirectionnelle — côté inverse (mappedBy).
+La clé étrangère est détenue par l'entité Proprietaire (côté propriétaire
+de la relation). Le cascade ['persist', 'remove'] propage automatiquement
+les opérations Doctrine vers le Proprietaire lié.</p>
+<p>Vaut null si aucun Proprietaire n'est encore associé à cet utilisateur.</p>
+</section>
+
     
     
 
@@ -559,11 +632,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Liste des rôles attribués à l&#039;utilisateur.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -571,10 +645,14 @@
     <span class="phpdocumentor-signature__name">$roles</span>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
-    
-        <section class="phpdocumentor-description"><p>The user roles</p>
+        <section class="phpdocumentor-description"><p>Stocké en JSON en base de données. Chaque rôle est une chaîne préfixée
+par &quot;ROLE_&quot; (ex : &quot;ROLE_USER&quot;, &quot;ROLE_ADMIN&quot;).
+Le rôle &quot;ROLE_USER&quot; est toujours ajouté automatiquement par getRoles()
+même s'il n'est pas explicitement présent dans ce tableau, garantissant
+ainsi que tout utilisateur possède au minimum ce rôle de base.</p>
 </section>
 
+    
     
 
         
@@ -614,20 +692,27 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">236</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Ensure the session doesn&#039;t contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.</p>
+        <p class="phpdocumentor-summary">Sérialise l&#039;entité pour stockage en session en remplaçant le hash du mot de passe.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__serialize</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">__serialize</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Surcharge la sérialisation PHP native pour des raisons de sécurité.
+Au lieu de stocker le vrai hash bcrypt/sodium en session (ce qui exposerait
+une donnée sensible), ce hash est remplacé par son empreinte CRC32C,
+un algorithme de checksum rapide et non réversible supporté depuis Symfony 7.3.</p>
+<p>Cela permet à Symfony de détecter un changement de mot de passe entre deux
+requêtes (invalidation de session) sans stocker le vrai hash en session.</p>
+</section>
+
     
     
 
@@ -635,7 +720,11 @@
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Les données sérialisées avec le hash remplacé par son CRC32C.</p>
+</section>
+
             </section>
 
 </article>
@@ -653,11 +742,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant technique unique de l&#039;utilisateur en base.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -674,6 +764,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'ID auto-incrémenté, ou null si l'entité n'est pas encore persistée.</p>
+</section>
+
             </section>
 
 </article>
@@ -691,11 +785,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le login de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLogin</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -712,6 +807,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le login, ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -729,11 +828,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">199</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le mot de passe haché de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPassword</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -741,7 +841,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Implémente PasswordAuthenticatedUserInterface::getPassword().
+Utilisé par Symfony pour vérifier le mot de passe lors de l'authentification.
+Ne retourne jamais le mot de passe en clair.</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -765,6 +869,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le hash du mot de passe, ou null s'il n'est pas encore défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -782,11 +890,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">249</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le Proprietaire associé à cet utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getProprietaire</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null</span></code>
@@ -803,6 +912,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le propriétaire lié, ou null si aucun n'est associé.</p>
+</section>
+
             </section>
 
 </article>
@@ -820,19 +933,24 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la liste complète des rôles de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRoles</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getRoles</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, string&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Implémente UserInterface::getRoles(). Ajoute systématiquement &quot;ROLE_USER&quot;
+à la liste des rôles stockés en base, puis déduplique via array_unique()
+pour éviter les doublons si &quot;ROLE_USER&quot; était déjà présent explicitement.</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -855,7 +973,11 @@
     
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, string&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Tableau de chaînes représentant les rôles (ex : ['ROLE_USER', 'ROLE_ADMIN']).</p>
+</section>
+
             </section>
 
 </article>
@@ -873,11 +995,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">A visual identifier that represents this user.</p>
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant visuel représentant cet utilisateur pour Symfony Security.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -886,7 +1008,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Implémente UserInterface::getUserIdentifier(). C'est cette valeur que Symfony
+utilise comme identifiant de session et dans les logs de sécurité.
+Ici, c'est le login qui joue ce rôle d'identifiant unique.</p>
+</section>
+
     
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -910,6 +1036,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le login converti en chaîne (cast sécurisé depuis ?string).</p>
+</section>
+
             </section>
 
 </article>
@@ -927,11 +1057,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le login de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setLogin</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$login</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -947,7 +1078,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le login à attribuer (doit être unique en base).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -958,6 +1091,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -975,11 +1112,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le mot de passe haché de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setPassword</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -987,7 +1125,12 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Cette méthode attend un mot de passe déjà haché par UserPasswordHasherInterface.
+Ne jamais passer un mot de passe en clair directement.</p>
+<p>Exemple d'utilisation correcte :
+$user-&gt;setPassword($passwordHasher-&gt;hashPassword($user, $plainPassword));</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -995,7 +1138,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le mot de passe haché à stocker.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1006,6 +1151,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1023,11 +1172,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">273</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit ou retire le Proprietaire associé à cet utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setProprietaire</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$proprietaire</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1035,7 +1185,23 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Gère la cohérence des deux côtés de la relation OneToOne bidirectionnelle :</p>
+<ul>
+<li>
+<p>Si $proprietaire est null et qu'un propriétaire était déjà lié :
+appelle setUser(null) sur l'ancien propriétaire pour désynchroniser
+le côté propriétaire (owning side) de la relation.</p>
+</li>
+<li>
+<p>Si $proprietaire est non null et que son utilisateur lié n'est pas encore
+cet utilisateur : appelle setUser($this) pour synchroniser le côté
+propriétaire (owning side) et garantir la cohérence en base.</p>
+</li>
+</ul>
+<p>Cette double vérification est le pattern standard Symfony pour maintenir
+la synchronisation des relations bidirectionnelles sans boucle infinie.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1043,7 +1209,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Proprietaire.html"><abbr title="\App\Entity\Proprietaire">Proprietaire</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le propriétaire à associer, ou null pour dissocier.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1054,6 +1222,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1071,11 +1243,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Utilisateur.php"><a href="files/src-entity-utilisateur.html"><abbr title="src/Entity/Utilisateur.php">Utilisateur.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit les rôles de l&#039;utilisateur.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setRoles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$roles</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1083,7 +1256,10 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Remplace entièrement la liste des rôles existants. &quot;ROLE_USER&quot; n'a pas
+besoin d'être inclus car il est ajouté automatiquement par getRoles().</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1091,7 +1267,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, string&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Tableau de rôles à attribuer (ex : ['ROLE_ADMIN']).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1102,6 +1280,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>

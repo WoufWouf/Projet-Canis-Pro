@@ -97,6 +97,10 @@
                 <a href="packages/App-Controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="packages/App-Entity.html" class="">Entity</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -129,7 +133,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Entity.html">Entity</a></li>
                             </ul>
         </div>
     
@@ -144,12 +149,38 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">NiveauApprentissage - Entité représentant un niveau de progression dans CanisPro.</p>
 
+
+    <section class="phpdocumentor-description"><p>Un niveau d'apprentissage est une donnée de référence qui catégorise à la fois
+les chiens (selon leur progression) et les cours (selon leur difficulté).
+Exemples de valeurs : &quot;Débutant&quot;, &quot;Intermédiaire&quot;, &quot;Avancé&quot;, &quot;Expert&quot;.</p>
+<p>Relations :</p>
+<ul>
+<li>
+<p>OneToMany vers Chien : un niveau peut être associé à plusieurs chiens.
+C'est le côté inverse (mappedBy: 'niveauxApprentissage'),
+la clé étrangère est portée par Chien.
+Pas d'orphanRemoval — supprimer un niveau ne supprime
+pas les chiens associés.</p>
+</li>
+<li>
+<p>OneToMany vers Cours : un niveau peut correspondre à plusieurs cours.
+C'est également le côté inverse (mappedBy: 'niveauxApprentissage'),
+la clé étrangère est portée par Cours.
+Pas d'orphanRemoval — supprimer un niveau ne supprime
+pas les cours associés.</p>
+</li>
+</ul>
+<p>Note sur le nommage : la propriété est nommée &quot;niveauxApprentissage&quot; (pluriel)
+côté Chien et Cours alors qu'il s'agit d'une relation ManyToOne (un seul niveau
+par chien/cours). Le singulier &quot;niveauApprentissage&quot; serait plus approprié
+et plus lisible.</p>
+</section>
 
 
 
@@ -194,24 +225,28 @@
     <span>
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;            </span>
 </dt>
+<dd>Collection des chiens ayant ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#property_cours">$cours</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&gt;            </span>
 </dt>
+<dd>Collection des cours correspondant à ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Identifiant unique auto-incrémenté du niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#property_libelle">$libelle</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>Libellé du niveau d&#039;apprentissage.</dd>
 
     </dl>
 
@@ -226,60 +261,70 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Constructeur — initialise les deux collections.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_addChien">addChien()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Associe un chien à ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_addCour">addCour()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Associe un cours à ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_getChiens">getChiens()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;    </span>
 </dt>
+<dd>Retourne la collection des chiens ayant ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_getCours">getCours()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&gt;    </span>
 </dt>
+<dd>Retourne la collection des cours correspondant à ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne l&#039;identifiant unique du niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_getLibelle">getLibelle()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne le libellé du niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_removeChien">removeChien()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Dissocie un chien de ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_removeCour">removeCour()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Dissocie un cours de ce niveau d&#039;apprentissage.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-NiveauApprentissage.html#method_setLibelle">setLibelle()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le libellé du niveau d&#039;apprentissage.</dd>
 
     </dl>
 
@@ -311,11 +356,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Collection des chiens ayant ce niveau d&#039;apprentissage.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -323,7 +369,14 @@
     <span class="phpdocumentor-signature__name">$chiens</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation OneToMany — un niveau peut être attribué à plusieurs chiens.
+C'est le côté inverse de la relation (mappedBy: 'niveauxApprentissage'),
+la clé étrangère niveaux_apprentissage_id est portée par l'entité Chien.</p>
+<p>Pas d'orphanRemoval — retirer un chien de cette collection ou supprimer
+ce niveau ne supprime pas le chien en base.</p>
+<p>Initialisée dans le constructeur avec une ArrayCollection vide.</p>
+</section>
+
     
     
 
@@ -365,11 +418,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Collection des cours correspondant à ce niveau d&#039;apprentissage.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -377,7 +431,14 @@
     <span class="phpdocumentor-signature__name">$cours</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation OneToMany — un niveau peut regrouper plusieurs cours de même difficulté.
+C'est le côté inverse de la relation (mappedBy: 'niveauxApprentissage'),
+la clé étrangère niveaux_apprentissage_id est portée par l'entité Cours.</p>
+<p>Pas d'orphanRemoval — retirer un cours de cette collection ou supprimer
+ce niveau ne supprime pas le cours en base.</p>
+<p>Initialisée dans le constructeur avec une ArrayCollection vide.</p>
+</section>
+
     
     
 
@@ -419,11 +480,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identifiant unique auto-incrémenté du niveau d&#039;apprentissage.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -431,7 +493,10 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Généré automatiquement par Doctrine lors du premier persist().
+Vaut null tant que l'entité n'a pas été persistée.</p>
+</section>
+
     
     
 
@@ -477,11 +542,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Libellé du niveau d&#039;apprentissage.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -489,7 +555,11 @@
     <span class="phpdocumentor-signature__name">$libelle</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Chaîne descriptive limitée à 20 caractères représentant le nom
+du niveau (ex : &quot;Débutant&quot;, &quot;Avancé&quot;).
+Ne peut pas être null en base de données.</p>
+</section>
+
     
     
 
@@ -533,11 +603,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Constructeur — initialise les deux collections.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -545,7 +616,12 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Doctrine requiert que les collections soient initialisées avec une
+ArrayCollection dans le constructeur pour éviter les erreurs lors
+de l'accès aux collections avant tout chargement depuis la base.
+Les deux collections ($chiens et $cours) sont initialisées ici.</p>
+</section>
+
     
     
 
@@ -567,11 +643,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">170</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Associe un chien à ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chien</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -579,7 +656,14 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Vérifie d'abord que le chien n'est pas déjà présent dans la collection
+via contains() pour éviter les doublons. Si nouveau, l'ajoute à la
+collection et synchronise le côté propriétaire de la relation en
+appelant $chien-&gt;setNiveauxApprentissage($this).</p>
+<p>Cette synchronisation bidirectionnelle est indispensable pour que Doctrine
+persiste correctement la clé étrangère dans la table chien.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -587,7 +671,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le chien à associer à ce niveau.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -598,6 +684,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -615,11 +705,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">229</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Associe un cours à ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addCour</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cour</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -627,7 +718,14 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Vérifie d'abord que le cours n'est pas déjà présent dans la collection
+via contains() pour éviter les doublons. Si nouveau, l'ajoute à la
+collection et synchronise le côté propriétaire de la relation en
+appelant $cour-&gt;setNiveauxApprentissage($this).</p>
+<p>Note : le paramètre est nommé $cour (singulier sans 's') par cohérence
+avec la convention utilisée ailleurs dans le projet pour l'entité Cours.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -635,7 +733,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le cours à associer à ce niveau.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -646,6 +746,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -663,11 +767,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">151</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la collection des chiens ayant ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getChiens</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;</span></code>
@@ -684,6 +789,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La collection des chiens associés à ce niveau.</p>
+</section>
+
             </section>
 
 </article>
@@ -701,11 +810,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la collection des cours correspondant à ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCours</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&gt;</span></code>
@@ -722,6 +832,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La collection des cours associés à ce niveau.</p>
+</section>
+
             </section>
 
 </article>
@@ -739,11 +853,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant unique du niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -760,6 +875,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'ID auto-incrémenté, ou null si l'entité n'est pas encore persistée.</p>
+</section>
+
             </section>
 
 </article>
@@ -777,11 +896,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le libellé du niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLibelle</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -798,6 +918,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le libellé (ex : &quot;Débutant&quot;), ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -815,11 +939,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">194</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Dissocie un chien de ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">removeChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chien</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -827,7 +952,14 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Utilise removeElement() pour retirer le chien de la collection.
+Si l'élément était présent et a été retiré (retour true), vérifie
+que le niveau lié côté Chien est bien ce niveau, puis appelle
+setNiveauxApprentissage(null) pour dissocier le côté propriétaire.</p>
+<p>Pas d'orphanRemoval — le chien n'est pas supprimé en base,
+il se retrouve simplement sans niveau d'apprentissage assigné.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -835,7 +967,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le chien à dissocier de ce niveau.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -846,6 +980,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -863,11 +1001,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Dissocie un cours de ce niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">removeCour</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cour</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -875,7 +1014,14 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Utilise removeElement() pour retirer le cours de la collection.
+Si l'élément était présent et a été retiré (retour true), vérifie
+que le niveau lié côté Cours est bien ce niveau, puis appelle
+setNiveauxApprentissage(null) pour dissocier le côté propriétaire.</p>
+<p>Pas d'orphanRemoval — le cours n'est pas supprimé en base,
+il se retrouve simplement sans niveau d'apprentissage assigné.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -883,7 +1029,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Cours.html"><abbr title="\App\Entity\Cours">Cours</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le cours à dissocier de ce niveau.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -894,6 +1042,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -911,11 +1063,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/NiveauApprentissage.php"><a href="files/src-entity-niveauapprentissage.html"><abbr title="src/Entity/NiveauApprentissage.php">NiveauApprentissage.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le libellé du niveau d&#039;apprentissage.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setLibelle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$libelle</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -931,7 +1084,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le libellé du niveau (max 20 caractères, ex : &quot;Intermédiaire&quot;).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -942,6 +1097,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>

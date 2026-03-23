@@ -97,6 +97,10 @@
                 <a href="packages/App-Controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="packages/App-Entity.html" class="">Entity</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -129,7 +133,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Entity.html">Entity</a></li>
                             </ul>
         </div>
     
@@ -144,12 +149,24 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Race - Entité représentant une race de chien dans l&#039;application CanisPro.</p>
 
+
+    <section class="phpdocumentor-description"><p>Une race est une donnée de référence (ex : Berger Allemand, Labrador, Husky)
+utilisée pour catégoriser les chiens inscrits dans l'école de dressage.</p>
+<p>Relations :</p>
+<ul>
+<li>OneToMany vers Chien : une race peut être associée à plusieurs chiens.
+C'est le côté inverse de la relation (mappedBy: 'race'),
+la clé étrangère est portée par l'entité Chien.
+L'option orphanRemoval: true supprime automatiquement
+les chiens orphelins si retirés de la collection.</li>
+</ul>
+</section>
 
 
 
@@ -194,18 +211,21 @@
     <span>
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;            </span>
 </dt>
+<dd>Collection des chiens appartenant à cette race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Race.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Identifiant unique auto-incrémenté de la race en base de données.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Race.html#property_nom">$nom</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>Nom de la race (ex : &quot;Berger Allemand&quot;, &quot;Labrador&quot;, &quot;Husky&quot;).</dd>
 
     </dl>
 
@@ -220,42 +240,49 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Constructeur — initialise la collection de chiens.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_addChien">addChien()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Ajoute un chien à cette race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_getChien">getChien()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;    </span>
 </dt>
+<dd>Retourne la collection complète des chiens de cette race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne l&#039;identifiant unique de la race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_getNom">getNom()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne le nom de la race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_removeChien">removeChien()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Retire un chien de cette race.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Race.html#method_setNom">setNom()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le nom de la race.</dd>
 
     </dl>
 
@@ -287,11 +314,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Collection des chiens appartenant à cette race.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -299,7 +327,15 @@
     <span class="phpdocumentor-signature__name">$chien</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation OneToMany — une race peut regrouper plusieurs chiens.
+C'est le côté inverse de la relation (mappedBy: 'race'),
+la clé étrangère race_id est portée par l'entité Chien.</p>
+<p>L'option orphanRemoval: true garantit que si un chien est retiré
+de cette collection, il sera automatiquement supprimé en base
+lors du prochain flush(), sans appel explicite à remove().</p>
+<p>Initialisée dans le constructeur avec une ArrayCollection vide.</p>
+</section>
+
     
     
 
@@ -344,11 +380,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identifiant unique auto-incrémenté de la race en base de données.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -356,7 +393,10 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Généré automatiquement par Doctrine lors du premier persist().
+Vaut null tant que l'entité n'a pas été persistée.</p>
+</section>
+
     
     
 
@@ -402,11 +442,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nom de la race (ex : &quot;Berger Allemand&quot;, &quot;Labrador&quot;, &quot;Husky&quot;).</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -414,7 +455,10 @@
     <span class="phpdocumentor-signature__name">$nom</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Limité à 30 caractères en base de données.
+Vaut null tant qu'il n'a pas été défini.</p>
+</section>
+
     
     
 
@@ -458,11 +502,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Constructeur — initialise la collection de chiens.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -470,7 +515,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Doctrine requiert que les collections soient initialisées avec une
+ArrayCollection dans le constructeur pour éviter les erreurs lors
+de l'accès à la collection avant tout chargement depuis la base.</p>
+</section>
+
     
     
 
@@ -492,27 +541,37 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Ajoute un chien à cette race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ye</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">addChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chien</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Vérifie d'abord que le chien n'est pas déjà présent dans la collection
+via contains() pour éviter les doublons. Si nouveau, l'ajoute à la
+collection et synchronise le côté propriétaire de la relation en
+appelant $chien-&gt;setRace($this).</p>
+<p>Cette synchronisation bidirectionnelle est indispensable pour que Doctrine
+persiste correctement la clé étrangère (race_id) dans la table chien.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$ye</span>
+                <span class="phpdocumentor-argument-list__argument__name">$chien</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le chien à associer à cette race.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -523,6 +582,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -540,11 +603,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la collection complète des chiens de cette race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getChien</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;</span></code>
@@ -561,6 +625,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La collection des chiens associés à cette race.</p>
+</section>
+
             </section>
 
 </article>
@@ -578,11 +646,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant unique de la race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -599,6 +668,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'ID auto-incrémenté, ou null si l'entité n'est pas encore persistée.</p>
+</section>
+
             </section>
 
 </article>
@@ -616,11 +689,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le nom de la race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNom</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -637,6 +711,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le nom de la race, ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -654,27 +732,38 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retire un chien de cette race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">removeChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ye</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">removeChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chien</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Utilise removeElement() pour retirer le chien de la collection.
+Si l'élément était présent et a été retiré (retour true), vérifie
+que la race liée côté Chien est bien cette race, puis appelle
+setRace(null) pour dissocier le côté propriétaire.</p>
+<p>Grâce à orphanRemoval: true, Doctrine supprimera automatiquement
+le chien en base lors du prochain flush() si il est retiré de
+cette collection.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$ye</span>
+                <span class="phpdocumentor-argument-list__argument__name">$chien</span>
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le chien à retirer de cette race.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -685,6 +774,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -702,11 +795,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Race.php"><a href="files/src-entity-race.html"><abbr title="src/Entity/Race.php">Race.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le nom de la race.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setNom</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$nom</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -722,7 +816,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le nom de la race (ex : &quot;Berger Allemand&quot;).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -733,6 +829,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>

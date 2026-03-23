@@ -263,17 +263,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\Securit\u00E9Controller",
             "name": "Securit\u00E9Controller",
-            "summary": "",
+            "summary": "Securit\u00E9Controller\u0020\u002D\u0020Contr\u00F4leur\u0020g\u00E9rant\u0020l\u0027authentification\u0020des\u0020utilisateurs\u0020CanisPro.",
             "url": "classes/App-Controller-SecuriteController.html"
         },                {
             "fqsen": "\\App\\Controller\\Securit\u00E9Controller\u003A\u003Alogin\u0028\u0029",
             "name": "login",
-            "summary": "",
+            "summary": "Affiche\u0020le\u0020formulaire\u0020de\u0020connexion\u0020et\u0020g\u00E8re\u0020les\u0020erreurs\u0020d\u0027authentification.",
             "url": "classes/App-Controller-SecuriteController.html#method_login"
         },                {
             "fqsen": "\\App\\Controller\\Securit\u00E9Controller\u003A\u003Alogout\u0028\u0029",
             "name": "logout",
-            "summary": "",
+            "summary": "Point\u0020de\u0020d\u00E9connexion\u0020de\u0020l\u0027utilisateur\u0020authentifi\u00E9.",
             "url": "classes/App-Controller-SecuriteController.html#method_logout"
         },                {
             "fqsen": "\\App\\Controller\\VisiteurController",
@@ -393,797 +393,797 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Chien",
             "name": "Chien",
-            "summary": "",
+            "summary": "Chien\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020un\u0020chien\u0020inscrit\u0020dans\u0020l\u0027\u00E9cole\u0020de\u0020dressage\u0020CanisPro.",
             "url": "classes/App-Entity-Chien.html"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020la\u0020collection\u0020d\u0027inscriptions.",
             "url": "classes/App-Entity-Chien.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetNom\u0028\u0029",
             "name": "getNom",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020nom\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getNom"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AsetNom\u0028\u0029",
             "name": "setNom",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020nom\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_setNom"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetDateNaissance\u0028\u0029",
             "name": "getDateNaissance",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020date\u0020de\u0020naissance\u0020du\u0020chien\u0020sous\u0020forme\u0020de\u0020cha\u00EEne.",
             "url": "classes/App-Entity-Chien.html#method_getDateNaissance"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AsetDateNaissance\u0028\u0029",
             "name": "setDateNaissance",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020date\u0020de\u0020naissance\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_setDateNaissance"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetRace\u0028\u0029",
             "name": "getRace",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020race\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getRace"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AsetRace\u0028\u0029",
             "name": "setRace",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020race\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_setRace"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetNiveauxApprentissage\u0028\u0029",
             "name": "getNiveauxApprentissage",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020niveau\u0020d\u0027apprentissage\u0020actuel\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getNiveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AsetNiveauxApprentissage\u0028\u0029",
             "name": "setNiveauxApprentissage",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020niveau\u0020d\u0027apprentissage\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_setNiveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetProprietaire\u0028\u0029",
             "name": "getProprietaire",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020propri\u00E9taire\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getProprietaire"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AsetProprietaire\u0028\u0029",
             "name": "setProprietaire",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020propri\u00E9taire\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_setProprietaire"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AgetInscriptions\u0028\u0029",
             "name": "getInscriptions",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020compl\u00E8te\u0020des\u0020inscriptions\u0020de\u0020ce\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_getInscriptions"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AaddInscription\u0028\u0029",
             "name": "addInscription",
-            "summary": "",
+            "summary": "Ajoute\u0020une\u0020inscription\u0020\u00E0\u0020ce\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_addInscription"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003AremoveInscription\u0028\u0029",
             "name": "removeInscription",
-            "summary": "",
+            "summary": "Retire\u0020une\u0020inscription\u0020de\u0020ce\u0020chien.",
             "url": "classes/App-Entity-Chien.html#method_removeInscription"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020du\u0020chien\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Chien.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024nom",
             "name": "nom",
-            "summary": "",
+            "summary": "Nom\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#property_nom"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024dateNaissance",
             "name": "dateNaissance",
-            "summary": "",
+            "summary": "Date\u0020de\u0020naissance\u0020du\u0020chien\u0020stock\u00E9e\u0020en\u0020cha\u00EEne\u0020de\u0020caract\u00E8res.",
             "url": "classes/App-Entity-Chien.html#property_dateNaissance"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024race",
             "name": "race",
-            "summary": "",
+            "summary": "Race\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#property_race"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024niveauxApprentissage",
             "name": "niveauxApprentissage",
-            "summary": "",
+            "summary": "Niveau\u0020d\u0027apprentissage\u0020actuel\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#property_niveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024proprietaire",
             "name": "proprietaire",
-            "summary": "",
+            "summary": "Propri\u00E9taire\u0020du\u0020chien.",
             "url": "classes/App-Entity-Chien.html#property_proprietaire"
         },                {
             "fqsen": "\\App\\Entity\\Chien\u003A\u003A\u0024inscriptions",
             "name": "inscriptions",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020inscriptions\u0020de\u0020ce\u0020chien\u0020aux\u0020s\u00E9ances.",
             "url": "classes/App-Entity-Chien.html#property_inscriptions"
         },                {
             "fqsen": "\\App\\Entity\\Cours",
             "name": "Cours",
-            "summary": "",
+            "summary": "Cours\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020un\u0020cours\u0020de\u0020dressage\u0020propos\u00E9\u0020par\u0020l\u0027\u00E9cole\u0020CanisPro.",
             "url": "classes/App-Entity-Cours.html"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020la\u0020collection\u0020de\u0020s\u00E9ances.",
             "url": "classes/App-Entity-Cours.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetTypeEntrainement\u0028\u0029",
             "name": "getTypeEntrainement",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020type\u0020d\u0027entra\u00EEnement\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getTypeEntrainement"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetTypeEntrainement\u0028\u0029",
             "name": "setTypeEntrainement",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020type\u0020d\u0027entra\u00EEnement\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_setTypeEntrainement"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetDescription\u0028\u0029",
             "name": "getDescription",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020description\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getDescription"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetDescription\u0028\u0029",
             "name": "setDescription",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020description\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_setDescription"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetPrix\u0028\u0029",
             "name": "getPrix",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020prix\u0020du\u0020cours\u0020en\u0020euros.",
             "url": "classes/App-Entity-Cours.html#method_getPrix"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetPrix\u0028\u0029",
             "name": "setPrix",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020prix\u0020du\u0020cours\u0020en\u0020euros.",
             "url": "classes/App-Entity-Cours.html#method_setPrix"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AisEsCollectif\u0028\u0029",
             "name": "isEsCollectif",
-            "summary": "",
+            "summary": "Indique\u0020si\u0020le\u0020cours\u0020est\u0020collectif.",
             "url": "classes/App-Entity-Cours.html#method_isEsCollectif"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetEsCollectif\u0028\u0029",
             "name": "setEsCollectif",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020si\u0020le\u0020cours\u0020est\u0020collectif\u0020ou\u0020individuel.",
             "url": "classes/App-Entity-Cours.html#method_setEsCollectif"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetNbChienMax\u0028\u0029",
             "name": "getNbChienMax",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020nombre\u0020maximum\u0020de\u0020chiens\u0020autoris\u00E9s\u0020dans\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getNbChienMax"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetNbChienMax\u0028\u0029",
             "name": "setNbChienMax",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020nombre\u0020maximum\u0020de\u0020chiens\u0020autoris\u00E9s\u0020dans\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_setNbChienMax"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetDuree\u0028\u0029",
             "name": "getDuree",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020dur\u00E9e\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getDuree"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetDuree\u0028\u0029",
             "name": "setDuree",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020dur\u00E9e\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_setDuree"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetNiveauxApprentissage\u0028\u0029",
             "name": "getNiveauxApprentissage",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020niveau\u0020d\u0027apprentissage\u0020associ\u00E9\u0020\u00E0\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getNiveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AsetNiveauxApprentissage\u0028\u0029",
             "name": "setNiveauxApprentissage",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020niveau\u0020d\u0027apprentissage\u0020requis\u0020pour\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_setNiveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AgetSeances\u0028\u0029",
             "name": "getSeances",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020des\u0020s\u00E9ances\u0020planifi\u00E9es\u0020pour\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_getSeances"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AaddSeance\u0028\u0029",
             "name": "addSeance",
-            "summary": "",
+            "summary": "Ajoute\u0020une\u0020s\u00E9ance\u0020\u00E0\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_addSeance"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003AremoveSeance\u0028\u0029",
             "name": "removeSeance",
-            "summary": "",
+            "summary": "Retire\u0020une\u0020s\u00E9ance\u0020de\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#method_removeSeance"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020du\u0020cours\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Cours.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024typeEntrainement",
             "name": "typeEntrainement",
-            "summary": "",
+            "summary": "Type\u0020d\u0027entra\u00EEnement\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_typeEntrainement"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024description",
             "name": "description",
-            "summary": "",
+            "summary": "Description\u0020d\u00E9taill\u00E9e\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_description"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024prix",
             "name": "prix",
-            "summary": "",
+            "summary": "Prix\u0020du\u0020cours\u0020en\u0020euros.",
             "url": "classes/App-Entity-Cours.html#property_prix"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024esCollectif",
             "name": "esCollectif",
-            "summary": "",
+            "summary": "Indique\u0020si\u0020le\u0020cours\u0020est\u0020collectif\u0020ou\u0020individuel.",
             "url": "classes/App-Entity-Cours.html#property_esCollectif"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024nbChienMax",
             "name": "nbChienMax",
-            "summary": "",
+            "summary": "Nombre\u0020maximum\u0020de\u0020chiens\u0020pouvant\u0020participer\u0020au\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_nbChienMax"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024duree",
             "name": "duree",
-            "summary": "",
+            "summary": "Dur\u00E9e\u0020du\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_duree"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024niveauxApprentissage",
             "name": "niveauxApprentissage",
-            "summary": "",
+            "summary": "Niveau\u0020d\u0027apprentissage\u0020requis\u0020pour\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_niveauxApprentissage"
         },                {
             "fqsen": "\\App\\Entity\\Cours\u003A\u003A\u0024seances",
             "name": "seances",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020s\u00E9ances\u0020planifi\u00E9es\u0020pour\u0020ce\u0020cours.",
             "url": "classes/App-Entity-Cours.html#property_seances"
         },                {
             "fqsen": "\\App\\Entity\\Inscription",
             "name": "Inscription",
-            "summary": "",
+            "summary": "Inscription\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020l\u0027inscription\u0020d\u0027un\u0020chien\u0020\u00E0\u0020une\u0020s\u00E9ance\u0020dans\u0020CanisPro.",
             "url": "classes/App-Entity-Inscription.html"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020de\u0020l\u0027inscription.",
             "url": "classes/App-Entity-Inscription.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AgetNbChienInscrit\u0028\u0029",
             "name": "getNbChienInscrit",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020nombre\u0020de\u0020chiens\u0020inscrits\u0020pour\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_getNbChienInscrit"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AsetNbChienInscrit\u0028\u0029",
             "name": "setNbChienInscrit",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020nombre\u0020de\u0020chiens\u0020inscrits\u0020pour\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_setNbChienInscrit"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AgetChien\u0028\u0029",
             "name": "getChien",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020chien\u0020associ\u00E9\u0020\u00E0\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_getChien"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AsetChien\u0028\u0029",
             "name": "setChien",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020chien\u0020associ\u00E9\u0020\u00E0\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_setChien"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AgetSeance\u0028\u0029",
             "name": "getSeance",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020s\u00E9ance\u0020associ\u00E9e\u0020\u00E0\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_getSeance"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003AsetSeance\u0028\u0029",
             "name": "setSeance",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020s\u00E9ance\u0020associ\u00E9e\u0020\u00E0\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#method_setSeance"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020de\u0020l\u0027inscription\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Inscription.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003A\u0024nb_Chien_Inscrit",
             "name": "nb_Chien_Inscrit",
-            "summary": "",
+            "summary": "Nombre\u0020de\u0020chiens\u0020inscrits\u0020pour\u0020cette\u0020inscription.",
             "url": "classes/App-Entity-Inscription.html#property_nb_Chien_Inscrit"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003A\u0024chien",
             "name": "chien",
-            "summary": "",
+            "summary": "Chien\u0020inscrit\u0020\u00E0\u0020la\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Inscription.html#property_chien"
         },                {
             "fqsen": "\\App\\Entity\\Inscription\u003A\u003A\u0024seance",
             "name": "seance",
-            "summary": "",
+            "summary": "S\u00E9ance\u0020\u00E0\u0020laquelle\u0020le\u0020chien\u0020est\u0020inscrit.",
             "url": "classes/App-Entity-Inscription.html#property_seance"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage",
             "name": "NiveauApprentissage",
-            "summary": "",
+            "summary": "NiveauApprentissage\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020un\u0020niveau\u0020de\u0020progression\u0020dans\u0020CanisPro.",
             "url": "classes/App-Entity-NiveauApprentissage.html"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020les\u0020deux\u0020collections.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020du\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AgetLibelle\u0028\u0029",
             "name": "getLibelle",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020libell\u00E9\u0020du\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_getLibelle"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AsetLibelle\u0028\u0029",
             "name": "setLibelle",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020libell\u00E9\u0020du\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_setLibelle"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AgetChiens\u0028\u0029",
             "name": "getChiens",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020des\u0020chiens\u0020ayant\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_getChiens"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AaddChien\u0028\u0029",
             "name": "addChien",
-            "summary": "",
+            "summary": "Associe\u0020un\u0020chien\u0020\u00E0\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_addChien"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AremoveChien\u0028\u0029",
             "name": "removeChien",
-            "summary": "",
+            "summary": "Dissocie\u0020un\u0020chien\u0020de\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_removeChien"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AgetCours\u0028\u0029",
             "name": "getCours",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020des\u0020cours\u0020correspondant\u0020\u00E0\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_getCours"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AaddCour\u0028\u0029",
             "name": "addCour",
-            "summary": "",
+            "summary": "Associe\u0020un\u0020cours\u0020\u00E0\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_addCour"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003AremoveCour\u0028\u0029",
             "name": "removeCour",
-            "summary": "",
+            "summary": "Dissocie\u0020un\u0020cours\u0020de\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#method_removeCour"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020du\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003A\u0024libelle",
             "name": "libelle",
-            "summary": "",
+            "summary": "Libell\u00E9\u0020du\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#property_libelle"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003A\u0024chiens",
             "name": "chiens",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020chiens\u0020ayant\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#property_chiens"
         },                {
             "fqsen": "\\App\\Entity\\NiveauApprentissage\u003A\u003A\u0024cours",
             "name": "cours",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020cours\u0020correspondant\u0020\u00E0\u0020ce\u0020niveau\u0020d\u0027apprentissage.",
             "url": "classes/App-Entity-NiveauApprentissage.html#property_cours"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire",
             "name": "Proprietaire",
-            "summary": "",
+            "summary": "Proprietaire\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020le\u0020profil\u0020personnel\u0020d\u0027un\u0020membre\u0020de\u0020CanisPro.",
             "url": "classes/App-Entity-Proprietaire.html"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020la\u0020collection\u0020de\u0020chiens.",
             "url": "classes/App-Entity-Proprietaire.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetNom\u0028\u0029",
             "name": "getNom",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020nom\u0020de\u0020famille\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getNom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetNom\u0028\u0029",
             "name": "setNom",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020nom\u0020de\u0020famille\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setNom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetPrenom\u0028\u0029",
             "name": "getPrenom",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020pr\u00E9nom\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getPrenom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetPrenom\u0028\u0029",
             "name": "setPrenom",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020pr\u00E9nom\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setPrenom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetEmail\u0028\u0029",
             "name": "getEmail",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027adresse\u0020email\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getEmail"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetEmail\u0028\u0029",
             "name": "setEmail",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020l\u0027adresse\u0020email\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setEmail"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetTel\u0028\u0029",
             "name": "getTel",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020num\u00E9ro\u0020de\u0020t\u00E9l\u00E9phone\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getTel"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetTel\u0028\u0029",
             "name": "setTel",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020num\u00E9ro\u0020de\u0020t\u00E9l\u00E9phone\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setTel"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetDateNaissance\u0028\u0029",
             "name": "getDateNaissance",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020date\u0020de\u0020naissance\u0020du\u0020propri\u00E9taire\u0020sous\u0020forme\u0020de\u0020cha\u00EEne.",
             "url": "classes/App-Entity-Proprietaire.html#method_getDateNaissance"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetDateNaissance\u0028\u0029",
             "name": "setDateNaissance",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020date\u0020de\u0020naissance\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setDateNaissance"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetAdresse\u0028\u0029",
             "name": "getAdresse",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027adresse\u0020postale\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getAdresse"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetAdresse\u0028\u0029",
             "name": "setAdresse",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020l\u0027adresse\u0020postale\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setAdresse"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetCodePostal\u0028\u0029",
             "name": "getCodePostal",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020code\u0020postal\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getCodePostal"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetCodePostal\u0028\u0029",
             "name": "setCodePostal",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020code\u0020postal\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setCodePostal"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetVille\u0028\u0029",
             "name": "getVille",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020ville\u0020de\u0020r\u00E9sidence\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getVille"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetVille\u0028\u0029",
             "name": "setVille",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020ville\u0020de\u0020r\u00E9sidence\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setVille"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetChiens\u0028\u0029",
             "name": "getChiens",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020compl\u00E8te\u0020des\u0020chiens\u0020de\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getChiens"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AaddChien\u0028\u0029",
             "name": "addChien",
-            "summary": "",
+            "summary": "Ajoute\u0020un\u0020chien\u0020\u00E0\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_addChien"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AremoveChien\u0028\u0029",
             "name": "removeChien",
-            "summary": "",
+            "summary": "Retire\u0020un\u0020chien\u0020de\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_removeChien"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AgetUser\u0028\u0029",
             "name": "getUser",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020compte\u0020utilisateur\u0020associ\u00E9\u0020\u00E0\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_getUser"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003AsetUser\u0028\u0029",
             "name": "setUser",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020ou\u0020retire\u0020le\u0020compte\u0020utilisateur\u0020associ\u00E9\u0020\u00E0\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#method_setUser"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020du\u0020propri\u00E9taire\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Proprietaire.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024Nom",
             "name": "Nom",
-            "summary": "",
+            "summary": "Nom\u0020de\u0020famille\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_Nom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024Prenom",
             "name": "Prenom",
-            "summary": "",
+            "summary": "Pr\u00E9nom\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_Prenom"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024email",
             "name": "email",
-            "summary": "",
+            "summary": "Adresse\u0020email\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_email"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024tel",
             "name": "tel",
-            "summary": "",
+            "summary": "Num\u00E9ro\u0020de\u0020t\u00E9l\u00E9phone\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_tel"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024date_Naissance",
             "name": "date_Naissance",
-            "summary": "",
+            "summary": "Date\u0020de\u0020naissance\u0020du\u0020propri\u00E9taire\u0020stock\u00E9e\u0020en\u0020cha\u00EEne\u0020de\u0020caract\u00E8res.",
             "url": "classes/App-Entity-Proprietaire.html#property_date_Naissance"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024Adresse",
             "name": "Adresse",
-            "summary": "",
+            "summary": "Adresse\u0020postale\u0020compl\u00E8te\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_Adresse"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024Code_Postal",
             "name": "Code_Postal",
-            "summary": "",
+            "summary": "Code\u0020postal\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_Code_Postal"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024Ville",
             "name": "Ville",
-            "summary": "",
+            "summary": "Ville\u0020de\u0020r\u00E9sidence\u0020du\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_Ville"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024chiens",
             "name": "chiens",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020chiens\u0020appartenant\u0020\u00E0\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_chiens"
         },                {
             "fqsen": "\\App\\Entity\\Proprietaire\u003A\u003A\u0024user",
             "name": "user",
-            "summary": "",
+            "summary": "Compte\u0020utilisateur\u0020li\u00E9\u0020\u00E0\u0020ce\u0020propri\u00E9taire.",
             "url": "classes/App-Entity-Proprietaire.html#property_user"
         },                {
             "fqsen": "\\App\\Entity\\Race",
             "name": "Race",
-            "summary": "",
+            "summary": "Race\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020une\u0020race\u0020de\u0020chien\u0020dans\u0020l\u0027application\u0020CanisPro.",
             "url": "classes/App-Entity-Race.html"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020la\u0020collection\u0020de\u0020chiens.",
             "url": "classes/App-Entity-Race.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020de\u0020la\u0020race.",
             "url": "classes/App-Entity-Race.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AgetNom\u0028\u0029",
             "name": "getNom",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020nom\u0020de\u0020la\u0020race.",
             "url": "classes/App-Entity-Race.html#method_getNom"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AsetNom\u0028\u0029",
             "name": "setNom",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020nom\u0020de\u0020la\u0020race.",
             "url": "classes/App-Entity-Race.html#method_setNom"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AgetChien\u0028\u0029",
             "name": "getChien",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020compl\u00E8te\u0020des\u0020chiens\u0020de\u0020cette\u0020race.",
             "url": "classes/App-Entity-Race.html#method_getChien"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AaddChien\u0028\u0029",
             "name": "addChien",
-            "summary": "",
+            "summary": "Ajoute\u0020un\u0020chien\u0020\u00E0\u0020cette\u0020race.",
             "url": "classes/App-Entity-Race.html#method_addChien"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003AremoveChien\u0028\u0029",
             "name": "removeChien",
-            "summary": "",
+            "summary": "Retire\u0020un\u0020chien\u0020de\u0020cette\u0020race.",
             "url": "classes/App-Entity-Race.html#method_removeChien"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020de\u0020la\u0020race\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Race.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003A\u0024nom",
             "name": "nom",
-            "summary": "",
+            "summary": "Nom\u0020de\u0020la\u0020race\u0020\u0028ex\u0020\u003A\u0020\u0022Berger\u0020Allemand\u0022,\u0020\u0022Labrador\u0022,\u0020\u0022Husky\u0022\u0029.",
             "url": "classes/App-Entity-Race.html#property_nom"
         },                {
             "fqsen": "\\App\\Entity\\Race\u003A\u003A\u0024chien",
             "name": "chien",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020chiens\u0020appartenant\u0020\u00E0\u0020cette\u0020race.",
             "url": "classes/App-Entity-Race.html#property_chien"
         },                {
             "fqsen": "\\App\\Entity\\Seance",
             "name": "Seance",
-            "summary": "",
+            "summary": "Seance\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020une\u0020s\u00E9ance\u0020planifi\u00E9e\u0020dans\u0020l\u0027\u00E9cole\u0020CanisPro.",
             "url": "classes/App-Entity-Seance.html"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "Constructeur\u0020\u2014\u0020initialise\u0020la\u0020collection\u0020d\u0027inscriptions.",
             "url": "classes/App-Entity-Seance.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020unique\u0020de\u0020la\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AgetDate\u0028\u0029",
             "name": "getDate",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020date\u0020de\u0020la\u0020s\u00E9ance\u0020sous\u0020forme\u0020de\u0020cha\u00EEne.",
             "url": "classes/App-Entity-Seance.html#method_getDate"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AsetDate\u0028\u0029",
             "name": "setDate",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020la\u0020date\u0020de\u0020la\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_setDate"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AgetHeure\u0028\u0029",
             "name": "getHeure",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027heure\u0020de\u0020d\u00E9but\u0020de\u0020la\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_getHeure"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AsetHeure\u0028\u0029",
             "name": "setHeure",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020l\u0027heure\u0020de\u0020d\u00E9but\u0020de\u0020la\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_setHeure"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AgetCours\u0028\u0029",
             "name": "getCours",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020cours\u0020auquel\u0020cette\u0020s\u00E9ance\u0020est\u0020rattach\u00E9e.",
             "url": "classes/App-Entity-Seance.html#method_getCours"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AsetCours\u0028\u0029",
             "name": "setCours",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020cours\u0020auquel\u0020cette\u0020s\u00E9ance\u0020est\u0020rattach\u00E9e.",
             "url": "classes/App-Entity-Seance.html#method_setCours"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AgetInscriptions\u0028\u0029",
             "name": "getInscriptions",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020collection\u0020compl\u00E8te\u0020des\u0020inscriptions\u0020de\u0020cette\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_getInscriptions"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AaddInscription\u0028\u0029",
             "name": "addInscription",
-            "summary": "",
+            "summary": "Ajoute\u0020une\u0020inscription\u0020\u00E0\u0020cette\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_addInscription"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003AremoveInscription\u0028\u0029",
             "name": "removeInscription",
-            "summary": "",
+            "summary": "Retire\u0020une\u0020inscription\u0020de\u0020cette\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#method_removeInscription"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020de\u0020la\u0020s\u00E9ance\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Seance.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A\u0024date",
             "name": "date",
-            "summary": "",
+            "summary": "Date\u0020de\u0020la\u0020s\u00E9ance\u0020stock\u00E9e\u0020sous\u0020forme\u0020de\u0020cha\u00EEne\u0020de\u0020caract\u00E8res.",
             "url": "classes/App-Entity-Seance.html#property_date"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A\u0024heure",
             "name": "heure",
-            "summary": "",
+            "summary": "Heure\u0020de\u0020la\u0020s\u00E9ance\u0020stock\u00E9e\u0020sous\u0020forme\u0020d\u0027entier.",
             "url": "classes/App-Entity-Seance.html#property_heure"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A\u0024cours",
             "name": "cours",
-            "summary": "",
+            "summary": "Cours\u0020auquel\u0020cette\u0020s\u00E9ance\u0020est\u0020rattach\u00E9e.",
             "url": "classes/App-Entity-Seance.html#property_cours"
         },                {
             "fqsen": "\\App\\Entity\\Seance\u003A\u003A\u0024inscriptions",
             "name": "inscriptions",
-            "summary": "",
+            "summary": "Collection\u0020des\u0020inscriptions\u0020li\u00E9es\u0020\u00E0\u0020cette\u0020s\u00E9ance.",
             "url": "classes/App-Entity-Seance.html#property_inscriptions"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur",
             "name": "Utilisateur",
-            "summary": "",
+            "summary": "Utilisateur\u0020\u002D\u0020Entit\u00E9\u0020repr\u00E9sentant\u0020un\u0020compte\u0020utilisateur\u0020de\u0020l\u0027application\u0020CanisPro.",
             "url": "classes/App-Entity-Utilisateur.html"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020technique\u0020unique\u0020de\u0020l\u0027utilisateur\u0020en\u0020base.",
             "url": "classes/App-Entity-Utilisateur.html#method_getId"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetLogin\u0028\u0029",
             "name": "getLogin",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020login\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_getLogin"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AsetLogin\u0028\u0029",
             "name": "setLogin",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020login\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_setLogin"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetUserIdentifier\u0028\u0029",
             "name": "getUserIdentifier",
-            "summary": "A\u0020visual\u0020identifier\u0020that\u0020represents\u0020this\u0020user.",
+            "summary": "Retourne\u0020l\u0027identifiant\u0020visuel\u0020repr\u00E9sentant\u0020cet\u0020utilisateur\u0020pour\u0020Symfony\u0020Security.",
             "url": "classes/App-Entity-Utilisateur.html#method_getUserIdentifier"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetRoles\u0028\u0029",
             "name": "getRoles",
-            "summary": "",
+            "summary": "Retourne\u0020la\u0020liste\u0020compl\u00E8te\u0020des\u0020r\u00F4les\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_getRoles"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AsetRoles\u0028\u0029",
             "name": "setRoles",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020les\u0020r\u00F4les\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_setRoles"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetPassword\u0028\u0029",
             "name": "getPassword",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020mot\u0020de\u0020passe\u0020hach\u00E9\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_getPassword"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AsetPassword\u0028\u0029",
             "name": "setPassword",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020le\u0020mot\u0020de\u0020passe\u0020hach\u00E9\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_setPassword"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A__serialize\u0028\u0029",
             "name": "__serialize",
-            "summary": "Ensure\u0020the\u0020session\u0020doesn\u0027t\u0020contain\u0020actual\u0020password\u0020hashes\u0020by\u0020CRC32C\u002Dhashing\u0020them,\u0020as\u0020supported\u0020since\u0020Symfony\u00207.3.",
+            "summary": "S\u00E9rialise\u0020l\u0027entit\u00E9\u0020pour\u0020stockage\u0020en\u0020session\u0020en\u0020rempla\u00E7ant\u0020le\u0020hash\u0020du\u0020mot\u0020de\u0020passe.",
             "url": "classes/App-Entity-Utilisateur.html#method___serialize"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AgetProprietaire\u0028\u0029",
             "name": "getProprietaire",
-            "summary": "",
+            "summary": "Retourne\u0020le\u0020Proprietaire\u0020associ\u00E9\u0020\u00E0\u0020cet\u0020utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_getProprietaire"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003AsetProprietaire\u0028\u0029",
             "name": "setProprietaire",
-            "summary": "",
+            "summary": "D\u00E9finit\u0020ou\u0020retire\u0020le\u0020Proprietaire\u0020associ\u00E9\u0020\u00E0\u0020cet\u0020utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#method_setProprietaire"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Identifiant\u0020unique\u0020auto\u002Dincr\u00E9ment\u00E9\u0020de\u0020l\u0027utilisateur\u0020en\u0020base\u0020de\u0020donn\u00E9es.",
             "url": "classes/App-Entity-Utilisateur.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A\u0024login",
             "name": "login",
-            "summary": "",
+            "summary": "Login\u0020\u0028identifiant\u0020de\u0020connexion\u0029\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#property_login"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A\u0024roles",
             "name": "roles",
-            "summary": "",
+            "summary": "Liste\u0020des\u0020r\u00F4les\u0020attribu\u00E9s\u0020\u00E0\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#property_roles"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A\u0024password",
             "name": "password",
-            "summary": "",
+            "summary": "Mot\u0020de\u0020passe\u0020hach\u00E9\u0020de\u0020l\u0027utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#property_password"
         },                {
             "fqsen": "\\App\\Entity\\Utilisateur\u003A\u003A\u0024proprietaire",
             "name": "proprietaire",
-            "summary": "",
+            "summary": "Propri\u00E9taire\u0020associ\u00E9\u0020\u00E0\u0020cet\u0020utilisateur.",
             "url": "classes/App-Entity-Utilisateur.html#property_proprietaire"
         },                {
             "fqsen": "\\App\\Form\\ChienType",

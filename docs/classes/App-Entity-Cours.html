@@ -97,6 +97,10 @@
                 <a href="packages/App-Controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="packages/App-Entity.html" class="">Entity</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -129,7 +133,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Entity.html">Entity</a></li>
                             </ul>
         </div>
     
@@ -144,12 +149,43 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Cours - Entité représentant un cours de dressage proposé par l&#039;école CanisPro.</p>
 
+
+    <section class="phpdocumentor-description"><p>Un cours est un programme d'entraînement défini par son type, sa description,
+son prix, sa durée et ses caractéristiques (collectif ou individuel, nombre
+maximum de chiens). Il est associé à un niveau d'apprentissage et peut
+être décliné en plusieurs séances planifiées à des dates différentes.</p>
+<p>Relations :</p>
+<ul>
+<li>
+<p>ManyToOne vers NiveauApprentissage : un cours est rattaché à un niveau
+de difficulté (ex : &quot;Débutant&quot;).
+La colonne est nullable — un cours peut
+exister sans niveau assigné.
+C'est le côté propriétaire (owning side),
+il porte la clé étrangère.</p>
+</li>
+<li>
+<p>OneToMany vers Seance             : un cours peut avoir plusieurs séances
+planifiées à des dates/heures différentes.
+C'est le côté inverse (mappedBy: 'cours'),
+la clé étrangère est portée par Seance.
+Pas d'orphanRemoval — supprimer un cours
+ne supprime pas automatiquement ses séances.</p>
+</li>
+</ul>
+<p>Note sur le nommage : $esCollectif devrait idéalement être $estCollectif
+(faute de frappe sur &quot;est&quot;). La méthode isEsCollectif() devrait être
+renommée en isCollectif() pour suivre la convention Symfony/PSR sur les booléens.</p>
+<p>Note sur $duree : stocké en INT sans unité précisée. Il est recommandé
+d'ajouter un commentaire ou une convention dans le projet pour indiquer
+si la durée est en minutes, en heures, etc.</p>
+</section>
 
 
 
@@ -194,54 +230,63 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>Description détaillée du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_duree">$duree</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Durée du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_esCollectif">$esCollectif</a>
     <span>
                         &nbsp;: bool|null            </span>
 </dt>
+<dd>Indique si le cours est collectif ou individuel.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Identifiant unique auto-incrémenté du cours en base de données.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_nbChienMax">$nbChienMax</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Nombre maximum de chiens pouvant participer au cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_niveauxApprentissage">$niveauxApprentissage</a>
     <span>
                         &nbsp;: <a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null            </span>
 </dt>
+<dd>Niveau d&#039;apprentissage requis pour ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_prix">$prix</a>
     <span>
                         &nbsp;: float|null            </span>
 </dt>
+<dd>Prix du cours en euros.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_seances">$seances</a>
     <span>
                         &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&gt;            </span>
 </dt>
+<dd>Collection des séances planifiées pour ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Cours.html#property_typeEntrainement">$typeEntrainement</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
+<dd>Type d&#039;entraînement du cours.</dd>
 
     </dl>
 
@@ -256,114 +301,133 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Constructeur — initialise la collection de séances.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_addSeance">addSeance()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Ajoute une séance à ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getDescription">getDescription()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne la description du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getDuree">getDuree()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne la durée du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne l&#039;identifiant unique du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getNbChienMax">getNbChienMax()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne le nombre maximum de chiens autorisés dans ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getNiveauxApprentissage">getNiveauxApprentissage()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null    </span>
 </dt>
+<dd>Retourne le niveau d&#039;apprentissage associé à ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getPrix">getPrix()</a>
     <span>
                                 &nbsp;: float|null    </span>
 </dt>
+<dd>Retourne le prix du cours en euros.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getSeances">getSeances()</a>
     <span>
                                 &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&gt;    </span>
 </dt>
+<dd>Retourne la collection des séances planifiées pour ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_getTypeEntrainement">getTypeEntrainement()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
+<dd>Retourne le type d&#039;entraînement du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_isEsCollectif">isEsCollectif()</a>
     <span>
                                 &nbsp;: bool|null    </span>
 </dt>
+<dd>Indique si le cours est collectif.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_removeSeance">removeSeance()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Retire une séance de ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setDescription">setDescription()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit la description du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setDuree">setDuree()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit la durée du cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setEsCollectif">setEsCollectif()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit si le cours est collectif ou individuel.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setNbChienMax">setNbChienMax()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le nombre maximum de chiens autorisés dans ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setNiveauxApprentissage">setNiveauxApprentissage()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le niveau d&#039;apprentissage requis pour ce cours.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setPrix">setPrix()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le prix du cours en euros.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Cours.html#method_setTypeEntrainement">setTypeEntrainement()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le type d&#039;entraînement du cours.</dd>
 
     </dl>
 
@@ -395,11 +459,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Description détaillée du cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -407,7 +472,12 @@
     <span class="phpdocumentor-signature__name">$description</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Texte limité à 100 caractères présentant le contenu et les objectifs
+pédagogiques du cours. Ne peut pas être null en base de données.
+Note : 100 caractères est une limite assez courte pour une description
+— envisager d'augmenter à 255 ou d'utiliser un type TEXT.</p>
+</section>
+
     
     
 
@@ -446,11 +516,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Durée du cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -458,7 +529,12 @@
     <span class="phpdocumentor-signature__name">$duree</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Stockée en INT. Ne peut pas être null en base de données.
+L'unité n'est pas précisée dans le code — il est recommandé d'établir
+une convention dans le projet (minutes ou heures) et de la documenter
+ici (ex : durée en minutes : 60 = 1h, 90 = 1h30).</p>
+</section>
+
     
     
 
@@ -494,11 +570,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Indique si le cours est collectif ou individuel.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -506,7 +583,14 @@
     <span class="phpdocumentor-signature__name">$esCollectif</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>true  = cours collectif (plusieurs chiens/propriétaires ensemble).
+false = cours individuel (un seul chien/propriétaire).</p>
+<p>Note : le nom $esCollectif contient une faute de frappe (&quot;es&quot; au lieu
+de &quot;est&quot;). Il devrait être renommé en $estCollectif, et la méthode
+isEsCollectif() en isCollectif() pour respecter les conventions PSR
+sur les accesseurs booléens.</p>
+</section>
+
     
     
 
@@ -542,11 +626,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identifiant unique auto-incrémenté du cours en base de données.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -554,7 +639,10 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Généré automatiquement par Doctrine lors du premier persist().
+Vaut null tant que l'entité n'a pas été persistée.</p>
+</section>
+
     
     
 
@@ -600,11 +688,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre maximum de chiens pouvant participer au cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -612,7 +701,11 @@
     <span class="phpdocumentor-signature__name">$nbChienMax</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Pertinent principalement pour les cours collectifs. Pour un cours
+individuel ($esCollectif = false), cette valeur devrait être 1.
+Ne peut pas être null en base de données.</p>
+</section>
+
     
     
 
@@ -648,11 +741,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Niveau d&#039;apprentissage requis pour ce cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -660,7 +754,13 @@
     <span class="phpdocumentor-signature__name">$niveauxApprentissage</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation ManyToOne — plusieurs cours peuvent partager le même niveau.
+C'est le côté propriétaire (owning side) de la relation, cette entité
+porte la clé étrangère niveaux_apprentissage_id.
+La colonne est nullable (JoinColumn nullable: true) — un cours peut
+exister sans niveau d'apprentissage assigné.</p>
+</section>
+
     
     
 
@@ -707,11 +807,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Prix du cours en euros.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -719,7 +820,12 @@
     <span class="phpdocumentor-signature__name">$prix</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Stocké en FLOAT (DOUBLE PRECISION en SQL). Ne peut pas être null.
+Note : pour des calculs financiers précis, il est recommandé d'utiliser
+le type DECIMAL (Types::DECIMAL) afin d'éviter les imprécisions
+inhérentes aux nombres flottants (ex : 19.99 stocké comme 19.989999...).</p>
+</section>
+
     
     
 
@@ -755,11 +861,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">170</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Collection des séances planifiées pour ce cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -767,7 +874,16 @@
     <span class="phpdocumentor-signature__name">$seances</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation OneToMany — un cours peut être décliné en plusieurs séances
+à des dates et heures différentes.
+C'est le côté inverse de la relation (mappedBy: 'cours'),
+la clé étrangère cours_id est portée par l'entité Seance.</p>
+<p>Pas d'orphanRemoval — supprimer un cours ne supprime pas automatiquement
+ses séances en base. Ce comportement devrait être évalué selon les règles
+métier : logiquement, supprimer un cours devrait supprimer ses séances.</p>
+<p>Initialisée dans le constructeur avec une ArrayCollection vide.</p>
+</section>
+
     
     
 
@@ -809,11 +925,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Type d&#039;entraînement du cours.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -821,7 +938,11 @@
     <span class="phpdocumentor-signature__name">$typeEntrainement</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Chaîne limitée à 25 caractères décrivant la catégorie du cours
+(ex : &quot;Obéissance&quot;, &quot;Agility&quot;, &quot;Pistage&quot;, &quot;Rapport&quot;).
+Ne peut pas être null en base de données.</p>
+</section>
+
     
     
 
@@ -865,11 +986,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Constructeur — initialise la collection de séances.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -877,7 +999,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Doctrine requiert que les collections soient initialisées avec une
+ArrayCollection dans le constructeur pour éviter les erreurs lors
+de l'accès à la collection avant tout chargement depuis la base.</p>
+</section>
+
     
     
 
@@ -899,11 +1025,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">397</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Ajoute une séance à ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">addSeance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$seance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -911,7 +1038,14 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Vérifie d'abord que la séance n'est pas déjà présente dans la collection
+via contains() pour éviter les doublons. Si nouvelle, l'ajoute à la
+collection et synchronise le côté propriétaire de la relation en
+appelant $seance-&gt;setCours($this).</p>
+<p>Cette synchronisation bidirectionnelle est indispensable pour que Doctrine
+persiste correctement la clé étrangère (cours_id) dans la table seance.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -919,7 +1053,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La séance à associer à ce cours.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -930,6 +1066,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -947,11 +1087,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">223</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la description du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -968,6 +1109,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La description, ou null si non définie.</p>
+</section>
+
             </section>
 
 </article>
@@ -985,11 +1130,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">329</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la durée du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDuree</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -997,7 +1143,10 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>L'unité n'est pas explicitement définie dans le code — se référer
+à la convention du projet (probablement en minutes).</p>
+</section>
+
     
     
 
@@ -1006,6 +1155,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La durée, ou null si non définie.</p>
+</section>
+
             </section>
 
 </article>
@@ -1023,11 +1176,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">190</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant unique du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -1044,6 +1198,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'ID auto-incrémenté, ou null si l'entité n'est pas encore persistée.</p>
+</section>
+
             </section>
 
 </article>
@@ -1061,11 +1219,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">301</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le nombre maximum de chiens autorisés dans ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNbChienMax</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -1082,6 +1241,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le nombre maximum de chiens, ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -1099,11 +1262,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">352</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le niveau d&#039;apprentissage associé à ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNiveauxApprentissage</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null</span></code>
@@ -1120,6 +1284,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le niveau requis, ou null si aucun niveau n'est assigné.</p>
+</section>
+
             </section>
 
 </article>
@@ -1137,11 +1305,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">246</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le prix du cours en euros.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getPrix</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
@@ -1158,6 +1327,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">float|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le prix, ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -1175,11 +1348,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">378</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la collection des séances planifiées pour ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSeances</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&gt;</span></code>
@@ -1196,6 +1370,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La collection des séances associées.</p>
+</section>
+
             </section>
 
 </article>
@@ -1213,11 +1391,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">200</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le type d&#039;entraînement du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTypeEntrainement</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
@@ -1234,6 +1413,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le type (ex : &quot;Obéissance&quot;), ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -1251,11 +1434,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">278</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Indique si le cours est collectif.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">isEsCollectif</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|null</span></code>
@@ -1263,7 +1447,12 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Retourne true si le cours accueille plusieurs chiens simultanément,
+false s'il s'agit d'un cours individuel.</p>
+<p>Note : la méthode est nommée isEsCollectif() au lieu de isCollectif()
+à cause de la faute de frappe sur le nom de la propriété ($esCollectif).</p>
+</section>
+
     
     
 
@@ -1272,6 +1461,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">bool|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>true = collectif, false = individuel, null si non défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -1289,11 +1482,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">426</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retire une séance de ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">removeSeance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$seance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1301,7 +1495,18 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Utilise removeElement() pour retirer la séance de la collection.
+Si l'élément était présent et a été retiré (retour true), vérifie
+que le cours lié côté Seance est bien ce cours, puis appelle
+setCours(null) pour dissocier le côté propriétaire.</p>
+<p>Attention : setCours(null) viole la contrainte NOT NULL sur la colonne
+cours_id dans Seance (JoinColumn nullable: false). Un flush() après
+cette opération lèverait une exception Doctrine. Il faudrait soit
+supprimer la séance, soit lui assigner un autre cours.</p>
+<p>Pas d'orphanRemoval — la séance n'est pas supprimée automatiquement
+en base lors du retrait de la collection.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1309,7 +1514,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La séance à retirer de ce cours.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1320,6 +1527,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1337,11 +1548,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">234</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit la description du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1357,7 +1569,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La description (max 100 caractères).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1368,6 +1582,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1385,11 +1603,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">340</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit la durée du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDuree</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$duree</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1405,7 +1624,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La durée du cours (unité à préciser : minutes recommandées).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1416,6 +1637,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1433,11 +1658,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">289</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit si le cours est collectif ou individuel.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setEsCollectif</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$esCollectif</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1453,7 +1679,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>true pour un cours collectif, false pour individuel.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1464,6 +1692,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1481,11 +1713,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">314</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le nombre maximum de chiens autorisés dans ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setNbChienMax</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$nbChienMax</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1493,7 +1726,9 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Pour un cours individuel ($esCollectif = false), cette valeur devrait être 1.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1501,7 +1736,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le nombre maximum de chiens (ex : 6 pour un cours collectif).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1512,6 +1749,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1529,11 +1770,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le niveau d&#039;apprentissage requis pour ce cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setNiveauxApprentissage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$niveauxApprentissage</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1541,7 +1783,10 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Accepte null car la colonne est nullable en base (JoinColumn nullable: true).
+Un cours sans niveau assigné est accessible à tous les niveaux.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1549,7 +1794,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-NiveauApprentissage.html"><abbr title="\App\Entity\NiveauApprentissage">NiveauApprentissage</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le niveau à associer, ou null.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1560,6 +1807,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1577,11 +1828,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le prix du cours en euros.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setPrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prix</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1589,7 +1841,10 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Privilégier des valeurs avec au maximum 2 décimales (ex : 49.90).
+Attention aux imprécisions des flottants pour les calculs financiers.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1597,7 +1852,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le prix du cours (ex : 49.90).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1608,6 +1865,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -1625,11 +1886,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Cours.php"><a href="files/src-entity-cours.html"><abbr title="src/Entity/Cours.php">Cours.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">211</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le type d&#039;entraînement du cours.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTypeEntrainement</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$typeEntrainement</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -1645,7 +1907,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le type d'entraînement (max 25 caractères).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -1656,6 +1920,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>

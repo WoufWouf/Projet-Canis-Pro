@@ -97,6 +97,10 @@
                 <a href="packages/App-Controller.html" class="">Controller</a>
                 
             </li>
+                    <li>
+                <a href="packages/App-Entity.html" class="">Entity</a>
+                
+            </li>
             </ul>
 
                         </section>
@@ -129,7 +133,8 @@
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App.html">App</a></li>
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/App-Entity.html">Entity</a></li>
                             </ul>
         </div>
     
@@ -144,12 +149,43 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">8</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Inscription - Entité représentant l&#039;inscription d&#039;un chien à une séance dans CanisPro.</p>
 
+
+    <section class="phpdocumentor-description"><p>Une inscription est la table de liaison entre un Chien et une Séance.
+Elle matérialise le fait qu'un chien (et donc son propriétaire) est inscrit
+à une séance planifiée d'un cours de dressage.</p>
+<p>C'est une entité de relation enrichie (elle ne se contente pas de lier deux
+entités mais porte également une donnée métier : nb_Chien_Inscrit).</p>
+<p>Relations :</p>
+<ul>
+<li>
+<p>ManyToOne vers Chien  : une inscription concerne exactement un chien.
+Cette entité porte la clé étrangère chien_id (JoinColumn).
+La colonne est NOT NULL (nullable: false).</p>
+</li>
+<li>
+<p>ManyToOne vers Seance : une inscription est rattachée à exactement une séance.
+Cette entité porte la clé étrangère seance_id (JoinColumn).
+La colonne est NOT NULL (nullable: false).</p>
+</li>
+</ul>
+<p>Contrainte métier : un même chien ne devrait pas pouvoir s'inscrire deux fois
+à la même séance. Cette contrainte d'unicité composite (chien + séance) n'est
+pas encore définie au niveau Doctrine (#[ORM\UniqueConstraint]) et devrait
+être ajoutée pour garantir l'intégrité des données.</p>
+<p>Note sur le nommage : $nb_Chien_Inscrit utilise un underscore et une majuscule,
+ce qui ne respecte pas les conventions PSR. Il devrait être renommé en
+$nbChienInscrit en camelCase.</p>
+<p>Note métier : le champ nb_Chien_Inscrit est actuellement toujours fixé à 1
+dans MembreController::newInscription(). Si une inscription ne concerne
+toujours qu'un seul chien (ce que confirme la relation ManyToOne vers Chien),
+ce champ est redondant et pourrait être supprimé.</p>
+</section>
 
 
 
@@ -194,24 +230,28 @@
     <span>
                         &nbsp;: <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null            </span>
 </dt>
+<dd>Chien inscrit à la séance.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Inscription.html#property_id">$id</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Identifiant unique auto-incrémenté de l&#039;inscription en base de données.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Inscription.html#property_nb_Chien_Inscrit">$nb_Chien_Inscrit</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
+<dd>Nombre de chiens inscrits pour cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/App-Entity-Inscription.html#property_seance">$seance</a>
     <span>
                         &nbsp;: <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null            </span>
 </dt>
+<dd>Séance à laquelle le chien est inscrit.</dd>
 
     </dl>
 
@@ -226,42 +266,49 @@
     <span>
                                 &nbsp;: <a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null    </span>
 </dt>
+<dd>Retourne le chien associé à cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne l&#039;identifiant unique de l&#039;inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_getNbChienInscrit">getNbChienInscrit()</a>
     <span>
                                 &nbsp;: int|null    </span>
 </dt>
+<dd>Retourne le nombre de chiens inscrits pour cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_getSeance">getSeance()</a>
     <span>
                                 &nbsp;: <a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null    </span>
 </dt>
+<dd>Retourne la séance associée à cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_setChien">setChien()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le chien associé à cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_setNbChienInscrit">setNbChienInscrit()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit le nombre de chiens inscrits pour cette inscription.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Entity-Inscription.html#method_setSeance">setSeance()</a>
     <span>
                                 &nbsp;: static    </span>
 </dt>
+<dd>Définit la séance associée à cette inscription.</dd>
 
     </dl>
 
@@ -293,11 +340,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Chien inscrit à la séance.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -305,7 +353,13 @@
     <span class="phpdocumentor-signature__name">$chien</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation ManyToOne — une inscription concerne exactement un chien,
+mais un chien peut avoir plusieurs inscriptions (à différentes séances).
+Cette entité porte la clé étrangère chien_id en base de données.
+La colonne est NOT NULL (nullable: false) — une inscription doit
+obligatoirement être associée à un chien.</p>
+</section>
+
     
     
 
@@ -355,11 +409,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Identifiant unique auto-incrémenté de l&#039;inscription en base de données.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -367,7 +422,10 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Généré automatiquement par Doctrine lors du premier persist().
+Vaut null tant que l'entité n'a pas été persistée.</p>
+</section>
+
     
     
 
@@ -413,11 +471,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Nombre de chiens inscrits pour cette inscription.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -425,7 +484,16 @@
     <span class="phpdocumentor-signature__name">$nb_Chien_Inscrit</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Champ nullable (nullable: true) — peut valoir null si non renseigné.
+Dans l'implémentation actuelle de MembreController::newInscription(),
+ce champ est systématiquement fixé à 1 car une inscription correspond
+toujours à un seul chien (confirmé par la relation ManyToOne vers Chien).
+Ce champ est donc potentiellement redondant et pourrait être supprimé
+ou remplacé par une valeur par défaut fixe.</p>
+<p>Note : le nommage $nb_Chien_Inscrit avec underscore et majuscule ne
+respecte pas les conventions PSR — devrait être $nbChienInscrit.</p>
+</section>
+
     
     
 
@@ -464,11 +532,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Séance à laquelle le chien est inscrit.</p>
+
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
@@ -476,7 +545,13 @@
     <span class="phpdocumentor-signature__name">$seance</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>Relation ManyToOne — une inscription est rattachée à exactement une séance,
+mais une séance peut accueillir plusieurs inscriptions (de chiens différents).
+Cette entité porte la clé étrangère seance_id en base de données.
+La colonne est NOT NULL (nullable: false) — une inscription doit
+obligatoirement être associée à une séance.</p>
+</section>
+
     
     
 
@@ -531,11 +606,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le chien associé à cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getChien</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null</span></code>
@@ -552,6 +628,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le chien inscrit, ou null s'il n'a pas encore été défini.</p>
+</section>
+
             </section>
 
 </article>
@@ -569,11 +649,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne l&#039;identifiant unique de l&#039;inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -590,6 +671,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'ID auto-incrémenté, ou null si l'entité n'est pas encore persistée.</p>
+</section>
+
             </section>
 
 </article>
@@ -607,11 +692,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne le nombre de chiens inscrits pour cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getNbChienInscrit</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
@@ -619,7 +705,9 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Dans l'implémentation actuelle, cette valeur est toujours 1.</p>
+</section>
+
     
     
 
@@ -628,6 +716,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Le nombre de chiens inscrits, ou null si non renseigné.</p>
+</section>
+
             </section>
 
 </article>
@@ -645,11 +737,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Retourne la séance associée à cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSeance</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null</span></code>
@@ -666,6 +759,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>La séance ciblée, ou null si elle n'a pas encore été définie.</p>
+</section>
+
             </section>
 
 </article>
@@ -683,11 +780,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">162</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le chien associé à cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setChien</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chien</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -695,7 +793,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Attention : passer null est techniquement possible via ce setter mais
+viole la contrainte NOT NULL définie sur la colonne chien_id en base.
+Un flush() avec $chien = null lèverait une exception Doctrine.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -703,7 +805,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Chien.html"><abbr title="\App\Entity\Chien">Chien</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le chien à inscrire (ne devrait pas être null en pratique).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -714,6 +818,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -731,11 +839,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit le nombre de chiens inscrits pour cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setNbChienInscrit</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$nb_Chien_Inscrit</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -751,7 +860,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Le nombre de chiens (généralement 1), ou null.</p>
+</section>
+
             </dd>
             </dl>
 
@@ -762,6 +873,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
@@ -779,11 +894,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Inscription.php"><a href="files/src-entity-inscription.html"><abbr title="src/Entity/Inscription.php">Inscription.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Définit la séance associée à cette inscription.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setSeance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$seance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
@@ -791,7 +907,11 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Attention : passer null est techniquement possible via ce setter mais
+viole la contrainte NOT NULL définie sur la colonne seance_id en base.
+Un flush() avec $seance = null lèverait une exception Doctrine.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -799,7 +919,9 @@
                 : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/App-Entity-Seance.html"><abbr title="\App\Entity\Seance">Seance</abbr></a>|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>La séance cible (ne devrait pas être null en pratique).</p>
+</section>
+
             </dd>
             </dl>
 
@@ -810,6 +932,10 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">static</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>L'instance courante pour permettre le chaînage de méthodes.</p>
+</section>
+
             </section>
 
 </article>
