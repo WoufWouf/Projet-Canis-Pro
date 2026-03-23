@@ -66,3 +66,9 @@ Pour les mot de passe :
 bash
 symfony console security:hash-password leMotDePasse
 ```
+
+Afficher la phpdoc
+```
+bash
+php -S localhost:8081 -t docs/
+```
