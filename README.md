@@ -72,3 +72,8 @@ Afficher la phpdoc
 bash
 php -S localhost:8081 -t docs/
 ```
+Faire les tests
+
+```
+./bin/phpunit --testsuite 'Project Test Suite'
+```
