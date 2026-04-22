@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription index{% endblock %}
+{% block title %}Gestion des Inscriptions{% endblock %}
 
 {% block stylesheets %}
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap');
-    /* Structure globale */
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;700&display=swap');
+    
     .page-wrapper {
-        font-family: 'Segoe UI', Arial, sans-serif;
+        font-family: 'Montserrat', sans-serif;
         padding: 40px;
         background-color: #ffffff;
     }
@@ -15,158 +15,127 @@
     h1 {
         font-family: 'Great Vibes', cursive;
         text-align: center;
-        font-size: 4rem;
+        font-size: 3.5rem;
         margin-bottom: 30px;
         color: #1a1a1a;
-        font-weight: normal;
     }
 
-    /* Grille de cartes */
     .cards-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 35px;
-        justify-content: flex-start;
+        gap: 25px;
+        justify-content: center;
     }
 
-    /* Style de la Carte (selon l'image) */
     .card-inscription {
         background: #fff;
         border: 2px solid #d8e2e6;
-        border-radius: 35px; /* Très arrondi comme sur l'image */
-        padding: 30px;
+        border-radius: 35px;
+        padding: 25px;
         width: 340px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
 
-    .card-field {
-        margin-bottom: 20px;
-    }
+    .card-field { margin-bottom: 15px; }
 
     .card-field label {
         display: block;
-        font-size: 1.1rem;
+        font-size: 0.9rem;
+        font-weight: 700;
         color: #333;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
     }
 
-    /* Style des zones de texte bleu clair */
     .field-box {
         background-color: #e9f3f5;
-        border-radius: 6px;
+        border-radius: 10px;
         padding: 10px 15px;
-        color: #7a979e;
-        min-height: 22px;
-        font-size: 0.95rem;
+        color: #5a7d85;
+        font-size: 0.9rem;
     }
 
-    .textarea-box {
-        min-height: 100px; /* Plus grand pour la liste des chiens */
-        line-height: 1.5;
-    }
-
-    /* Boutons en bas de carte */
+    /* Actions : Alignement des 3 boutons */
     .card-actions {
         display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
         justify-content: space-between;
-        margin-top: 30px;
+        margin-top: 25px;
     }
 
     .btn-action {
         text-decoration: none;
         color: white;
         background-color: #4d8396;
-        padding: 12px 0;
-        width: 46%;
+        padding: 10px 0;
+        width: 47%; /* Pour View et Edit */
         text-align: center;
         border-radius: 20px;
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         font-weight: bold;
         text-transform: uppercase;
-        transition: background 0.3s ease;
+        transition: 0.3s;
     }
 
-    .btn-action:hover {
-        background-color: #3a6372;
-    }
+    .btn-action:hover { opacity: 0.9; }
 
-    /* Lien de création */
-    .create-btn-container {
-        margin-top: 40px;
-    }
+    .btn-delete:hover { background-color: #a93226 !important; }
 
     .btn-new {
+        display: inline-block;
         color: #4d8396;
         text-decoration: none;
         font-weight: bold;
-        border: 1px solid #4d8396;
+        border: 2px solid #4d8396;
         padding: 10px 20px;
         border-radius: 10px;
+        margin-bottom: 30px;
     }
 </style>
 {% endblock %}
 
 {% block body %}
 <div class="page-wrapper">
-    <h1>Gestion Inscription </h1>
+    <h1>Gestion Inscription</h1>
 
-      <div class="create-btn-container">
-        <a href="{{ path('adminAjoutInscription') }}" class="btn-new">+ Create new</a>
+    <div style="text-align: center;">
+        <a href="{{ path('adminAjoutInscription') }}" class="btn-new">+ CREATE NEW</a>
     </div>
-<br><br>
+
     <div class="cards-container">
         {% for inscription in inscriptions %}
             <div class="card-inscription">
                 
-                {# Champ Date (lié à la Séance) #}
                 <div class="card-field">
-                    <label>Séances du :</label>
+                    <label>Séance :</label>
                     <div class="field-box">
-                        {% for seance in inscription.seances %}
-                            {{ seance.date ? seance.date}}
-                            {% if not loop.last %}, {% endif %}
+                        {% if inscription.seance %}
+                            {{ inscription.seance.date }} à {{ inscription.seance.heure }}
                         {% else %}
-                            Aucune séance
-                        {% endfor %}
+                            Non définie
+                        {% endif %}
                     </div>
                 </div>
 
-                {# Champ Heure (lié à la Séance) #}
                 <div class="card-field">
-                    <label>à</label>
+                    <label>Chien :</label>
                     <div class="field-box">
-                        {% for seance in inscription.seances %}
-                            {{ seance.heure ? seance.heure : 'Heure non définie' }}
-                            {% if not loop.last %}, {% endif %}
-                        {% else %}
-                            --
-                        {% endfor %}
-                    </div>
-                </div>
-
-                {# Liste des chiens #}
-                <div class="card-field">
-                    <label>Les chiens Inscrits :</label>
-                    <div class="field-box textarea-box">
-                        {% for chien in inscription.chiens %}
-                            <div>{{ chien.nom }}</div>
-                        {% else %}
-                            <div>Aucun chien inscrit</div>
-                        {% endfor %}
+                        {{ inscription.chien ? inscription.chien.nom : 'Inconnu' }}
                     </div>
                 </div>
 
                 <div class="card-actions">
-                    <a href="{{ path('adminModifierUneInscription', {'id': inscription.id}) }}" class="btn-action">EDIT</a>
+                    {# Boutons classiques #}
                     <a href="{{ path('adminAfficheUneInscription', {'id': inscription.id}) }}" class="btn-action">VIEW</a>
+                    <a href="{{ path('adminModifierUneInscription', {'id': inscription.id}) }}" class="btn-action">EDIT</a>
+                    
+                    {# Inclusion du formulaire de suppression (occupe une ligne ou se glisse selon la place) #}
+                    {{ include('inscription/_delete_form.html.twig') }}
                 </div>
-
             </div>
         {% else %}
-            <p>Aucun enregistrement trouvé dans la base de données.</p>
+            <p>Aucune inscription trouvée.</p>
         {% endfor %}
     </div>
-
-  
 </div>
 {% endblock %}
